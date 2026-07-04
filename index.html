@@ -1,0 +1,3312 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>塔羅覺察日誌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0a14;
+    --bg-elevated:#141020;
+    --surface:#1c1630;
+    --surface-2:#241c3a;
+    --border:#342a4d;
+    --border-soft:#2a2240;
+    --gold:#c9a24b;
+    --gold-bright:#e8c874;
+    --gold-dim:#8a7238;
+    --purple:#9678cf;
+    --purple-deep:#5b4590;
+    --text:#ece6f5;
+    --text-muted:#a89bc4;
+    --text-dim:#6f6389;
+    --danger:#c1594c;
+    --success:#7fae8a;
+    --shadow:0 8px 32px rgba(0,0,0,0.45);
+    --radius:14px;
+    --radius-sm:8px;
+    --font-display:'Cinzel', serif;
+    --font-deco:'Cinzel Decorative', serif;
+    --font-body:'Noto Serif TC', serif;
+    --card-back:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAACACAYAAACVxE74AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAEXCSURBVHhehb3pjiRJkuf3E1Uz8yvuiLwz6+g6enu65p5ZLrlYkiAJAiRfat6GD8AvBMklQCwWu9wZsK/pnu7q6jqy8s7IjNvd7VAVfhBRc4/qIaiBiHA3N9Pjr3KrqLoc7T1WvIgIqGIXFJDyEarq7wTEPhMULU+Xy4CWx0RArRYdb/TLYg+JylZL5Wav59YDm+ftkqBaPtquW269/+Nnrd+gPsSxZeuF+jvxroh1yIe8VZVdEFW/x54PXo2BOV7e/L19zdqXsVNbn5a3Yp/azwYo3brFn/AxOYhindftmkvvtwEbn7Xn/N9Y/ujZW61ud1VGIH5wB3gbIwk59vZnA972veU3lPtU1WbWB7YBY+sxGefWOjRetqbVejHeo1lRbAYFsUkTf0i3JqW0vdUx64uPXvUWqFq4SK2l8sn2wMTHsI2WAKJqVOzXCudtxusYlNf+V7SgyjgWcUzKPSoQthsspbDu7YulwdsXHcMNH2/fJCCF/8frxqoGyO22btf/w+esjLffYuM/LiOBeNk0/8ejsPvGkdwq4nUUwMbX24Szff/h7qPxvbVVmNVnXqzSQv5sGOF2HwrVjHWUTv5zpXTSKnBa+uPyR/LPH/2j270eb1ux0f6zt/7/ls1T/+zzBVQnhlHGeldDuWMbmwKKXfSrI3D2q/7R7eFuWvvB7T495bcUe20Ucvtzq/927bDVxFZNSh6vlRfb7dv/TV0/rHVUwyOlbrVTpI7fZ/1y5TcypKBqhBjsVqcnb0m9IvGbbFwux8TkhsBIWUWmlVmyajYTVWZZvYryO/bUO1R+8bq81S322pbhW0Sg3kd1UFy0FZG96b6LgR9OVLm0JVspunKjM0e5LBQhu+HDIu6D2PVxAA7RD0e8ucdFZfnFZ8raMNIvyuf/874/+lX/LfVsg1h+ymv7773c/Apk3b7XcSn1efvlff7Bsyqb5zbXttDy8W3XPo4TmyhBkW07FLlNpfgMC5BTdtYqdO49Q1AyAi4N1Z/YKqP02ECh9u+2/PR6BUFLR7LfuFVutbDdlH9gJqD1qLRz+3bd0gmbUlh+JIrthvx1iH6hjH1swEYvxyOgLhOcJXSr0io0zGZzqrra2Ks+fYorLb8sW437jaCOi7+2eS4TUnBUk0Bixn6ppGBRILCu/wCO7UEDEsJoYGvp22hRbOissP7GoSmt4RNtCk4QgkAaBpbrFX3qR8rTbDXixCjHe09sbFrsvgxumymBk8MHzGcLUlZi6eCteRbCKHu8U15V6ZixYkHDhRIbii2TIFLsuwDiXpg4hE4945DLgwVEQIJR98ZJ2YBncq/00sVDsUGlWAab/hRAx+ZcCtZ1ZLW+4fT8Lcqw4coyacf7H7i02noSRULk5OgDhMBqdYOKIjkjARQh+7SLKCJhw7ruKhgWYopkZNvSjoE1DrewmoNRhL+KT0hWlExQA1rE+pl9ECPuzupWj9OHtwf2uaiBmTNkNUkaRAhiBk/pYbGfN7wgBEd7Pp2T8pp35y/JSpFL1u7J/gfmqHpNiqJ54ODoAbPmgOXNFV1q+RePJ3z+cJfVOoMm02YBgtgMBRFCUDSoAZmMAlJpLyiqQnLMbex5pIjStmBIOu0QBGIAQkKTkEMFREQzGgJBXd5mm1gAkQwSIAS3oYGspJwgK0NWcsogMJJCBJHgAA3GSCpoFpBMFvj6ecf37wVyYHdnwdXVK66X167avcfH+x94eKIUJaWBhw8/Z33TM/RLvvh8zt39ip99ecGqM8qpQyCGQJCIxEAIgSCBEJWoNvvqrIU6KA6fcWR2VoOcs02kQgxCIT2JQs4QgzKZCDFDq5E0KFkzEgKSbRJdUhHEAVVBJJg4EgMnpWEUPzkbdYoqiPc9gBJQzWTN5KzkpISgTKrMTz6c8YcXa756PqGZNEwnA89fvSTEMjaMQo3tykVj9wf3PqW9alnMrvgf/vVj/uf/4xuy1IhmUoYglVNljVQ1moWUMyFkprEii9L1iZx6JnVFGhJN0xADpDSwO6tMXhNoolLVQs6ZbrD61+ueLJFprSwWkZPjyN0d+L//qWcxr1GFs6uO3WnDpAlECXTdgKKEYJQWxNioT4k8KE0jJIWbZcfebsVyOTBk5eomQagQIIQIkkFBNRFCQLVlMp/RLq/47/7qgH/7DysGnXGwH/nu+TNUEqIZEYiz6f7fFaazuVOCRHZ3junWLQ/vwvl1y7PTnlpgOgncP6q4vM5IrKgqIejAzlTYm0XmjbBetQjKvf2BvV1hvRqoG9A8QM7M53Bx05IFlt3A5TpxtU4s+8T1aqDrMrOJyc7D3cAH92ecXfZ0y8x8b86TB1OePr0mxJoqKOuUObtacXbdc7VOXK8HrtvExU3PTduhCusucbkcGIbE7iKyXvec3yRSyjy+v+DyqiUGIYiymMDQ9cxnDSqJw0XDqm05uxn45MGUd2c96z4wn9dcXFyMZiMbT8nI1TRZoVYhaQLNrFoTuk0TUSpubhIfPZwzqwYm04rjg8BiWrG6acmp5/hkQowwn9e8ed9zeBDpU2A+r9jdrbm+yTy5O2NWC8eHNfePKp7cmfDooOHx3RlNE2h76IbEi1Pl7399zWKqJCpen7b8+5+953INF9cdV0uY1JGT3YYP78y4f9iwN6+Ionz8ZMGTuwv6fqBpAvNpBAJdr2QJJteryJvzFYmelGGxiNx/UHP30Q6xCRzuTmiHzLI1XZHUrIlEMg0vhpV5eEqcTfb+Di+FToNEdhZHtOslx/tQx8jplQn+nVnNyf6Um2XHj+41vDvreHgy49vn18Qq0iZhtRxoYsvFEppGmFZC6geubmBS9dyslZt14s5+QxiAUHF+3XG5HLi4HuhSYt3DoJByph1AJfP+auDtxUAaMqpKVqFLcHE9cLVKLNcJNLCYBo73aiYRfv/8gj4LKQtd19MPmRwqulXik4dzjmaBw3nFbD5huc7cPxTeXySGAR4eRVbrnpuVUeC67fnxkzmvT3tWfWA+bbi4Pt84IQpx1hRAlYwp/CCRxeKAdbviaE+YVJE3l5k0CGfXyr19IQRh0URqMp0GuiEwqyBlZdkq//pv7nB+tuavvzjhd99esn+4R0hLPv/wDjl13DnZ493FijeXiTfnLTerHkSYTyoOFkZle/Oaw0XDyW7FpI5MIxzvNRzuTNnfmbC30zBvhKaCIWVW/cCyS5zfJC5vWoTMozsLUjewOw88PhFO9iPLVU9TR96c93z7pmXoBy6uMonMx4/mXF4MfPHZjGZS85uv14i7tUNOfP5oxovTjnaomE5rLi4vnByNi+N0svd3o4ZyOSpSsbtzwLpdc7QLTVXx7gpO9hru7DdMG6Fvlbbv+OBe5B+/a5nMZqzbgcnUjN9vXlzx+ZMFv/v6jKu1IDnz5E7Nb765Zp0jr95es+6VaRM4mNccOmg5K6susewSN+3A9TpxfjPw/jpxsYTzm8zVOrFqB7rBTJ+mDuzOInsLq0ME2gEuV8pyZfJ9PlG+ftZBrDiYNsynQkLIOTCfVqz6TJBI1ymf/WgCnbLqM5M6EaNwdZ1IAp8/mvHqfc+6j8ymNRdXF6bIMft4swTiJItHTBSTp2YHBrqUuFkNnF2t+erVGq2E+WxCyoEP7lacX61oNfP6tGXSKNO6oe0i7Tpz/3iGZPjdi0QvgXXbcXIw48nxjP15xXpIvDpveXW+5v1N4noN604Y+kCfMCeiiHpV0gDrFq6X8P5Sefl+4Nm7jlfnLTkP3Nmr+PDujN2ZcLVSnp/DqlOO9hvWK+g0ENwkGpJS1bBoTOAt5jBk+PZ1Ig+JxUzQlE3tiBDM/gMymk30WLGARWDLO7BrI7woxv7FGb7pM6s+c7w/Y7XOvLpI/KevOmIVeHQgNAHuHjV8+mDCpIJffX3NMle8ft9y1pqCO1wETnYbuq7n+fslL963XK8yqoFKKioJBFHE40Fus1OHiqaq0CxodvOOTJRMHc0uJkfOb+DZu47XFy3Tuuajew339wMv3ifeXCRWXebt+4EcK473axAhqXK4X3G0Fzjar/jD0x5tAst+4Ndft7y7VqpKiBIQiW5hFt+weHpWAsWFL4h6KWaABVKtUTTx6HjC9XLN28vExc3AEAO/fdbSrtcAtOuOpy+WvHrX0kSbwa4fOJzXPD6e0nUDry+MElMWJqGilmCBBZu3kVtKPwVrf0h+k3fTJhwqf1CweENA6Ht4fd7z4l1PHeHTx3NmM6FLmaQD371a060yQTvWq8zZ+0tEE//wj1eECGdvOp6/GHh8b0IVBDSM4TrGYM8PikXsreMFShExD8T94iCBGASJ8Oh4zuWyY92DoHx4t6KRhEjm+HjOJCq7O3NUINbCkBMxwAd3F0DP129WnC+VIBV1MDmeVHGP0cCU7RnfLFObVjfKdGcS3Juxyd5aQ1IQzUwqQTTy8r3y9PWanXnNvcMpEiBp4PVFh0hkNlUePd7j9KLn8KCh73smc8ih5uomc7RfgfTknGyiwUylYjbJplc2FDUSLkXBfGEJSBCqUFHHijtHUy5ueu6ezJjUGbLQ98rOzoTfP1/z4LDm4ztKIJGGzN684tHhhNfvl7y9zKBhS8YERAKaDRS7XkjS+7JFjVZsNEbBdm8mk3I2T9pZzSgpOIcpUZQ0RF6edizXHQ8Op8wbodeKe4fw8f0JaVDqWPHR45pA5v1Vpqrh7XnP7rzmaDcyJOO4DTdv/1optDHeAluUIhBFaIKQkvLi7Q1/8mSfqm2ZNZFXZ2uqKjAjkWPNr5+vebusWPXCvb2KSQx89fqGdQ9RCgjWikWHfC4dJfVbcmEZ9QSD0dnY9I9SXQF4C3uLH2ziROasZJqq4notvHzfMZ9EPr4X2N+Z8IuvV3z9qiPlnl9+uQQC+7NASJm/+myX1Pa8vxgssrbFPcYV/tap1cMzWwRaBuDqKQab6boKXKwDz96ukBB5e5E52q05WgQ+vjtjIpkskd98t0Q0Mmsir68GNEfCFuuOsUOPc0pBspSxh0V+2+sCsAWi2aBaSpkEYVy025oui0RlCAGSCq8uOlZD5t1FRztAOyh1FdiZ1yxT4GrZcrQXePZqxZurbKLJatoC8XbRIkML0f7wRsUCDKpKILAziRZobmp2dmoO9iZ893LFt29beg3UKJ8/XJAl8N27gRgiVVBQC0KXwaE+g2qBXQViFbcAHAnAe7ZVtmRYeaVOKTkrk8bs0FtF7B4JNkjRgUkUXr+zJZ2HhzWByPHJnHu7PVHg7nHN1SqhTUUVMmkobW0B5rbnWAqg9nqD5niPD3jI2cyLNLC3W3N22dJ3yqvTNZ88mpMFhmHgaHfK1arn7UWHiDIMPVWMVBbq35qwLVUuuHjHqdUCxIgrSDYiddQAfmETmbe6BOj6NLZTFuLsZps6CYEYo11CeX1p/vmTk5o3p2tmizn7TWZvMSErNCLMamE+j6ScIXuccCxboBaW38x4ucUAFjZCeNX2PDppGNY9s0ZYzCvOluaHn54nDuYTlMy7y4EqCOqTMKhS1ZGqMtOotLAxiG3Khz5ZP8T+jPawx0yt065ZMTFhlGm9xZ/Nuonom8GwTShCTondndrrUKogvDlLSBamVcXPvlqRgW++u6KqI1frRKwii1l0li5omSgsuJmn5MliWy2OENvgFCW7HzuwM6u47gbuHlXI0HG8G/n+bc+0Duw0wull66wNQQKiYpFxIISNDXe7+HXBPlT/z/b7AqjRXHZhZdq8yOCNkigYaqEe51NB2JlXmMWmZgl4rtN3b9fsLywc+f46s79Tse5gyBZRv1omquAmpFsPBadxSB7g3sJ5vG7/1RK+XEDx9PUlBGHdJ+7sBXLOpJR5dNjw8mLtppDJpQ16QtsOdH0aL9ugx1Fv3m9TW2nfVi9oqsCkieP6lBacTESP94JpYi2ToLgwUFLOrHvl7Kp10HXsc1XVvLlo+eBkRjcoe3tT+rbj0dGc1bqn8gD0aNwHm4hCB6VXGy2/RSQGrslPI3FBgvL83TWL6ZQXr1fEWnl+1nL/sOb0uqXP5jKCRaKs3YB4AsG2nTvKvhG7jdkkUmKM9jqKUMfItAlMa6Fu/HN1WN0RMMGwqWus3GW0Uasy9LYisGncR64Dy1ZZrToO5w1fv17x0cMZN6tEXTfMptFtcwdxi7nHkY1m04iw/S03BCw4krJpeQk1tfR8dG/CN6/XBqAmTq8yEVu3MXawNSbEr4kQq1KrL9/6TIt3yMKGnpmnBTADTVXpukxKm7UjVVsYHKmmSF21kY3EYTf46zKRGzC3pUYI8Ox0zXyi5Jz45nXLu7MODaCDWS22ZrUlZqy5sc3gfS+9HwMhZfjjSqAL3LPrzPnNwNVN4t7+lHfXgy3BgqW7uKLwFdqxt2a2bLKLR5YvHQwQq+DRnCJvMznb7zopyzabt+K9UzXEYgwbqg62MFfoZmzG+2ayb1MK8DaCTFXXvLvq+OzBgut15uG9Cctlj0ppQ0aFZC0UpKytLTt0hHbrFbYeH4RA4EcPdjjcbVACu7MJsYos20wIxexxHEyVgdt/YAFggQ3litmmweMGAqSURpbJW0kIiNmYKW+ochT+bn8aVXuOgFsG29ApNrlZjSQLHDYpWGUaCGSuWmEY4HAx4brN3D2c0A/2fBmdmIV3qwWniy3C9A/G4tRVizCrK/ZmNZIyb953HO40vL9Y+5K0joJfMbYTCltYX4PYknBdVWYBlCXkQtGeeZfHpIEysSYDRok1yvjSjoFiOAmq5tsbNZW6vSNFloz12hB9CAUvAoGn71oO5hXPTzuCBBaTiOYSoNkmwK1B3pKs29cdkOAoq0DWxJdPrzhdZtYKfUos10YxwMbHLQ2q1eXjcvmlpJT8mq3Fl0aLfMuWaYCqryQWu9KTHrZgNiIovA6IxLEtWzTbmtSyFq+bPhbKFAlMpz7RBGKAZWftzGaB6zbRD8lVWzALXbcC36UqFYJJeLs4tuUyqOjObhgQgdk0MAyJg2lk2dqUCtYJh5GqsgCslgpFTHZiA83ZZSmmsMa2x475jGKUVyhdxIxwq9aM9jHd3KnKKHFzv1UoxLABertB9UCMyVZx29Qmd95UXC4H7uxOaPsBYbhF7T5dY/EeF7OpQKBuhpRbLENjcBDuHjX0w8DRbs26y64MXCa5vFSntrHG0uESVHAxEmPcolDM1NbsSy5CFSN1XVFVFXVT0zQVsRKqOtBUFVXl3heKimV62DiK7DbQyiS6MBoBN/NaSZpImlmtOuuwU20U4Wqd2F80hJCZNwEJkFMyL9Bu2+IQEzujDLXPXViLgWyKWkEzXW9d+uTehFWbyMRRmzq9gViDXv3YqDiw5XrWvEkwc+UTY6SqKkK0tXNVpR8SfRrMMegSQ4I0WGwhuzyTEKiqmsmkMR+9iCAK61t7I8pq4CqWJVKFyijdKdOo2LJg+iT0g9KEaKk3xdsrmJU/W3RREso2ZZtoyAa5Agi/+/aaqq54vyzyzbR2jNGCxeZQjRUVFtxQRxmXMKTBgtd1RVWbn5xSou8HhpRcsThr2x9i8LrU5OGQEsMwMPQDKRnIsaqJVY0Eq/NW/LKoElVUM0NOxuaYdity3N4rMQROz5Y0VeCbtzcoSgwlOOj5WNkVnz/mUokfDHjza/fZRTOFMuuuULHbnQjTWc2kqdwNVKpYmf+uOnpMgqUTShBirAhVoB8G2rYnpWSJ/7JFBbqh9JySua8jtZeQoIuYZG5wGgbS4JPV1LBloxZLYLuBnCxWYcBsVjHNUFSuOmj7RFUFkmIc5LjIhtbGEhgZ3e6y+myGbJOUDWroE/uzinWfyXmca5RMSgOrVcuQzI3RolFLUARTXipKjME6lxKpTyNVqHgGYgzev62p9kk2C0A2zoeWmott65vN1DydYUiEWBFjdcvEKhOLWgA9uAWxu5hY/xVbIs6Zrh+YTWsmsfJURxt7oXQ8LFgmwmToD2FmwyoKiFq+5dHhlOt1tuVUk4BjR3E2lDJt226ks1RdVagKfTf49JnJYpnHVqrodfsFGY1wA9L65Uy3hW8ZYIiBqqr8GWXoO3K2EFwhHeuPEKJvZAhGGpc3a6/H0xk1Y2rP+4l47qmPcauUEWwHKbdKoVe/TYS6rgkCXY9Rps+kuNYWcXbGyCkGYdJU9lkQmjqabEzux6tRN6pE2SzepaSoe5/Bc+WDKvO5Utfuy/tPKUU0iTsQaRgwUWNGHU6xsbZVAVRMgTkloph9mTd8V36Cp6arekgybGThiAEbMbUx7J0IrJjmBQPGSFxpu6LBjYLEG7PY55ZQFxj6zDBkmkmNSKDtBgfeOxoMiZyTmzx47HUgeop2ViWJ0mvmwd2akwOzFQf1LDiPRrmoBmy3Si4ZHWpJvWUFNPVmT1eNheKsq8ZJRvkbsIqNXAAWLGDu825cOwJr4InZJ5ubxrKlDLwOck5O8ka/5jN7SEGLw2ilxK2L8kgpWUVjKTLHFEHO5oXEEElZGEJivjPw0SP48x9F/uqzKZ/fFT6+W/NnP6r5kw8rHp8EpjOhU0iYBRAwj86HaT8FoAKGi6ZRPOFRLqd0wc3ZApELTlElxriZLCfAEQ+DDcsP9ckpE1TAKWDabmJzudRacnIXJERbp6kCEixeaD0TS29ct544UTpp7ZSOqU9GmwbmOz0//hC++CByf7+h74RnbzO/etpy0SZeXChfvV7z9iIhQXlyR/izHwk/fgw7O4lucC4ged1qOYX+OoRgW4NGbtr24gzJ7QnYKGqz2FM2rrNxGD0aqj6oMR7qxehpa5aKa1c0qJr8gY3BnHImxEgVLXig2Squ6mh+e7CAhYgv4Y4JVopqQgWquueLH1V8dEe4vEj89rvMl08Tz97A2YXQdcLOVNiZZYYhcrmKPD8L/O4ZfPkM3l3D/UPhTz+tqarOHMDC8tj/EI12UlJCXZkidMUpZd3K2bxgABZtU08sS2lwqVxUkFsMUgDCZHYBzIRr8Rg2WXgFbIrP7oI4iHgU3GzJAmaI0aJHLmYEG0hWZVJHXzcXBjJ3DpSfftRwft7z62/g/VWEFGhCpA6BKgYmlTCvLOVcJBBFmARhWgto5uI68+X3ynevBj77qObJw4FMJoZATommjmgyhhSUlLLl0uOOSRU3YUWLII/sKSU8WKhyDDeWdKXC3QWhH5QyM+V12VknWx8a4PbG2t6aFYQQI3kwBUZRGKoMQ6YdOmazCqXn04eBJ3dm/PabnpengWEQYg3zRhmyTRYEdmaRuhKO9ytXkgEIpKzMa9CUEB24Wiq/+bpnfxb5kw8ruq7ncL8hFTDFl2dUSYPJRFRJg+UsSQm+qK0/aRngyLsBQumXAbzBy4mwkGDR67eKo2gpegVPj6dg2j1omROrqKorV0JOmqUaBREl5cByteLf/DQiOfP3/7Sk63w1MQTWfeDwoGIx7Ykh0DSRO7sW9jtcwN5MbIuOKg+PI1VUo/6cEelR4OffKMtu4L/66wndekWxJnHbVVFUzL21GbdrhVCMLOyvYsEaV7NI3nDuiFmh6KKOhduG/HgTBoLZOK6AiqHtQrt0YKMitwIkLsNMNWREhUE7Pv+g4d1VYG9vyqIerB1XXE1tO0NO9hv2p5k6Zh7egbbPoD37OyBkQkjs7zZcXHdI8I297j7uzZYsZhN+/7Lnwwc1MWQkbO1TdZGmRbYGo8pNcbbyIZmZWMbtisjBVBuoXTGlZFhb2X69eSy4QrFtJ96IWieK/6se+Um9aVqTSZYcq2pubEL54D5MmopffAXvzgb+p3+zy8N7AhlqiTzch/tHNcv1kmkDOzuR/WnipoWuH9iZZT591PD5g5oXr0/Z24+Imlk2qPDkTuS//Ysjnr9ecvo+MtuZ8viubSJja8kFNdtZFdu85sEdxKk1GJRGJ4ZJMWJsg9gWpP4M2zJ0tDu38ZcyI1t2pbjVJQpilFeeRZWUBzLGgjGYy4YqIpG9ncSPP9zly28H5pMJ376q+dUfOv7mi4p/9RcT7u4nzq4ib99lPr1fc7gLUVpiDec3PUNSdmbC69Mlp5ctiybw4CDR1MLOHP72xzP+s5/s8O9+cc31OhIl86s/dDy+v8tiZiu3Nv7CfUJOg4Gi6v67c6pbIgUTf8BSPMXNrfLBFnHfOiKjFJubMqO+9ODU6BoG9Z259pESquA1W3c1Z/p+sL1OKOvU8dGDyK//sKLrGnLOTJoJf3g55c1pYipL/su/nvEnH/fECn79febrtx3dsGKdzOUdBqiCcrXsaFPm+bvMm/PI/eOBf/NnBzR0/OO3HRc3kRBNJgep+NXXKx4fC72bb7Ax5hHrqwQjmhA8FjBSlTsI2HbHMcJVVIS4NeAe10bLbyOKYCmwYVyHtjXzbeUEbZvI2agwiHkRUrRdCMRggOcMR3tKFYXvX0FTe/hOLB769KWton793YqP7zX8Z58rn31Qk3Pi5EC4Wdo6VNdnJnVvVkBS9ncrPn2o/OSjPf7wdMn9h4e8Om2JEohEEJP57RCZNYG96drYeZuk3KYeFw596dqI1kbq3O9P/fD528WlwaYUQlePUIQoSIwmmN2vB0vELUu2Np1u1HsNyd1JUWHImY8fB16/H9iZToHsMlaZsuZmFfnuVcvJofDz37dUVeDTez1/8+mER8eBm2WmDgMpKX2beXgc+eiu8K//BGaV8o+/v+bhnYZf/OoVB4uKST2QpbYMEVeaL84HPrwXfVV1w87ldXE+cvbl4GAGvOkq3/59i+rsebOgTPUyrilRlJrbnOIdEUAiKWHKZ8tdTL4EoX5/CXCUTiiQ8gCiNHVmfwanZxAlQQ7kLPzpp8onjy02+t1pRcqJD+9lfve0Z93DRDpyr9ysMk0ltP3A1Y1ybx8eHma+f534/m3mpx8v+O7VFafdDjdd5u7RjJPdFY9OIkGVnBLP3ycaUSLdLbdXswWYS/zWHEELKUKJB4OGQFZfsTWmN2IKrk8cYgfU5YL/L3Nn4Nh6ul0sLudt7R4sdGTPeNJDmU/NymIhtENmvbRgdDGuF42SRfjoUeDeYc0v/pBYTIXdHeGfvk9UjW0nXLe2+WEYPEoVhX/6piNLxU+eNLw+63n2LvDJPfj8YcPzt4kP7jVGAB7s7rqBy3UmViWYU1zgLSfFRdwYPPGrFtG3Vc9bOI0WgFOoydCNcGZLQApGtqqZECzwW9dmWhQ2t0esgRILFbW956WqPim7M3h3CckpV1WZT5WLC+Xrb9fMq0i7XPPuMvPVy4EHR4lJhI7IZBJIyWRzKIt7qnz+0ZSP7gWWXeL7twOLaeTpK3j2NnGyG3j2NvD6XD2rJBFIXK4T0zqTUrIdHT7O8hsEswQKcTgFFqkpmNGTUdzLtuKxV8wf2/pgfGGvS5aEsW1gPoFaMlI23MvGvFDLMyxdGVcSe1UO5nBxCTFabpEKDP3AOimhgadv1zRN5K8+m/DB/SmrVebhceD0tEVCxcOTmhgt92lImeygXl8PDAn+8pOav/xUuHsSWGnFZT/w7toW2cSdiypkbtqBWWU6WzCzz1SFA+exnyChLEARg5jHFn0ZuRyWsFnes3G7wg74cRRGkQ4GWPay7wM3NlPeXa6Z1EIlvclJrwQsqV/LmjgZFY9GpQxUXF73TCplZ5Z4cDTw0QNld5r58x81/MtPK754Avf3MsubNW8ulNcXmS5Hvn3Z00wiswaqKnByULGYBuoqsrOoOVhU7DTCnanwl48z//Vnmf/mi8hffJS4s9czmWREbIX0apWoIwyDrcU7Ek4IBtTI/n6cUE7ZJjPquIW7iATwBf6CmoIc7jzWEnk3IJUYJ9x/9AlXp6f853/asOxqfv98xSePJtw5gaevBn73h97WZBQW84oqwrpNdJ01ECu4fxy4uyfc37+iTVMmkpGoiFQMyShDiDYxCnUQmiZRB9uoqr6/aMigzqIXV4l3l5leGVf2QhWogiVO1DHSVMJOnVg0A4RAkkDf2U6PSdXz9jry+mzg1bto6Tsi7O/P0JS5vk62WBjMBn94b8rBNFNPhedvO/78w4p//8sL3l03HO/P+P7lUwuYqFG87Zf3GOcoS0LFYveAdrXi0Z1A3wvvbmxC23bg9ZvEqrf4oWLeU9+bJzPyAKa8Xr1vubNf8eUrZbmCPteQiwto1kOfMl3Xc9NnLlaZ8xXcrJR1Czdt5vKqZzGP3CwH6kltR2rEwHwS2JsH9qaR3blwvAjc2Q8c7QpNhLZXrtbC24vM6WXPu+uBPMDzM7haZrq0MfuyKmkwo2ojG2HVtjTRlOuL0xs+ebDg+zdrll1gPqm4uLowa8hFoAEqJnJLRRIiO4t9Vqs1T+5VdK1wvhQWU+HteeL8OhCL3ABiDBbJHsG0BrpOubgJ3D2IfP028ey18vK98OxMeHspXK9M2EwnwryJ7C8Ch7uZqhJUKi5uAq/PB3YXNd06sZjVPH255NG9hlozi2nF4RwWs0CUzPUy826Z+e5Nz++eKb97kfjqdc/3b3tenduxGU0V+fZNIGfPfPEIU86CqmWsbNxluFonHt6dcX7V8fqs4ydPdvj+7ZplWzGbVFxcX/gMjDLUIwSjOilwFGVjxuq6NRcyYAeWIMYWuBgy6eI1lCpRqhBYdsLBbsO0mTBpJkRpWHYVvcLrS/jt98Ivn8/55Xc1v3tWMY2BuzuZO7vw6R1hPhGevVkRGZhNKn737Zp1UiQkvnmr/Py7xK9fBM76hu/fCW8uGlZtIGtFlEBTW6B6MaksJ2vcPLYhI/G8qjGbMAQQCzy3y8z5dSKESHZNbpPhlZSinoozIuzFBOwmfCUCSW1rdJ9NUxfIxW/Qohm9QosyCVUMrPrA0V6NSEQ0oknYmfb8+HGkXfXcO2y4vGjphsBynZjNlBwrzq569nYiz14t7TiMHhaTzN2jCd+/bpnPKu7uCcubxOUSPn1U82efThlWPbOpmUwiEbDFv/15xWoozqGbez589e3a6p5SUTKFMDSVFfcCuI+9oOqEufHlHaKCSZnD7AFkwQ9wTub31rVFz8HSWYIUMK2eIBEhMK0iy7V5NzEawCHaMsbPf7fkpp2gsubh3UzX93z+UUWohK+edqx7pU8DdSVUlQ2iqSPzaeLJ3Tk/+3LJ7g78qy8mNDFxcxP53dcdf/GTQ774UUVTDQiV73EX7uw2dJ2ZQSXIMQI0jtsdE994MZpH4oGVYAarSDBH07m04Gr1bojTpyQXsWqXADw1XFGGlBmGZCc26pbb6S5Y8AOoQgiEICyXUAdlOlXqIESUZRfY3xUe309887wjhsiTk8TRQvn17zvObwYOfAfwdBLA08GrGOjawLSGjx80/O5pYl7Dp/eEF2cD171y0/Z8/zLTxCkhCFEiiyYynzb06Xagx4rL0WJKCdR1ZbGJckktLmFcawarEdkGJzau51YZQTRwbHaKp2BmUvYkKxPgxt5l0WoM4Aab/ZQz3RB5ez5wtJs811TpOrhaNbx739Jp5N35NfeP4OdfriEIn3244KbNVLFiUgXzr1WoonB2E/j5NwPTSebxSeTv/2nNzk7D8uqGbgj80/cdLy6ia3Gb4A/uzXh71ZM0uGUyUgqUgLgaZeacWa1bP+3GbizEZJi6eNiw5Fg2WVblE1t02QA4sr9naABakiiC2XDGGhaxL5ofHVecEQk8fQ2He8LlaoX4eXbvLpSzm5qce/72p1Oevlozn0852Iv8w2+u+PW3A89PW6a1pVWKa+T3Vz3vl4F/+8uePiV+8uGcV29bfvrZnh146IxmXo+QZeDkaMLTN6uNHDRrbyyK2+LuIRXRtwmf++Zbz4MyzjZ0Cl64+zpSrDqFlywzg9Jkp+AsXU6SVTuOIjpbay5n2XkEakvkR4GLazvh4f6dgXWX0GSR9qzKn35c092saJqKNxdL/t0vWqp6wsnelLObyKypXf4qSmTdKn/x2ZyPHu7wH7+E375Yc7AI0N7w5ET9uLeBrIlBM4d7kbOrFeuuGskpepafoN5/U6JmhxYFpBZhUkYWL/uFTNZu9IaUCRzR9OrL7FHEserWfjqjWgl2tMXgKX+odciCtEZJ5v2Y95A00dQV3z4f+OKTCSIrRIS27/n0QeL+rvCLrwZ++XXH1y/gztEUTQNXy8xla+vzkyrQ1MI6R276mtOzgd9/t6RNgS9fCX//dcfTtx2fPw4cLVoss3IgVomffLDL9686XxPzsCRY7j2eOIaYi+1gZedUUTtzxa4a1Tk8lLsNPSOfW+fYSzGtvEHxgLEpG/HwlrGECfZNgipA0kysKgCa2nZVWIKBkoeOm1XFL7+84LMnDe+ulnzxUeDRSeT//PmKZ5dm0kybwPVVT87CydGMPtdkDSwamFaRrheSBpZtIMaa6aRibxbptOYX3wn/6bcr/vbzGceLTNtn/vSDGb/+wxmrrlgrFg1TP9gqVlumuMtKSkxYswXDnQLFebusEFt9hsyIkDqr37pj+43mrawmozhRs9twbe4YO9tb69mDJdtnKYsor85r3l31/OXnAZXM//azlqsuApmstsyxt9swpEggEFJFlwO7E3Mnr5ZCpuHuyZSP70MThK4XVsueFDPfngn/+y+uuXsIf/lJxZuzNW8uTZbaNknz32OwVEv1ZDYbH1TRxJfqSJMQhOxjMsVsnxXYyisdtfyW0b+Np7o8tAr8QbU7RHymQqCqXDlh27mD+/Y20yZC1MVPQGmHioNFJA+KrToFPzM0+omPFZdL+Pplz7KPvH6v7C2maAicXilKzT9+2zPoLss1rDpfXc2ZoMrlGiI9FYnn7zb5pyVb0GxMoarcNCoDQmi7ZIskI5UZxd6mOrY1biFT+COzSdmC1GSCw+qsbw8bmC4rc6a30BF4DpOEaOtQsqnFZhamdUXQmv/w60g7RP7m85qmAkJlVkQOfPuqI9SRECEjPD1TmknFMkXOb9S2Y8fId68ziYAEU4hJa6a18l98Au+uhX/4KjBvIn4yaMHM0tFztj76OHCNTrEzCwIyAmP/xMSA0baVojfYBtSw3IBpqJvWM/LypQLxz0tgu1BwNiNfgsUb67ryZ4rRBXUViFJxcdEzqYSvXka+ep354qOKB8dK0syQ7ZBXNPjS7cD5ynYiPz9V1oOdQIumcXdIynYU8Wf34K+ewFcvlO/eCqBcrzKTSSRG26+Ey/0QI2mwOlQzkzpQl9WHQh5bnHsL1C1iNcg2uLnZ5JpvtAJ0fCOyTf72aMSWjQubo9A0NbGyAwIEi8jHGMZNV7E247zryhqUxT/Prmp+8zRxvKj4y08rnhxl6ipZOC0pWQfalLhqE28uBtBkslnVT9rNPDrI/M0HMAmJ//Q1vLuuqcYl8EDbJ2I0dxktrG7jsrEJbWfbeUatHYxYwE0idVw2NuVIySNWG8O+3FKUj1Uyolwe9xynooxC8AOlBc+ft1MbisixBC6TEWmweGOMxeMwK6EOSt83/Oq7yJfPYDat+OlH8GefRj59HHh4lDmcwkWrtN3A8W7mgzuZP/tI+VefJf78SWLRCL98pvzqeSQnO4nHuh+LemYY7HCXuqndzDOfcmR3tdXPGA0S23HiKHluQbbtLyMeRm0jFYIx7sbMt72T9que5y5u/atuZgzMq9gm67LF2jwNqzKr7YQKIfjZI7bp1KrwuCMCKJNK6IeG37+I/OJr4dtXLe0604hwstswrzL39wLHu3Zo4fvLgX/6PvOzbyJfvgqkoaKWYlsa9zhpjN3eXhMapZdHmYxL3Rvc7F4bn80uM80m38oNvVWEoMrGBHAgRpoUN+idArfBN42/6ch43Sq0ToqQhkTOtnmhGPta7D2ryJRbUkRt/R2tuLyp+e5N4KtXwm+f93zzFn7zqudXT+F3LyLP3zdcrytUoQmFsywtPfohBuOQ1TKqAQbfhVKM+XEsPgbbdbyhXFX7nhK26KfcO4Il+B8P35VrIwFu6R7xLwGootA01omiaApyZTnDqM47gWWSCBZs6FMaBzWaYmoDETHRYUvEvlEgZ6qg1BGmdTT7MwmTADUJ8YWynP30COsAQ07UlUfj3WWu65o0JFdCduSHgWayXHUTfdowkLmiZTxxSzLa+Dwh9wdly/XcAGnmgiCaicGi1zFG5ot6BGlUVD6QMWc9K7EqMsqmUbDAbT8M4wbZkkhQFJS4e7fppWeguHVxehFYrieQCwB2lwqoU3sIAdFA1yUL21U1MUb6rvdgsynR4DuUM5kY3b9XA8oUUJnsItqwKL/jY5/jiqYUex2sLkf1FuQOrQSqCIpydrYixmBLxh4kyTnZ+2zRmNliQk7WCy1sgVEvKnS9fYtB3dSIbyQYOQMlSzKzaKQIE/xmmm/qVbHl3DLBzizGzlVlm2dzpu/sbGdj4YKIBXWMcJTpdDIa6taVDWWamQWzqijj0i+Ts5u+W3E71BF3WToKbTElEutIHQNDFuZTo64S5hPfLqg+2yW33tjCKFiLnHQWzDnTd5aSE6uNzDPX2ZAp4BhV+fzi8QMMSPWJTINZExIiVV2hahspNLuJZh3xZY4CrjFXTom27ZFqqy3cjceC2vNJzcHBjCrYcSFFhNpfR9Qn7JanZJgaFdhEmhyqfKfExXXPvAn40XH2jNiuj0kzIadM15s/X/ZvZjekbTuNB6VdB/TdQBpsT1FV+YEDvlXcIR3bKe+yU7S6Wysx0kxryxHIytAN5JTHhFjxxC9TPMXu9L67DDY2sVFb1p2VnIXFtKLPia9f3bAcLBWocLS4hCpkKLfDdyMRWHFBHWMgq5CGTEqBISs7s0wWq6Ryrdq2PUMaUCwzT5zCXOzbbPs0WeNmluVs21y6rmcYBsR3K4cg1DHQVLYmtLuoWMzN9q1iZFJ7UqxmunVHGjYcsRmPZd5JIakiRwP0gyd/lW+/wcBumpq6rhGBIcGdg4arqzWTyr7QJflinRO9T7T96K2E27F4hwT/RsBA31vDTSWseuVgUY+dT57ZVuRUYe9cTlJwO7RswS7PjRJxZD97fhisvpQy/ZDphkQWZdVl1p6VkrJ9CwNOreOyixNfYV2JZvZp9nuihe1SMQFdrFlHzE5tu54hJWKoaBpTyHUVPRi+SXjbUJ6wiZZ65Hh7Tn/4L6nQDYk0KLMJJPsGHdwC8vuKieJsXgxj/6aE7OZUkEAVbMGtiAJ/2mWbHbql6quHgvFVtpPFut5kfam/pHFrmbxiL7rJZhZHSfVxBeNwbOcUgIf3XD7iXz21v4hcLhPDkKmj36jJH/L35VWpp1wsnFIGh5tGybdTZ01MakstvLjJ7Myipd4Ys3iQodh3RUNafWXARrVKrIqptGm8eHDGhkYNYjNq9TpgqmbEm2fmdm+hgXGMxhWbgI5PoMXlrMcFSf9f3uJm1bpLLKaBq3VLOyh9bwtpmhXFRA+MKn/8H8ZBjR8WOisDNBsSMrOpreuEqmIxjcToxoMR6BjJKbbjGJFiZAYyZljjCsNQM5AEy5QzSrNv5Sp758vXAW8X0/QbhpPg3+sU7eA/9W2I4NQXGG1L6695QbZ87NTvTuakMdu6oiJG4XCvtn54Tw2qMgtOhj7k8Y2x3QZtxdjNRS77O1NE4XivImnFnX1L7S4kos4yInayAu5PF1YqXKxqFFao1ojSWF58/9DYER+4DaNcKj8WZyjP4lyVPaHWid1Cam4Z2ARbXf5ylP2gBF8m/+DulMulnb+vaguF4nvgjIts0s1+9ckpSslY1K47kreKeFz0//ntGaeXmXltXw51sDujDpZd7JzkrOSs4ZQ4UghmThlI9r/Ql+WSuh9dJtiPyhQR6ij+DQzGVqOMtUZv7QH4ASF72QxKFUIVqLcUgfjkVaEiRmUShWULdw5rUha+fNkTQkRUi0lvlO599EsG6C0wXdvZdacKR7+phJP9KRHb1PXmrOXuYaSzZE1wc6gMUlxIi3/3HG7cE8oH1raIZzxbq0a52Q4mwJVaFYMd3V5sUe+fKTz/YGRB+78t192QM3Z1gz773necKkWEZd9zuBd4e76mCpF1m4kok6Ye58lpxgSYg+dIlUU6R7vAIhuUs2+hSX1kbzHh7pFFx+dNtsCtCLMm+zYcf8zBESdGK5594fUWih1LIdxytxYwhCDRgsnRNPb27w/l6gjm+D6b3TQqtA2XZnXuogxeWMwjk6pi1cGjkxnP3vc0jTB09pWTZmCMiHpbJpJwEbQZnHpE2gMbZYAx2hFBQWC1Hri8ssTU4x14cZ64fxQZNMG4b2lE1uWTMJ3WWIq5ITcCu20J62Yi2ZJ/MRT/vVBYmTAbRlnaHjUYW+ffq41E1TM/8ACIB2ZLP2IMJFEen8w4P+9ZzCp250qflEf3poB6JvWW3HTX1F7ZeAtzjzG/EvTAuTJ44n6ItmHg4rLnaL/i/BrmM6GplKuVcmfXGi/cZ1rWKHIybexwFTezRu30A2Aci01RC+wOeSAl6DpPs2Ej8wpnleqMMG7TD2pEOp1WZrJ5Y4ofcSRCn4WTvYrzy442w9nVgAzKR/dqri/WJLVEiHL/2EWjvbG9zU46n0lc2Notdg6dsZrlI61zRRNgIj0p2Rc/vb/O1NOakz3IWnad2aBFAmmwI9hGZYNtZBW3+Qo1qzpCxR0UY8jiCJjx7s+Mik5xYhtFBGKvxYdRrI+hN6M8uPcmntyGBPYWgYN5w6vLHgnQNBUXq8yzt2uWQyRryUGw7Y72RbEuLgp+t13PsVfjtNtECCJ2sFTtOUBfv2gJVeTickWIwuEuPD8dONhpWDRpNMoLwdl6jg0KqxIl28DEtb0/U5XzlLw7jAB5XzCgS8DfQC+Txy2CKFUUYLs+MyQDXcpZegq7U/smnuenNzw8rPirH+9wMhPOLjtm0wrSYLQ3ru8XbertbVrZLIFYsf/23kJiGSWpkLIlu6IDKw1ctT0nxzOGHPnJh1MeH0/55lXL3aOGWaOeWcK4f2l0CwsQrhRSWfgSADurSR2gIt8YwfL7yj2yYT8VW3ndFCMKJyR7tIg19UiTCkcL5Xh/zpffXxDqip0J/Ow3ZxzfmXLvaMKqs/1J08Z0gSlJH4eOlY0R/G2V4H3YKCPbvldSFJWLZU8VYDoZeHQ8Iffw8k3LL7/paVv75q9v3yRO9uIIamFLcMXioxvlkM+yzaWF08bdJUUibbHv5hkD3FxBY/HsS8OmCMHW9Uvd/oyPTAUmdeJob8Kz0xua6YR5LZbIUE14e9Fzdd2iWWnq2pMufIWh6AeryX4UUMuD+qNi7OT+LybDgmQuV5lJLfzZJwvOL3suV/CnP6ppGtjZqTneDaw64WAHDheB/R3ohmyZJB7Ss8E5m/t/VSfdQtXiYTb7GLCTwGO5x+w6f84qFT8U28C1+7XIuW2lEezwl7qGh8cV63YFWZiETN/B81eJT+8J68slK2rmsWXdKW2rRLHzTqSInmJuaiHDMajjN+CDHIuimsZliSCZ/VnNr/+wYpnsqyn7XjiaKu2qYxqFJyeCEPjmXWJnVvHkbgSShQILnxRQnbIsAFw6aVRdgBTroMtKA8h6tkXd/k99i7bJ5+hnNZmctjoF1Z6j3Yq7+1Peng3s7075259MmTbKTTeQQuTsSqnqmr4d+OLjQy6vW+qmoQrBA8w2Q9bLcVZNtm/mrghb5xK143uGYbBoe1YqgSePdgCoJBKryHdv4Q+vE28uB56/ayFnLi5umFTw/LTlZhX48N6Eoz3PcpM4JriadrYzkh3qLUVo/bJ5EDsbNG8MaNTOMTGKLWxvBBH823NQ3+8ZAl3u2ZklntzZI6vy9aszzm96fv7VFS9errg5u6GuA5Mq8ey05+11YjVk/uNvrzjYm6KeKFEoc+zvVh+BErEvBpzPt8tMW7vJ5GwpMJerxN//5oJJE9iZ1gRqPrpT8eG9mi8+nvHwpOH8KkHTcDC3BNyLm55nb1qaKvDBvQlVlehzNlPGNXvJ12dbeY7EaC9GAvdiA9gQw3ZRz5VHhKyJKvY8vjNlbzbh5ekV59cd06bmTz8/oqoib68Sjx5O2G0S90+mfPpBzd3dmkVVQVAOdgJkI6yNzNze6LaZ/GDmhnduu19OptkDI3vzCXcOGtZZ+fZtZn+3Yn8WWPWRmO0ItZenidlkwsu3mZPDhofHkf1d+27Ol+eJt2c9D4+nPDqpmdSJPiXzPoqqGjvoh8E6cJv+/aCP2wC7/AoSPKLfMWkGHp5U9uWE1z2vz3qGHuaLCYeLCetVMgoPkadv4MGjOfvTnr4VjnYij+5MOJ5P+f5tok22x964ynLni9zEL6nZod4rpwbj+lHEIiRihOvWUhY/uNPw+aOGe8eBZlYRq8yj+3Oenw5MJzMUiKHm+zd2GNZ0MuejhxMOp7YE8d2LJVc3ysn+jMd3phwscA1aIpH2U84AsR9XUt7/IhZ8HJZYphmVTNUk7hwKT+7NOJjX3LTKi/dr6rphEiMP7u8RFO7fnXJ6doNqYDoNzHcnPHvR8eTxAbszuOobFOVwR7m86WjqCtS8QQs9/oCVfNJL5v4I6gZzNUB9yXjImefvWr552XJ+OfD7bwZSXvPnH8348pslVdWQ80CWyMFexbSBo8MFZ2fX7O5MOdiJ7M+n/MnHU2ZT+Pb1muenLZoDxzsND49q7h3V7OxAiHbgdJ8Sbc70GXrNDLknZaVPPUl7CJnJRDjYa7h3MuPRyZSjnQldG3h12vLuOtF2Ac0VHz2Zc/e4pmt7Hj6YgWbWHbaLOQnvXl9xet7zv/679zy4OyPSsUxTqirwwcMZ7SqhGYZs61Eeth7RMk6HOJ/u/92IostOIbC7OGK9XnP/CEQiL9+3TCohJ/jwccOdHeHewZSvXl1zua6oQmJ3J3C9HKgmFRcXLbNG+emP9/jq6xumOzV9yvzo4YKnr1Y09YS6ErreDgZYtz05w7Sp2J3V7C8a9ncqDhcVswZ+8nHNwUKoYs3+YsLutGE+rWmqiObEuhu4WfYs14pIpGks3HfnZEJdV5yd9QQGJFaslh0v366oYoNqZt0N7O7XNCGzsz9hNonsTyL1PPDi9cDNqqPrE0kTP3m84Ls3S1YDzCcNF9cXvhxiFLsJjjibm9xymQSEYIdbqR+6d2c/UGdlMlVUBs4uEkdHE5Zt5uhoyv4ikdLAyd0p3RD5zVfXHO3XTCVxuFPzm6/e+3nziZQ6qrq3faQtrAfl7Krn5bsVL98u+f7lFS9OV7w4W/Pi7YrnL9a8Pe949f6a56cXvHp/zbuLJTergbbNhCoyaOZ61ZEQPv/4gCbC5dU1Ozs1k1gzCQnIhAjnV1ccHEcOdgMf3F0wrWuO9ir665anbzsaYNYk9g9nJAZSTkAa3WVjdY9wuQsc59O9v1PMMzSxoIgEdneOaFctd47M7Ty9zIgqH9xveP12yZAnrNcd3SDkpOwuZrx6teTDx/ukDnJSjvfte5GDRC5uEm8vBoTI8X5k0WQOdiOLScXhIrCYe06SwqQBVUvsijHz0b3I8V7N3qymqeGm7RG1FdRJXTGfVRzsT5Bh4OhwwoOjHdbrjjx0nF+s2FssGNqeV+9abtbKfFpzZ7/i5HBC6gaGnHnzbs1VK7w67fj4wYQXp4l1gsU00C5bVn1m3Sc+ezDnxemaVR9ZzCouLi+3rA8hzqb7/v3ypRjp7u3doWs7Tg5sAs5uQIfMtK6pa+H1pfLsdU9CuL5Rrm8SEgNdm3j+6prLZWbaVIQ6cH6duV4mQoRVO/DqLHG2tNjqm7NMmwMR23RQx8B8EplMKt5fdfzo/pSffjzHbPSK2U7FB3cnvHzdc7A7Y2dmCWTdWplOa65uEi9eX3G9Guj6yNFBw8265/X7DiSQVHh/2aMaeP3+htfnPbuzidu6wnRScbOy76lftcrVTcvRYcPZ2YpWlX/xaMqL0551iiwmNRfXl648DTs52ntsrosWM8CWWx8//inLyxvu7d/wyQc7/F+/eEcVGnJW+gGqSUN0co8hIlKxmAcCds5IXZl2XvYdTawIZOxcfzPwY4Qm2kpkzhCCbZQdhsG+hCpnDvcb+kF59a7jr38y5/Iq8e2rnrsHFUJNrCtSr0ilrDsh9wNUpmsR08YpD7ZnvhKGJIRYMZ81rFZrbpY9i2lkf7fm25fXTCYNWTPLdWfem59sO22AEIlVx//4lyf8L//hEq1m7M0D3z17ith5BZbmebz3WM0XdYRFSX3Po0df0LcDQ3vGv/wXM1Yp8Y9fX9EmCzCIRGKsqKItUUQRO/sYZdpEgtiJDrHyeGY2nz4TLWAd7NtnTNx4Fl9OZEe4S8qqs9x4weRrQNidVkxnFZIMtKYKtqMvld0gxaq1JDIzGDcht6zQ+xcYEGzVdt0Plp9VR8scyQPqm9ZSyhAqdueR//4v9vj5l5d8/bZhNpnRVB3P37y0bTqOoBztPdqylNxHzcru3gN2d4+5unqP6JonR4HjgxoROy08iIW1yoF9tlRhW2pUxezCMUfUD5NSW5+qfGljlOv2h4y5d+q5m0GUSiIZYdBElQNN00AUUoKqFuMIhdybMZPVVgbE7VMVRdSWtM3U8SwW7BtqE+V0W9sC2Q4tWZWAf42Rmis7CZE/vLjhm1M7Rn5vd87Z+Qtu1msf4z8DqKX7+UYDrTg5eUIVhZvVDe0w0HZrW5jGDgoM4vs7PWhQlnlztvBYoUw7Sda8nlACIZ6/X3ijLH6pA6KYexo8D4rA5hseQiBi+wAEy1UlG+eo2pFHYJnNKdtOwGwdQPwMZ2tfCJIhCpo3SbglLGi9sxBmSrA3nRAksFjs0LaXvD97a4sa6iJTdBvQoqocaQTVyN7uEbs7C/rBzCFEEfuOxDGKY/NeqM0NMHfNVG2QZvgaMEIJwdkzWgIcJVyopUs2cHvtk4cFV4QSxRMzUcZv2fVv5vLoU/a+IPik2+Tj3+Jg3ff6MpbVpIaDPwaUUyCM265vzrm6vvA1eRMpRuaCHO0+GlfWgkmckU1FhCFlJvWEvZ09/5qfcqe5ghvpWyq312U3iPVHtrwKD3SUYO8YKSoUoUbBJTi9lWlcellYShzLsRcel8xqMnJc8tUyOTb5lrvq615ifWLreSkTQiEV+7wfWq5vLunT4HX5ZjfnNQf0sYrg7LPpnE/GZuFLjWXHQMUWoBZ58UUAB8Y66/fJ7W/U3gRkN76uFtkmYhM29seKPW+rAIWCNk/a0nApDq+/9rH667Kz2qIG5T5vaRvcUgo7I/Y9IP6Mqxsfxcavl6PdRypbOUiUwfl4y8MmK8sg/T41OZX9FFsbSPFyC5j+ekS0zP52+MtL2RtV1ve3Pyq1Gy+PoNpV66y1WO6+jZOW8fhziMcKsXbtvg1EI66FaLBKyh2FMo3cNvXI4e4j2/rkAt4UkoNaBlWoUjfLu6OMxBIjCtVZ1SUBoLBV8LQY687I3j8A1Dhgsyd/65OCxNY6km5JuU2ob5TNIyjqcra8tv+FQq1WE0Pb7Yzt+/1FFAacQ9w8Cw4uPkmbNaXt0Y2s7W2M/zaNKE7mt369YyKeQ1HqKXXfRrDM0/jr9TvcrtCKSLn16FbZfGCU7wetjDKgtF+AKuLNrYOt/im3Zfo2kYiOC7cj+BuRoeDvglFFqfBW1VvX7Gd7FsUbH28cKcpYfANWobYNWOU+e+33j1Tivdh0xt+WjOdSrz3pL8ayqX9s0ifYig3dQB1v2Ijy289v4VFuLQCPn6uLD+9GsJs2nRKsA6NCUQ/sei0j5ZRLRWlhLCcFwLGHRVFtyjZW4Fw6Tsg/8znb4sGdj63PcaVxq5XxBh9sGU/p6/YtLiZsUgtyNs7NJ/Z/M6f288MJCGNHx06WWzeDNMVSBmoPbMwc71yRXQVAKZ3asM92sUm9PbiR4kal6Z0qv1sMYf9Lm+WPK0G/zIZ4yp12WTYTYMrXKt6mPpOx3j/Z9GVbWeoP3iPC/wtadQlkGkYlagAAAABJRU5ErkJggg==');
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;overflow-x:hidden;}
+  /* 防止瀏覽器把牌圖當作可下載／可拖曳物件。 */
+  img, [role="img"], .rws-card-img, .rws-tray-img, .rws-tile-img, .rws-preview-img, .rws-summary-img, .meaning-card-large{
+    -webkit-user-drag:none;user-drag:none;
+    user-select:none;-webkit-user-select:none;
+    -webkit-touch-callout:none;
+  }
+  img{pointer-events:none;}
+  body{
+    overflow-x:hidden;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(150,120,207,0.15), transparent 60%),
+      radial-gradient(ellipse 700px 700px at 90% 100%, rgba(201,162,75,0.06), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  #app{
+    width:100%;
+    max-width:480px;
+    margin:0 auto;
+    min-height:100vh;
+    position:relative;
+    padding-bottom:100px;
+    background:linear-gradient(180deg, rgba(28,22,48,0.3), transparent 300px);
+  }
+  ::selection{background:var(--purple-deep);color:#fff;}
+  ::-webkit-scrollbar{width:6px;height:6px;}
+  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 20px 14px;
+    position:sticky;top:0;z-index:20;
+    background:linear-gradient(180deg, var(--bg) 60%, transparent);
+    backdrop-filter:blur(6px);
+  }
+  .brand{
+    font-family:var(--font-deco);
+    font-size:20px;
+    letter-spacing:1px;
+    color:var(--gold-bright);
+    display:flex;align-items:center;gap:8px;
+  }
+  .brand .glyph{font-size:18px;filter:drop-shadow(0 0 6px rgba(232,200,116,0.5));}
+  .icon-btn{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--surface);border:1px solid var(--border);
+    color:var(--text-muted);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:17px;
+    transition:all .15s ease;
+  }
+  .icon-btn:hover{border-color:var(--purple);color:var(--gold-bright);}
+  .icon-btn:active{transform:scale(0.92);}
+
+  /* ---------- Views ---------- */
+  .view{display:none;padding:0 18px;animation:fadeIn .25s ease;touch-action:pan-y;}
+  .view.active{display:block;}
+  #view-detail{touch-action:pan-y;overscroll-behavior-y:auto;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  .page-title{
+    font-family:var(--font-display);
+    font-size:22px;font-weight:600;letter-spacing:.5px;
+    color:var(--text);margin:6px 0 18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .page-title .sub{font-size:12px;color:var(--text-dim);font-family:var(--font-body);font-weight:400;}
+
+  /* ---------- Calendar ---------- */
+  .cal-nav{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:14px;
+  }
+  .cal-nav .month-label{
+    font-family:var(--font-display);font-size:19px;letter-spacing:1px;color:var(--gold-bright);
+  }
+  .cal-nav button{
+    background:var(--surface);border:1px solid var(--border);color:var(--text-muted);
+    width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:15px;
+  }
+  .cal-nav button:hover{color:var(--gold-bright);border-color:var(--purple);}
+
+  .weekday-row{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:6px;}
+  .weekday-row span{text-align:center;font-size:11px;color:var(--text-dim);letter-spacing:1px;}
+
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .cal-cell{
+    aspect-ratio:1;border-radius:10px;position:relative;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    cursor:pointer;border:1px solid transparent;
+    background:rgba(255,255,255,0.015);
+    transition:all .15s ease;
+  }
+  .cal-cell.empty{visibility:hidden;cursor:default;}
+  .cal-cell:hover{background:var(--surface);border-color:var(--border);}
+  .cal-cell .num{font-size:13px;color:var(--text-muted);font-weight:500;}
+  .cal-cell.today .num{color:var(--gold-bright);}
+  .cal-cell.today{border-color:var(--gold-dim);}
+  .cal-cell.selected{background:var(--surface-2);border-color:var(--purple);}
+  .cal-cell .dots{display:flex;gap:2px;margin-top:2px;height:5px;}
+  .cal-cell .dots span{width:4px;height:4px;border-radius:50%;background:var(--purple);}
+  .cal-cell.term .num{color:var(--gold-bright);}
+  .cal-cell.term{
+    border:1px solid var(--gold-dim);
+    box-shadow:0 0 0 1px rgba(201,162,75,0.15), 0 0 14px rgba(201,162,75,0.25);
+    background:radial-gradient(circle, rgba(201,162,75,0.12), transparent 70%);
+  }
+  .cal-cell.term::before{
+    content:attr(data-term-symbol);
+    position:absolute;top:2px;right:3px;font-size:9px;
+    filter:drop-shadow(0 0 3px rgba(232,200,116,0.8));
+  }
+  .term-legend{
+    margin-top:14px;font-size:11px;color:var(--text-dim);
+    display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
+  }
+  .term-legend span{display:flex;align-items:center;gap:4px;}
+
+  .month-review-reminder{
+    display:none;margin:12px 0 8px;background:linear-gradient(135deg, rgba(201,162,75,.14), rgba(150,120,207,.12));
+    border:1px solid var(--gold-dim);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);
+  }
+  .month-review-reminder.active{display:block;}
+  .month-review-reminder .title{color:var(--gold-bright);font-size:14px;font-weight:600;margin-bottom:6px;}
+  .month-review-reminder .text{color:var(--text-muted);font-size:12px;line-height:1.7;margin-bottom:10px;}
+
+
+
+  .field-error{
+    border-color:var(--danger) !important;
+    box-shadow:0 0 0 3px rgba(193,89,76,0.22) !important;
+  }
+  .field-hint-error{
+    margin-top:6px;
+    font-size:12px;
+    color:var(--danger);
+  }
+  .detail-edit-panel{
+    background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius);
+    padding:14px;margin:12px 0 16px;box-shadow:var(--shadow);
+  }
+
+  .day-records{margin-top:20px;}
+  .day-records-title{font-size:13px;color:var(--text-muted);margin-bottom:10px;letter-spacing:.5px;}
+  .record-chip{
+    background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-sm);
+    padding:12px 14px;margin-bottom:8px;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;gap:8px;
+    transition:border-color .15s ease;
+  }
+  .record-chip:hover{border-color:var(--purple);}
+  .record-chip .info{flex:1;min-width:0;}
+  .record-chip .q{font-size:14px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .record-chip .meta{font-size:11px;color:var(--text-dim);margin-top:3px;}
+  .record-chip .del{
+    color:var(--danger);font-size:16px;padding:4px 8px;cursor:pointer;
+    border:0;background:transparent;font-family:inherit;line-height:1;
+    display:flex;align-items:center;justify-content:center;border-radius:8px;
+  }
+  .record-chip .del:hover{background:rgba(193,89,76,.12);}
+
+  .empty-hint{
+    text-align:center;color:var(--text-dim);font-size:13px;padding:30px 10px;line-height:1.8;
+  }
+
+  /* ---------- Review panel ---------- */
+  .review-panel{
+    margin-top:22px;background:var(--bg-elevated);border:1px solid var(--border-soft);
+    border-radius:var(--radius);padding:16px 16px 14px;
+  }
+  .review-header{
+    display:flex;align-items:center;justify-content:space-between;cursor:pointer;
+  }
+  .review-header h3{
+    margin:0;font-family:var(--font-display);font-size:15px;color:var(--gold-bright);
+    letter-spacing:.5px;font-weight:600;
+  }
+  .review-header .chev{color:var(--text-dim);transition:transform .2s ease;}
+  .review-header.open .chev{transform:rotate(180deg);}
+  .review-body{display:none;margin-top:12px;}
+  .review-body.open{display:block;}
+  .review-stat{font-size:12px;color:var(--text-muted);margin-bottom:10px;}
+  .review-item{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:8px 0;border-bottom:1px solid var(--border-soft);font-size:13px;
+  }
+  .review-item:last-child{border-bottom:none;}
+  .review-item .rank{color:var(--gold);font-family:var(--font-display);margin-right:8px;}
+  .review-item .count{color:var(--text-dim);font-size:12px;}
+  .source-note{font-size:11px;color:var(--text-dim);line-height:1.55;margin:0 0 8px;}
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 12px;}
+  .review-pill{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:10px 8px;text-align:center;}
+  .review-pill .num{font-family:var(--font-display);color:var(--gold-bright);font-size:18px;line-height:1.2;}
+  .review-pill .label{color:var(--text-dim);font-size:10px;margin-top:3px;}
+  .review-block{background:rgba(150,120,207,0.06);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:11px 12px;margin-top:10px;}
+  .review-block h4{margin:0 0 6px;font-size:12px;color:var(--gold-bright);font-family:var(--font-display);letter-spacing:.4px;}
+  .review-block p{margin:0;color:var(--text-muted);font-size:12px;line-height:1.75;}
+
+  .settlement-card{
+    background:linear-gradient(180deg, rgba(201,162,75,.12), rgba(150,120,207,.07));
+    border:1px solid var(--border);border-radius:18px;padding:14px;margin-top:12px;box-shadow:0 8px 24px rgba(0,0,0,.22);
+  }
+  .settlement-title{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px;}
+  .settlement-title h4{margin:0;color:var(--gold-bright);font-family:var(--font-display);font-size:15px;letter-spacing:.6px;}
+  .grade-badge{min-width:64px;height:64px;border-radius:18px;background:rgba(12,10,20,.62);border:1px solid var(--gold-dim);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:inset 0 0 18px rgba(201,162,75,.08);}
+  .grade-badge .grade{font-family:var(--font-display);font-size:26px;color:var(--gold-bright);line-height:1;}
+  .grade-badge .label{font-size:10px;color:var(--text-dim);margin-top:4px;}
+  .settlement-summary{font-size:12px;color:var(--text-muted);line-height:1.75;margin-bottom:10px;}
+  .trend-chart{width:100%;height:150px;margin:8px 0 4px;background:rgba(12,10,20,.35);border:1px solid var(--border-soft);border-radius:12px;padding:8px;box-sizing:border-box;}
+  .trend-chart svg{width:100%;height:100%;display:block;overflow:visible;}
+  .trend-chart text{fill:var(--text-dim);font-size:9px;font-family:var(--font-body);}
+  .trend-chart .grid{stroke:rgba(168,155,196,.18);stroke-width:1;}
+  .trend-chart .line{fill:none;stroke:var(--gold-bright);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+  .trend-chart .dot{fill:var(--gold-bright);stroke:var(--bg-elevated);stroke-width:2;}
+  .review-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .review-actions .btn{font-size:12px;padding:8px 11px;}
+  .month-end-hint{position:absolute;right:6px;bottom:5px;font-size:9px;color:var(--gold-bright);opacity:.9;}
+  .cal-cell.month-end{border-color:rgba(201,162,75,.55);box-shadow:0 0 0 1px rgba(201,162,75,.08) inset;}
+  .monthly-ai-note{margin-top:10px;}
+  .monthly-ai-note textarea{min-height:96px;font-size:12px;}
+  .keyword-cloud{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+  .keyword-cloud span{font-size:11px;color:var(--text-muted);background:var(--surface);border:1px solid var(--border-soft);border-radius:18px;padding:4px 8px;}
+
+  /* ---------- Floating add button ---------- */
+  .fab{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+    max-width:440px;width:calc(100% - 36px);
+    background:linear-gradient(135deg, var(--purple-deep), var(--purple));
+    color:#fff;border:none;border-radius:30px;
+    padding:15px 20px;font-size:15px;font-family:var(--font-display);letter-spacing:.5px;
+    cursor:pointer;box-shadow:0 10px 30px rgba(90,60,150,0.45);
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    z-index:30;
+  }
+  .fab:active{transform:translateX(-50%) scale(0.97);}
+
+  /* ---------- Forms ---------- */
+  .field{margin-bottom:18px;}
+  .field label{
+    display:block;font-size:12px;color:var(--text-muted);margin-bottom:7px;letter-spacing:.5px;
+  }
+  input[type="text"], input[type="date"], select, textarea{
+    width:100%;background:var(--surface);border:1px solid var(--border);
+    color:var(--text);border-radius:var(--radius-sm);padding:12px 13px;
+    font-family:var(--font-body);font-size:14px;
+    outline:none;transition:border-color .15s ease;
+  }
+  input[type="text"]:focus, input[type="date"]:focus, select:focus, textarea:focus{
+    border-color:var(--purple);
+  }
+  input[type="date"]{
+    color-scheme:dark;
+    position:relative;
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator{
+    opacity:1;
+    cursor:pointer;
+    filter:invert(84%) sepia(36%) saturate(705%) hue-rotate(359deg) brightness(96%) contrast(88%) drop-shadow(0 0 4px rgba(232,200,116,.45));
+  }
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-clear-button{
+    display:none;
+  }
+  textarea{resize:vertical;min-height:110px;line-height:1.7;}
+  textarea.long-note{min-height:180px;}
+  select{appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23a89bc4'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;padding-right:32px;
+  }
+  .mode-toggle{display:flex;gap:8px;}
+  .mode-toggle button{
+    flex:1;padding:11px;border-radius:var(--radius-sm);border:1px solid var(--border);
+    background:var(--surface);color:var(--text-muted);font-size:13px;cursor:pointer;font-family:var(--font-body);
+  }
+  .mode-toggle button.active{border-color:var(--gold-dim);color:var(--gold-bright);background:var(--surface-2);}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 18px;border-radius:var(--radius-sm);border:none;
+    font-family:var(--font-display);font-size:14px;letter-spacing:.5px;cursor:pointer;
+    width:100%;
+  }
+  .btn-primary{background:linear-gradient(135deg, var(--purple-deep), var(--purple));color:#fff;}
+  .btn-gold{background:linear-gradient(135deg, var(--gold-dim), var(--gold));color:#1a1408;}
+  .btn-ghost{background:var(--surface);color:var(--text-muted);border:1px solid var(--border);}
+  .btn-danger{background:rgba(193,89,76,0.12);color:var(--danger);border:1px solid rgba(193,89,76,0.35);}
+  .btn:active{transform:scale(0.98);}
+  .btn-row{display:flex;gap:10px;margin-top:10px;}
+
+  .photo-upload{
+    border:1.5px dashed var(--border);border-radius:var(--radius);
+    padding:26px 14px;text-align:center;cursor:pointer;color:var(--text-dim);
+    font-size:13px;background:var(--bg-elevated);
+  }
+  .photo-upload:hover{border-color:var(--purple);}
+  .photo-preview{width:100%;border-radius:var(--radius);margin-top:10px;display:block;}
+
+  .card-select-row{
+    display:flex;gap:8px;align-items:center;margin-bottom:10px;
+  }
+  .card-select-row .pos-label{
+    width:78px;flex-shrink:0;font-size:12px;color:var(--gold-bright);
+  }
+  .orient-toggle{
+    display:flex;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;flex-shrink:0;
+  }
+  .orient-toggle button{
+    border:none;background:var(--surface);color:var(--text-dim);padding:11px 10px;font-size:12px;cursor:pointer;
+  }
+  .orient-toggle button.active{background:var(--purple-deep);color:#fff;}
+
+  /* ---------- Draw overlay (fan spread) ---------- */
+  .draw-overlay{
+    position:fixed;inset:0;z-index:100;display:none;
+    flex-direction:column;align-items:center;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse at 50% 46%, rgba(42,27,74,0.42) 0%, rgba(12,10,20,0.94) 58%, rgba(6,4,12,0.985) 100%),
+      linear-gradient(180deg, rgba(20,16,32,0.96), rgba(9,7,15,0.99));
+  }
+  .draw-overlay.active{display:flex;}
+  .draw-overlay{--draw-safe-edge:60px;}
+  .draw-overlay::before{
+    content:"";position:absolute;inset:10px;border:1px solid rgba(150,120,207,0.44);border-radius:18px;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.04), 0 0 28px rgba(150,120,207,0.12);
+    pointer-events:none;
+  }
+  .draw-overlay::after{
+    content:"◆";position:absolute;left:24px;top:24px;color:var(--gold-bright);font-size:22px;opacity:.82;
+    text-shadow:0 0 18px rgba(232,200,116,0.45);pointer-events:none;
+  }
+  .draw-top{
+    position:relative;z-index:2;width:min(1080px, calc(100vw - 36px));
+    padding:34px 4px 8px;display:flex;justify-content:center;align-items:center;
+  }
+  .draw-top .title{
+    font-family:var(--font-display);color:var(--gold-bright);font-size:22px;font-weight:700;letter-spacing:1.5px;
+    text-align:center;text-shadow:0 0 18px rgba(232,200,116,0.18);
+  }
+  #draw-title::before,#draw-title::after{content:"◆";font-size:17px;margin:0 18px;color:var(--gold);}
+  #draw-close{
+    position:absolute;right:0;top:26px;width:42px;height:42px;border-radius:50%;
+    background:rgba(36,28,58,.78);border:1px solid rgba(150,120,207,0.38);
+  }
+  .draw-tray{
+    position:relative;z-index:2;display:flex;gap:28px;justify-content:center;align-items:flex-start;
+    flex-wrap:nowrap;padding:22px 12px 8px;min-height:132px;width:min(760px, calc(100vw - (var(--draw-safe-edge) * 2)));
+    overflow:visible;
+  }
+  .tray-slot{
+    width:70px;height:104px;border-radius:10px;border:1.5px dashed rgba(150,120,207,0.72);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;
+    background:rgba(13,10,24,0.18);box-shadow:inset 0 0 20px rgba(150,120,207,0.05);
+  }
+  .tray-slot .slot-label{
+    position:absolute;bottom:-28px;font-size:12px;color:var(--text);white-space:nowrap;text-align:center;
+    width:120px;left:50%;transform:translateX(-50%);
+  }
+  .tray-card{
+    width:70px;height:104px;border-radius:10px;
+    background-image:var(--card-back);background-size:100% 100%;background-position:center;background-repeat:no-repeat;
+    border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;color:transparent;font-size:0;
+    transition:transform .5s ease;transform-style:preserve-3d;position:relative;
+  }
+  .tray-card.revealed{transform:rotateY(180deg);}
+  .tray-card .face{position:absolute;inset:0;backface-visibility:hidden;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4px;gap:3px;}
+  .tray-card .back-face{background-image:var(--card-back);background-size:100% 100%;background-position:center;background-repeat:no-repeat;color:transparent;font-size:0;}
+  .tray-card .front-face{background:linear-gradient(160deg, var(--surface-2), var(--bg-elevated));color:var(--gold-bright);transform:rotateY(180deg);border:1px solid var(--gold-dim);}
+  .front-art{font-size:16px;color:var(--gold-dim);transition:transform .3s ease;line-height:1;}
+  .tray-card.reversed .front-art{transform:rotate(180deg);}
+  .front-label{font-size:9px;line-height:1.2;color:var(--gold-bright);word-break:break-all;}
+
+  .rws-card-img,.rws-tray-img,.rws-tile-img,.rws-preview-img,.rws-summary-img{
+    display:block;width:100%;height:100%;border-radius:inherit;background-color:var(--bg-elevated);
+    background-size:cover;background-position:center;background-repeat:no-repeat;
+    pointer-events:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none;
+  }
+  .spread-preview,.spread-preview-board,.spread-layout,.draw-tray,.tray-card,.card-tile{
+    -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+  }
+  .spread-preview-board,.spread-layout{touch-action:pan-y;}
+  .tarot-img-fallback{
+    width:100%;height:100%;align-items:center;justify-content:center;color:var(--gold-dim);
+    font-size:18px;background:linear-gradient(160deg,var(--surface-2),var(--bg-elevated));border-radius:inherit;
+  }
+  .tray-card .front-face{overflow:hidden;padding:0;gap:0;}
+  .tray-card .front-face .rws-tray-img{border-radius:10px;}
+  .tray-card.reversed .front-face .rws-tray-img{transform:rotate(180deg);}
+  .summary-card-row{
+    display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-soft);
+  }
+  .summary-card-row:last-child{border-bottom:none;}
+  .summary-card-thumb{
+    width:42px;aspect-ratio:2/3;border-radius:6px;border:1px solid var(--border-soft);overflow:hidden;flex:0 0 auto;
+    background:var(--bg-elevated);
+  }
+  .summary-card-row.reversed .summary-card-thumb{transform:rotate(180deg);}
+  .summary-card-main{min-width:0;flex:1;}
+  .summary-card-main .pos-name{font-size:13px;color:var(--text);line-height:1.35;}
+  .summary-card-main .src-note{font-size:10px;color:var(--text-dim);margin-top:2px;}
+  .spread-preview-card{
+    overflow:hidden;padding:0;background:var(--bg-elevated);
+  }
+  .spread-preview-card::before{content:none;}
+  .spread-preview-card .preview-img-wrap{
+    position:absolute;inset:0;border-radius:7px;overflow:hidden;opacity:.82;
+  }
+  .spread-preview-card .num{
+    position:absolute;top:3px;left:3px;z-index:2;margin:0;background:rgba(12,10,20,.76);border:1px solid rgba(201,162,75,.45);
+  }
+  .spread-preview-card .label{
+    position:absolute;left:3px;right:3px;bottom:3px;z-index:2;max-width:none;padding:2px 3px;border-radius:5px;
+    background:rgba(12,10,20,.78);color:var(--text);text-shadow:0 1px 2px rgba(0,0,0,.7);
+  }
+  .card-tile .rws-tile-img{
+    width:58px;aspect-ratio:2/3;height:auto;border-radius:6px;border:1px solid var(--border-soft);margin:2px 0;
+  }
+  .card-tile.reversed .rws-tile-img{transform:rotate(180deg);}
+
+  .fan-wrap{
+    position:relative;z-index:1;flex:1;width:100%;max-width:100vw;overflow-x:auto;overflow-y:hidden;
+    display:flex;align-items:center;justify-content:flex-start;
+    padding:8px max(50px, var(--draw-safe-edge)) 6px;touch-action:pan-x manipulation;
+    box-sizing:border-box;scrollbar-width:thin;scrollbar-color:rgba(150,120,207,.65) rgba(36,28,58,.45);
+  }
+  .fan-wrap::-webkit-scrollbar{height:8px;}
+  .fan-wrap::-webkit-scrollbar-track{background:rgba(36,28,58,.45);border-radius:999px;}
+  .fan-wrap::-webkit-scrollbar-thumb{background:rgba(150,120,207,.65);border-radius:999px;}
+  .fan-stage{
+    position:relative;height:170px;flex:0 0 auto;
+    margin:0 auto;transform:translateZ(0);overflow:visible;
+  }
+  .fan-card{
+    position:absolute;left:0;top:34px;width:58px;height:90px;border-radius:9px;
+    background-image:var(--card-back);background-size:100% 100%;background-position:center;background-repeat:no-repeat;
+    border:1.2px solid rgba(232,200,116,0.86);
+    box-shadow:0 9px 18px rgba(0,0,0,0.56), inset 0 0 0 1px rgba(255,255,255,0.08);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;color:transparent;font-size:0;
+    transition:filter .15s ease, opacity .3s ease, transform .18s ease, box-shadow .18s ease;
+    will-change:transform;backface-visibility:hidden;
+  }
+  .fan-card::before{content:"";position:absolute;inset:3px;border-radius:8px;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.14);pointer-events:none;}
+  .fan-card.center-card{filter:brightness(1.08);box-shadow:0 14px 24px rgba(0,0,0,0.62), 0 0 16px rgba(232,200,116,0.20), inset 0 0 0 1px rgba(255,255,255,0.10);}
+  .fan-card:hover{filter:brightness(1.18);transform:var(--fan-transform-hover)!important;box-shadow:0 18px 28px rgba(0,0,0,0.62), 0 0 18px rgba(232,200,116,0.25);}
+  .fan-card.used{opacity:0;pointer-events:none;}
+  .draw-bottom{position:relative;z-index:2;width:min(760px, calc(100vw - (var(--draw-safe-edge) * 2)));padding:4px 18px 42px;text-align:center;box-sizing:border-box;}
+  .draw-focus-tip{
+    margin:0 auto 10px;padding:10px 14px;width:min(560px,100%);box-sizing:border-box;
+    border:1px solid rgba(201,162,75,.28);border-radius:999px;
+    background:linear-gradient(90deg, rgba(201,162,75,.10), rgba(150,120,207,.10));
+    color:var(--gold-bright);font-size:13px;line-height:1.5;letter-spacing:.4px;
+    box-shadow:0 0 20px rgba(201,162,75,.08);
+  }
+  .draw-hint{font-size:14px;color:var(--text-dim);margin-bottom:14px;letter-spacing:.5px;}
+  .draw-actions{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;}
+  .draw-bottom .btn{min-width:132px;justify-content:center;}
+
+  @media (max-width: 720px){
+    .draw-overlay::before{inset:6px;border-radius:14px;}
+    .draw-top{padding-top:24px;width:calc(100vw - 28px);}
+    .draw-top .title{font-size:18px;}
+    #draw-title::before,#draw-title::after{margin:0 8px;font-size:14px;}
+    #draw-close{right:0;top:16px;width:38px;height:38px;}
+    .draw-tray{gap:12px;padding-top:14px;min-height:104px;overflow-x:auto;justify-content:flex-start;scrollbar-width:none;}
+    .draw-tray::-webkit-scrollbar{display:none;}
+    .tray-slot{width:48px;height:72px;border-radius:8px;}
+    .tray-slot .slot-label{bottom:-22px;font-size:10px;width:86px;}
+    .tray-card{width:48px;height:72px;border-radius:8px;}
+    .front-label{font-size:7px;}
+    .draw-overlay{--draw-safe-edge:50px;}
+    .fan-stage{height:128px;}
+    .fan-card{width:38px;height:58px;border-radius:7px;}
+    .draw-bottom{padding-bottom:28px;}
+    .draw-focus-tip{font-size:12px;border-radius:14px;padding:9px 12px;}
+    .draw-hint{font-size:12px;}
+    .draw-actions .btn{min-width:112px;}
+  }
+
+  @media (max-height: 650px){
+    .draw-top{padding-top:16px;}
+    .draw-tray{min-height:92px;padding-top:10px;}
+    .fan-stage{height:118px;}
+    .fan-card{top:20px;}
+    .draw-bottom{padding-bottom:20px;}
+  }
+  /* ---------- Detail view ---------- */
+  .detail-meta{
+    background:var(--bg-elevated);border:1px solid var(--border-soft);border-radius:var(--radius);
+    padding:14px 16px;margin-bottom:18px;
+  }
+  .detail-meta .q{font-size:15px;color:var(--text);line-height:1.6;margin-bottom:6px;}
+  .detail-meta .q-label{font-size:12px;color:var(--gold-bright);letter-spacing:.08em;margin-bottom:6px;}
+  .note-save-hint{font-size:12px;color:var(--text-dim);margin:6px 0 0;line-height:1.6;}
+  .detail-meta .tags{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--text-dim);}
+  .detail-meta .tags span{background:var(--surface);padding:3px 9px;border-radius:20px;}
+
+  .spread-photo{width:100%;border-radius:var(--radius);margin-bottom:18px;border:1px solid var(--border-soft);}
+
+  .spread-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px;}
+  .spread-grid.cols-1{grid-template-columns:1fr;}
+  .spread-grid.cols-5{grid-template-columns:repeat(5,1fr);}
+  .card-tile{
+    background:linear-gradient(160deg, var(--surface-2), var(--bg-elevated));
+    border:1px solid var(--border);border-radius:var(--radius-sm);
+    padding:12px 8px;text-align:center;cursor:pointer;min-height:88px;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;
+    transition:border-color .15s ease;
+  }
+  .card-tile:hover{border-color:var(--gold-dim);}
+  .card-tile .pos{font-size:10px;color:var(--text-dim);letter-spacing:.5px;}
+  /* 卡牌圖案佔位符：逆位時倒立 180 度 */
+  .card-tile .art{
+    font-size:20px;color:var(--purple);transition:transform .25s ease;line-height:1;margin:1px 0;
+  }
+  .card-tile.reversed .art{transform:rotate(180deg);}
+  .card-tile .name{
+    font-size:13px;color:var(--gold-bright);font-family:var(--font-display);line-height:1.3;
+  }
+  .card-tile .orient{font-size:9px;color:var(--text-dim);}
+
+  .section-label{
+    font-size:13px;color:var(--gold-bright);font-family:var(--font-display);
+    letter-spacing:.5px;margin:22px 0 10px;
+  }
+
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(6,4,12,0.75);z-index:90;
+    display:none;align-items:center;justify-content:center;padding:18px;overscroll-behavior:contain;
+  }
+  .modal-overlay.active{display:flex;}
+  .modal-sheet{
+    background:var(--bg-elevated);border:1px solid var(--border);border-radius:20px;
+    max-width:520px;width:min(100%,520px);padding:22px 20px 26px;max-height:min(88vh,760px);overflow-y:auto;
+    box-shadow:0 24px 70px rgba(0,0,0,.55);transform:translateZ(0);
+  }
+  .modal-sheet h3{
+    font-family:var(--font-display);color:var(--gold-bright);margin:0 0 6px;font-size:17px;
+  }
+  .modal-sheet .orient-tag{font-size:11px;color:var(--text-dim);margin-bottom:12px;}
+  .meaning-card-preview{display:flex;justify-content:center;align-items:center;margin:10px 0 16px;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
+  .meaning-card-large{
+    width:min(62vw,280px);aspect-ratio:2/3;border-radius:12px;border:1px solid var(--gold-dim);
+    background-size:cover;background-position:center;background-repeat:no-repeat;
+    box-shadow:0 18px 42px rgba(0,0,0,.42),0 0 0 1px rgba(232,200,116,.12) inset;
+    user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;pointer-events:none;
+  }
+  .meaning-card-large.reversed{transform:rotate(180deg);}
+  .modal-sheet p{font-size:14px;line-height:1.8;color:var(--text-muted);margin:0;}
+  .modal-close{
+    display:block;margin:18px auto 0;background:none;border:1px solid var(--border);color:var(--text-muted);
+    padding:9px 24px;border-radius:20px;cursor:pointer;
+  }
+
+  .toast{
+    position:fixed;bottom:100px;left:50%;transform:translateX(-50%);
+    background:var(--surface-2);border:1px solid var(--gold-dim);color:var(--gold-bright);
+    padding:10px 18px;border-radius:20px;font-size:13px;z-index:200;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  .toast.show{opacity:1;}
+
+  /* ---------- Settings ---------- */
+  .settings-card{
+    background:var(--bg-elevated);border:1px solid var(--border-soft);border-radius:var(--radius);
+    padding:16px;margin-bottom:14px;
+  }
+  .settings-card h4{margin:0 0 6px;font-family:var(--font-display);color:var(--gold-bright);font-size:14px;}
+  .settings-card p{margin:0 0 12px;font-size:12px;color:var(--text-dim);line-height:1.7;}
+  .file-input-hidden{display:none;}
+
+
+
+  /* ---------- Spread helper / true layout / cropper ---------- */
+  .spread-help{
+    margin-top:8px;background:rgba(201,162,75,0.06);border:1px solid var(--border-soft);
+    border-radius:var(--radius-sm);padding:11px 12px;font-size:12px;color:var(--text-muted);line-height:1.7;
+  }
+  .spread-help strong{color:var(--gold-bright);font-weight:600;}
+
+  .spread-preview{
+    margin-top:10px;background:linear-gradient(180deg, rgba(150,120,207,.08), rgba(201,162,75,.04));
+    border:1px solid var(--border-soft);border-radius:var(--radius);padding:12px;
+  }
+  .spread-preview-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-size:12px;color:var(--gold-bright);}
+  .spread-preview-title span:last-child{color:var(--text-dim);font-size:11px;}
+  .spread-preview-board{position:relative;min-height:300px;border-radius:var(--radius-sm);
+    background:radial-gradient(circle at 50% 50%, rgba(201,162,75,.08), transparent 62%), rgba(12,10,20,.35);
+    overflow:visible;border:1px solid rgba(201,162,75,.16);
+  }
+  .spread-preview-board[data-spread="single"]{min-height:260px;}
+  .spread-preview-board[data-spread="celtic"]{min-height:460px;}
+  .spread-preview-board[data-spread="relationship"],
+  .spread-preview-board[data-spread="smallcross"]{min-height:430px;}
+  .spread-preview-board[data-spread="twochoice"],
+  .spread-preview-board[data-spread="cup"],
+  .spread-preview-board[data-spread="heartvoice"]{min-height:400px;}
+  .spread-preview-board[data-spread="star"],
+  .spread-preview-board[data-spread="smallcross"],
+  .spread-preview-board[data-spread="fourElementsFixed"],
+  .spread-preview-board[data-spread="fourElementsFree"]{min-height:400px;}
+  .spread-preview-card{position:absolute;width:74px;min-height:116px;transform:translate(-50%,-50%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    pointer-events:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+  }
+  .spread-preview-card::before{content:none;}
+  .spread-preview-card .preview-back{
+    position:relative;width:62px;aspect-ratio:2/3;border-radius:7px;border:1px solid rgba(201,162,75,.58);
+    background-image:var(--card-back);background-size:100% 100%;background-position:center;background-repeat:no-repeat;
+    box-shadow:0 8px 20px rgba(0,0,0,.34), inset 0 0 0 1px rgba(255,255,255,.10);
+  }
+  .spread-preview-card .preview-back::after{content:"";position:absolute;inset:3px;border-radius:5px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);}
+  .spread-preview-card .num{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;
+    background:rgba(12,10,20,.66);border:1px solid rgba(232,200,116,.62);color:var(--gold-bright);
+    font-size:12px;line-height:22px;text-align:center;z-index:1;
+  }
+  .spread-preview-card .label{font-size:10px;line-height:1.25;color:var(--text-muted);max-width:74px;margin-top:5px;}
+  .spread-preview-card.crossed{transform:translate(-50%,-50%) rotate(90deg);}
+  .spread-preview-card.crossed .label{display:none;}
+  @media (max-width:430px){
+    .spread-preview-board{min-height:330px;}
+    .spread-preview-board[data-spread="single"]{min-height:250px;}
+    .spread-preview-board[data-spread="celtic"]{min-height:460px;}
+    .spread-preview-card{width:66px;min-height:102px;}
+    .spread-preview-card .preview-back{width:54px;}
+    .spread-preview-card .label{font-size:9px;max-width:64px;}
+  }
+  .crop-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+  .cropped-card-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px;}
+  .cropped-card-item{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-sm);padding:8px;font-size:11px;color:var(--text-dim);}
+  .cropped-card-item img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:6px;border:1px solid var(--border-soft);display:block;margin-bottom:5px;}
+  .crop-modal{position:fixed;inset:0;background:rgba(6,4,12,0.94);z-index:130;display:none;flex-direction:column;}
+  .crop-modal.active{display:flex;}
+  .crop-top{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+  .crop-top .title{font-family:var(--font-display);color:var(--gold-bright);font-size:14px;}
+  .crop-work{flex:1;overflow:auto;padding:10px 14px;display:flex;justify-content:center;align-items:flex-start;}
+  .crop-canvas-wrap{position:relative;max-width:100%;touch-action:none;}
+  #crop-img{display:block;max-width:100%;height:auto;border-radius:10px;border:1px solid var(--border);}
+  .crop-box{position:absolute;border:2px solid var(--gold-bright);background:rgba(201,162,75,0.12);box-shadow:0 0 0 9999px rgba(0,0,0,0.35);border-radius:8px;cursor:move;}
+  .crop-box::after{content:"";position:absolute;right:-8px;bottom:-8px;width:18px;height:18px;border-radius:50%;background:var(--gold-bright);border:2px solid var(--bg);cursor:nwse-resize;}
+  .crop-bottom{padding:14px 18px 20px;background:linear-gradient(180deg, transparent, var(--bg));}
+  .crop-guide{font-size:12px;color:var(--text-dim);line-height:1.6;text-align:center;margin-bottom:10px;}
+  .spread-layout{position:relative;min-height:600px;margin-bottom:22px;background:radial-gradient(circle at 50% 50%, rgba(150,120,207,.07), transparent 65%);border:1px solid var(--border-soft);border-radius:var(--radius);overflow:visible;padding:18px 0;touch-action:pan-y;}
+  .spread-layout .card-tile{position:absolute;width:112px;min-height:152px;transform:translate(-50%,-50%);cursor:pointer;}
+  .spread-layout .card-tile .thumb{width:70px;aspect-ratio:2/3;object-fit:cover;border-radius:6px;border:1px solid var(--border-soft);margin:2px 0;}
+  .spread-layout[data-spread="single"]{min-height:260px;}
+  .spread-layout[data-spread="celtic"]{min-height:620px;}
+  .spread-layout[data-spread="relationship"]{min-height:660px;}
+  .spread-layout[data-spread="twochoice"]{min-height:560px;}
+  .spread-layout[data-spread="cup"]{min-height:560px;}
+  .spread-layout[data-spread="star"]{min-height:600px;}
+  .spread-layout[data-spread="heartvoice"]{min-height:560px;}
+  .spread-layout[data-spread="smallcross"]{min-height:660px;}
+  .spread-layout[data-spread="fourElementsFixed"],.spread-layout[data-spread="fourElementsFree"]{min-height:560px;}
+
+  .summary-card-row{cursor:pointer;}
+  .summary-card-row:focus-visible,.spread-layout .card-tile:focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px;}
+  .tray-card.revealed{cursor:pointer;}
+
+
+  .creator-card{
+    margin:18px 0 96px;
+    padding:14px 16px;
+    border:1px solid var(--border-soft);
+    border-radius:var(--radius);
+    background:linear-gradient(135deg,rgba(201,162,75,0.10),rgba(150,120,207,0.10));
+    color:var(--text-muted);
+    font-size:13px;
+    line-height:1.75;
+    box-shadow:0 8px 24px rgba(0,0,0,0.18);
+  }
+  .creator-card strong{color:var(--gold-bright);font-weight:700;}
+  .creator-card a{color:var(--gold-bright);text-decoration:none;border-bottom:1px solid rgba(232,200,116,0.45);}
+  .creator-card a:active{opacity:0.75;}
+  .creator-card.compact{margin:14px 0 0;padding:12px 14px;font-size:12px;}
+
+  @media (min-width:720px){
+    #app{max-width:760px;}
+    .fab{max-width:680px;}
+    .view{padding:0 28px;}
+    .modal-sheet{max-width:720px;}
+    .spread-layout{min-height:620px;}
+    .spread-layout[data-spread="celtic"]{min-height:680px;}
+    .cropped-card-list{grid-template-columns:repeat(4,1fr);}
+  }
+  @media (max-width:520px){
+    .spread-layout{min-height:540px;}
+    .spread-layout .card-tile{width:92px;min-height:132px;padding:9px 5px;}
+    .spread-layout .card-tile .name{font-size:12px;}
+    .spread-layout .card-tile .thumb{width:56px;}
+    .spread-layout[data-spread="celtic"]{min-height:610px;}
+    .spread-layout[data-spread="relationship"],.spread-layout[data-spread="smallcross"]{min-height:620px;}
+    .spread-layout[data-spread="twochoice"],.spread-layout[data-spread="cup"],.spread-layout[data-spread="heartvoice"],.spread-layout[data-spread="star"],.spread-layout[data-spread="fourElementsFixed"],.spread-layout[data-spread="fourElementsFree"]{min-height:540px;}
+    .crop-actions{grid-template-columns:1fr;}
+  }
+
+  @media (max-width:360px){
+    .fan-stage{height:112px;}
+    .fan-card{width:34px;height:52px;}
+    .tray-slot,.tray-card{width:32px;height:52px;}
+  }
+
+  .ph{width:1.08em;height:1.08em;display:inline-block;vertical-align:-.18em;color:var(--icon, var(--gold));fill:currentColor;flex:0 0 auto;}
+  .btn .ph{width:18px;height:18px;margin-right:6px;vertical-align:-3px;}
+  .icon-btn .ph{width:22px;height:22px;margin:0;color:var(--gold);}
+  .brand .ph{width:21px;height:21px;margin-right:8px;color:var(--gold-bright);filter:drop-shadow(0 0 8px rgba(232,200,116,.35));}
+  .fab .ph{width:20px;height:20px;margin-right:7px;color:currentColor;}
+  .term-legend .ph,.term-icon .ph{width:14px;height:14px;color:var(--gold-bright);}
+  .term-icon{position:absolute;top:3px;right:4px;line-height:1;filter:drop-shadow(0 0 3px rgba(232,200,116,0.65));}
+  .cal-cell.term::before{content:none;}
+  .q-label .ph,.record-chip .q .ph,.settlement-title h4 .ph,.review-header h3 .ph,.spread-preview-title .ph{width:16px;height:16px;margin-right:5px;color:var(--gold-bright);}
+  .photo-upload .ph{width:20px;height:20px;margin-right:6px;color:var(--gold-bright);}
+  .tarot-img-fallback .ph,.art .ph{width:28px;height:28px;color:var(--gold-bright);opacity:.7;}
+  .draw-overlay::after{content:"◆";}
+  #draw-title::before,#draw-title::after{content:"◆";}
+
+
+.logo-mark{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold);
+  font-size:1.05em;
+  line-height:1;
+  margin-right:.35em;
+}
+
+
+.btn.disabled,
+.btn:disabled,
+.mode-toggle button:disabled{
+  opacity:.48;
+  cursor:not-allowed;
+  pointer-events:none;
+}
+
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div class="topbar">
+    <div class="brand"><span class="logo-mark">✦</span>塔羅覺察日誌</div>
+    <div class="icon-btn" id="btn-settings" title="設定"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M150 24l8 25a85 85 0 0 1 18 10l25-6 22 38-18 19a82 82 0 0 1 0 20l18 19-22 38-25-6a85 85 0 0 1-18 10l-8 25h-44l-8-25a85 85 0 0 1-18-10l-25 6-22-38 18-19a82 82 0 0 1 0-20L31 91l22-38 25 6a85 85 0 0 1 18-10l8-25z"/><circle cx="128" cy="128" r="34" fill="var(--bg)"/></svg></div>
+  </div>
+
+  <!-- ===================== 首頁／日曆 ===================== -->
+  <div class="view active" id="view-calendar">
+    <div class="cal-nav">
+      <button id="cal-prev">‹</button>
+      <div class="month-label" id="cal-month-label"></div>
+      <button id="cal-next">›</button>
+    </div>
+    <div class="weekday-row">
+      <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+    <div class="term-legend">
+      <span><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><circle cx="128" cy="128" r="48"/><path d="M116 16h24v36h-24zm0 188h24v36h-24zM16 116h36v24H16zm188 0h36v24h-36zM48 31l25 25-17 17-25-25zm135 152l25 25-17 17-25-25zm25-135l-25 25-17-17 25-25zM73 183l-25 25-17-17 25-25z"/></svg> 夏至</span><span><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M116 20h24v216h-24zM34 76l12-21 188 108-12 21zM222 55l12 21L46 184l-12-21z"/><circle cx="128" cy="128" r="18" fill="var(--bg)"/></svg> 冬至</span><span><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><circle cx="128" cy="128" r="18"/><ellipse cx="128" cy="70" rx="26" ry="42"/><ellipse cx="128" cy="186" rx="26" ry="42"/><ellipse cx="70" cy="128" rx="42" ry="26"/><ellipse cx="186" cy="128" rx="42" ry="26"/></svg> 春分</span><span><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M224 34C125 34 48 86 44 174c52 12 122-10 158-66-20 58-74 91-142 97 78 40 170-30 164-171z"/></svg> 秋分</span>
+    </div>
+
+    <div class="month-review-reminder" id="month-review-reminder">
+      <div class="title"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M170 226C94 226 32 164 32 88c0-22 5-43 15-61 15 51 62 88 118 88 22 0 43-6 61-16-5 71-64 127-136 127z"/><path d="M196 28l8 22 24 8-24 8-8 22-8-22-24-8 24-8z"/></svg> 今天是本月最後一天，適合做一次回顧占卜</div>
+      <div class="text">可以問：這個月我完成了什麼？我反覆遇見的課題是什麼？下個月最需要帶走哪一份提醒？</div>
+      <button class="btn btn-gold" type="button" id="btn-month-review-add">新增月末回顧占卜</button>
+    </div>
+
+    <div class="day-records" id="day-records-wrap" style="display:none;">
+      <div class="day-records-title" id="day-records-title"></div>
+      <div id="day-records-list"></div>
+    </div>
+
+    <div class="review-panel">
+      <div class="review-header" id="review-header">
+        <h3><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><rect x="44" y="32" width="168" height="192" rx="18"/><path d="M78 78h100v18H78zm0 44h100v18H78zm0 44h62v18H78z" fill="var(--bg)"/></svg> 本月回顧</h3>
+        <span class="chev">⌄</span>
+      </div>
+      <div class="review-body" id="review-body"></div>
+    </div>
+    <div class="creator-card">
+      <strong>工具製作／塔羅覺察：</strong>
+      <a href="https://www.instagram.com/hahachilltarot" target="_blank" rel="noopener noreferrer">@hahachilltarot</a>
+      <br>把每一次抽牌當成覺察存檔，而不是命運判決書。
+    </div>
+
+  </div>
+
+  <!-- ===================== 新增紀錄 ===================== -->
+  <div class="view" id="view-add">
+    <div class="page-title">新增占卜紀錄</div>
+
+    <div class="field">
+      <label>日期</label>
+      <input type="date" id="add-date">
+    </div>
+
+    <div class="field">
+      <label><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><circle cx="128" cy="128" r="94"/><circle cx="128" cy="128" r="66" fill="var(--bg)"/><circle cx="128" cy="128" r="38"/><circle cx="128" cy="128" r="14" fill="var(--bg)"/></svg> 我想探索的問題</label>
+      <input type="text" id="add-question" placeholder="這一次想探索的是什麼？">
+      <div class="field-hint-error" id="add-question-error" style="display:none;">請先填寫想探索的問題，再開始抽牌。</div>
+    </div>
+
+    <div class="field">
+      <label>牌陣</label>
+      <select id="add-spread"></select>
+      <div class="spread-help" id="spread-help"></div>
+      <div class="spread-preview" id="spread-preview"></div>
+    </div>
+
+    <div class="field">
+      <label>輸入模式</label>
+      <div class="mode-toggle">
+        <button type="button" id="mode-manual" class="active">手動輸入</button>
+        <button type="button" id="mode-online">線上抽牌</button>
+      </div>
+    </div>
+
+    <!-- 手動模式區塊 -->
+    <div id="manual-block">
+      <div class="field">
+        <label>占卜照片（整體牌陣一張）</label>
+        <div class="photo-upload" id="photo-upload-trigger"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><rect x="28" y="44" width="200" height="168" rx="22"/><circle cx="88" cy="96" r="22" fill="var(--bg)"/><path d="M50 188l56-64 38 42 28-30 34 52z" fill="var(--bg)"/></svg> 點擊上傳照片</div>
+        <input type="file" accept="image/*" class="file-input-hidden" id="photo-input">
+        <img id="photo-preview" class="photo-preview" style="display:none;">
+        <div class="crop-actions" id="crop-actions" style="display:none;">
+          <button class="btn btn-ghost" type="button" id="btn-auto-crop"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M64 214l-22-22 112-112 22 22z"/><path d="M176 28l10 30 32 10-32 10-10 30-10-30-32-10 32-10zM76 30l7 20 21 7-21 7-7 20-7-20-21-7 21-7zM204 142l7 20 21 7-21 7-7 20-7-20-21-7 21-7z"/></svg> 依牌陣預估裁切</button>
+          <button class="btn btn-gold" type="button" id="btn-open-crop"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M66 22h26v142h142v26h-52v44h-26v-44H66z"/><path d="M100 66h90v90h-26V92h-64z"/></svg> 手動裁切牌卡</button>
+        </div>
+        <div class="cropped-card-list" id="cropped-card-list"></div>
+      </div>
+      <div class="field">
+        <label>手動選牌（作為辨識輔助）</label>
+        <div id="manual-card-selects"></div>
+      </div>
+    </div>
+
+    <!-- 線上抽牌模式區塊 -->
+    <div id="online-block" style="display:none;">
+      <div class="field">
+        <label>抽牌邏輯</label>
+        <div class="mode-toggle">
+          <button type="button" id="draw-noreplace" class="active">78張不放回</button>
+          <button type="button" id="draw-independent">每陣位獨立抽</button>
+        </div>
+      </div>
+      <button class="btn btn-gold" id="btn-start-draw">開始抽牌</button>
+      <div id="online-result" style="margin-top:14px;"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="btn-cancel-add">取消</button>
+      <button class="btn btn-primary" id="btn-save-record">儲存紀錄</button>
+    </div>
+  </div>
+
+  <!-- ===================== 紀錄與覺察頁 ===================== -->
+  <div class="view" id="view-detail">
+    <div class="page-title">紀錄與覺察</div>
+    <div class="detail-meta" id="detail-meta"></div>
+    <div class="detail-edit-panel" id="detail-edit-panel" style="display:none;">
+      <div class="field">
+        <label>日期</label>
+        <input type="date" id="edit-date">
+      </div>
+      <div class="field">
+        <label><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><circle cx="128" cy="128" r="94"/><circle cx="128" cy="128" r="66" fill="var(--bg)"/><circle cx="128" cy="128" r="38"/><circle cx="128" cy="128" r="14" fill="var(--bg)"/></svg> 我想探索的問題</label>
+        <input type="text" id="edit-question" placeholder="這一次想探索的是什麼？">
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="btn-save-edit" type="button">儲存問題</button>
+        <button class="btn btn-ghost" id="btn-cancel-edit" type="button">取消</button>
+      </div>
+    </div>
+    <img id="detail-photo" class="spread-photo" style="display:none;">
+    <div class="section-label">牌陣</div>
+    <div class="spread-grid" id="detail-cards"></div>
+
+    <div class="section-label">覺察筆記</div>
+    <div class="field">
+      <label><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M86 42c-25 0-42 18-42 42 0 4 1 8 2 12-17 8-28 25-28 45 0 27 21 49 48 51 7 16 23 26 42 26h8V42zm84 0c25 0 42 18 42 42 0 4-1 8-2 12 17 8 28 25 28 45 0 27-21 49-48 51-7 16-23 26-42 26h-8V42z"/><path d="M78 86c18 0 32 13 34 30M84 150c18 0 31 10 36 26M178 86c-18 0-32 13-34 30M172 150c-18 0-31 10-36 26" stroke="var(--bg)" stroke-width="14" stroke-linecap="round" fill="none"/></svg> 當下想法 / <svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M128 20l22 68 72 8-55 45 17 70-56-37-56 37 17-70-55-45 72-8z"/><circle cx="54" cy="52" r="12"/><circle cx="204" cy="196" r="10"/></svg> 第一直覺</label>
+      <textarea id="detail-thoughts" placeholder="寫下你當下的感受、直覺與聯想……"></textarea>
+      <div class="note-save-hint">此區會自動儲存，不需要按修改問題。</div>
+    </div>
+
+    <div class="field">
+      <label>AI 解讀</label>
+      <textarea id="detail-ai-reading" class="long-note" placeholder="把 ChatGPT、Claude、Gemini 或其他 AI 的完整解讀貼在這裡……"></textarea>
+      <div class="note-save-hint">此區會自動儲存，可貼長文。</div>
+    </div>
+
+    <div class="field">
+      <label>後續驗證 / 覺察</label>
+      <textarea id="detail-follow-up" class="long-note" placeholder="幾天或幾週後回來補充：事情如何發展？我看見了什麼模式？"></textarea>
+      <div class="note-save-hint">此區會自動儲存，適合月末覆盤使用。</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-gold" id="btn-copy-prompt">複製提示詞問 AI</button>
+      <button class="btn btn-ghost" id="btn-edit-record"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M42 174l-10 50 50-10 120-120-40-40z"/><path d="M174 42l20-20 40 40-20 20z"/></svg> 修改問題</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" id="btn-back-calendar">返回日曆</button>
+      <button class="btn btn-danger" id="btn-delete-record" type="button">刪除紀錄</button>
+    </div>
+  </div>
+
+  <!-- ===================== 設定 ===================== -->
+  <div class="view" id="view-settings">
+    <div class="page-title">設定與備份</div>
+    <div class="settings-card">
+      <h4>匯出資料</h4>
+      <p>將所有占卜紀錄（含照片）匯出為單一 JSON 檔，可作為備份或轉移到其他裝置。</p>
+      <button class="btn btn-gold" id="btn-export"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M116 28h24v104l34-34 17 17-63 63-63-63 17-17 34 34z"/><path d="M48 198h160v26H48z"/></svg> 匯出 JSON 備份</button>
+    </div>
+    <div class="settings-card">
+      <h4>匯入資料</h4>
+      <p>選擇先前匯出的 JSON 備份檔，匯入的紀錄將以新增方式加入，不會覆蓋現有紀錄。</p>
+      <input type="file" accept="application/json" class="file-input-hidden" id="import-input">
+      <button class="btn btn-ghost" id="btn-import"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M116 178h24V74l34 34 17-17-63-63-63 63 17 17 34-34z"/><path d="M48 198h160v26H48z"/></svg> 選擇備份檔匯入</button>
+    </div>
+    <div class="settings-card">
+      <h4>資料儲存位置</h4>
+      <p id="storage-path-info">讀取中…</p>
+      <p style="margin-top:-6px;">基於瀏覽器安全機制，網頁無法讀取或顯示這個資料庫在您硬碟中的實際檔案路徑；上面顯示的是瀏覽器紀錄此資料的「來源」與資料庫名稱。若要在其他電腦或瀏覽器使用，請用上方的匯出／匯入功能搬移資料，不需要（也無法）手動尋找檔案。</p>
+    </div>
+    <div class="settings-card">
+      <h4 style="color:var(--danger);">清除所有資料</h4>
+      <p>將永久刪除本機瀏覽器中儲存的所有占卜紀錄與照片，且無法復原。建議清除前務必先匯出備份。</p>
+      <button class="btn btn-danger" id="btn-clear-all"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M70 76h116l-8 146H78z"/><path d="M58 46h140v24H58zM96 24h64l10 22H86z"/></svg> 清除所有資料</button>
+    </div>
+    <div class="settings-card">
+      <h4>關於</h4>
+      <p>塔羅覺察日誌是一個純前端應用，所有資料僅儲存在您目前使用的瀏覽器本機（IndexedDB），不會上傳到任何伺服器。清除瀏覽器資料或更換裝置前，請記得先匯出備份。</p>
+    </div>
+    <button class="btn btn-ghost" id="btn-settings-back" style="margin-top:6px;">返回日曆</button>
+  </div>
+
+  <button class="fab" id="btn-fab-add">新增占卜紀錄</button>
+</div>
+
+<!-- 裁切牌卡覆蓋層 -->
+<div class="crop-modal" id="crop-modal">
+  <div class="crop-top">
+    <div class="title" id="crop-title">裁切牌卡</div>
+    <div class="icon-btn" id="crop-close"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M70 52l58 58 58-58 18 18-58 58 58 58-18 18-58-58-58 58-18-18 58-58-58-58z"/></svg></div>
+  </div>
+  <div class="crop-work">
+    <div class="crop-canvas-wrap" id="crop-wrap">
+      <img id="crop-img" alt="裁切用照片">
+      <div class="crop-box" id="crop-box"></div>
+    </div>
+  </div>
+  <div class="crop-bottom">
+    <div class="crop-guide" id="crop-guide">拖曳框框對準牌卡，拉右下角可調整大小。</div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" type="button" id="crop-prev">上一張</button>
+      <button class="btn btn-gold" type="button" id="crop-save-next">儲存這張</button>
+      <button class="btn btn-primary" type="button" id="crop-next">下一張</button>
+    </div>
+  </div>
+</div>
+
+<!-- 抽牌覆蓋層 -->
+<div class="draw-overlay" id="draw-overlay">
+  <div class="draw-top">
+    <div class="title" id="draw-title">請依序點選牌卡</div>
+    <div class="icon-btn" id="draw-close"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M70 52l58 58 58-58 18 18-58 58 58 58-18 18-58-58-58 58-18-18 58-58-58-58z"/></svg></div>
+  </div>
+  <div class="draw-tray" id="draw-tray"></div>
+  <div class="fan-wrap" id="fan-wrap">
+    <div class="fan-stage" id="fan-stage"></div>
+  </div>
+  <div class="draw-bottom">
+    <div class="draw-focus-tip" id="draw-focus-tip">小提示：先想著你的問題，保持專注，再點選讓你有感覺的牌。</div>
+    <div class="draw-hint" id="draw-hint">點擊下方牌堆，依序抽出所需的牌</div>
+    <div class="draw-actions">
+      <button class="btn btn-ghost" id="btn-reshuffle" type="button"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M211 122a83 83 0 0 0-148-43l29 3-2 24-72-8 8-72 24 2-3 28a111 111 0 0 1 192 66zM45 134a83 83 0 0 0 148 43l-29-3 2-24 72 8-8 72-24-2 3-28a111 111 0 0 1-192-66z"/></svg> 重新洗牌</button>
+      <button class="btn btn-gold" id="btn-reveal" style="display:none;" type="button">揭曉</button>
+      <button class="btn btn-primary" id="btn-confirm-draw" style="display:none;" type="button">確認並帶回</button>
+    </div>
+  </div>
+</div>
+
+<!-- 牌義彈窗 -->
+<div class="modal-overlay" id="meaning-modal">
+  <div class="modal-sheet">
+    <h3 id="meaning-card-name"></h3>
+    <div class="orient-tag" id="meaning-orient"></div>
+    <div class="meaning-card-preview" id="meaning-card-preview"></div>
+    <p id="meaning-text"></p>
+    <button class="modal-close" id="meaning-close">關閉</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+var PHOSPHOR_ICONS = {
+  sparkle: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M128 20l22 68 72 8-55 45 17 70-56-37-56 37 17-70-55-45 72-8z"/><circle cx="54" cy="52" r="12"/><circle cx="204" cy="196" r="10"/></svg>`,
+  sun: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><circle cx="128" cy="128" r="48"/><path d="M116 16h24v36h-24zm0 188h24v36h-24zM16 116h36v24H16zm188 0h36v24h-36zM48 31l25 25-17 17-25-25zm135 152l25 25-17 17-25-25zm25-135l-25 25-17-17 25-25zM73 183l-25 25-17-17 25-25z"/></svg>`,
+  snow: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M116 20h24v216h-24zM34 76l12-21 188 108-12 21zM222 55l12 21L46 184l-12-21z"/><circle cx="128" cy="128" r="18" fill="var(--bg)"/></svg>`,
+  flower: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><circle cx="128" cy="128" r="18"/><ellipse cx="128" cy="70" rx="26" ry="42"/><ellipse cx="128" cy="186" rx="26" ry="42"/><ellipse cx="70" cy="128" rx="42" ry="26"/><ellipse cx="186" cy="128" rx="42" ry="26"/></svg>`,
+  leaf: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M224 34C125 34 48 86 44 174c52 12 122-10 158-66-20 58-74 91-142 97 78 40 170-30 164-171z"/></svg>`,
+  moon: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M170 226C94 226 32 164 32 88c0-22 5-43 15-61 15 51 62 88 118 88 22 0 43-6 61-16-5 71-64 127-136 127z"/><path d="M196 28l8 22 24 8-24 8-8 22-8-22-24-8 24-8z"/></svg>`,
+  review: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><rect x="44" y="32" width="168" height="192" rx="18"/><path d="M78 78h100v18H78zm0 44h100v18H78zm0 44h62v18H78z" fill="var(--bg)"/></svg>`,
+  target: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><circle cx="128" cy="128" r="94"/><circle cx="128" cy="128" r="66" fill="var(--bg)"/><circle cx="128" cy="128" r="38"/><circle cx="128" cy="128" r="14" fill="var(--bg)"/></svg>`,
+  image: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><rect x="28" y="44" width="200" height="168" rx="22"/><circle cx="88" cy="96" r="22" fill="var(--bg)"/><path d="M50 188l56-64 38 42 28-30 34 52z" fill="var(--bg)"/></svg>`,
+  magic: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M64 214l-22-22 112-112 22 22z"/><path d="M176 28l10 30 32 10-32 10-10 30-10-30-32-10 32-10zM76 30l7 20 21 7-21 7-7 20-7-20-21-7 21-7zM204 142l7 20 21 7-21 7-7 20-7-20-21-7 21-7z"/></svg>`,
+  crop: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M66 22h26v142h142v26h-52v44h-26v-44H66z"/><path d="M100 66h90v90h-26V92h-64z"/></svg>`,
+  cards: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><rect x="56" y="42" width="104" height="152" rx="14" transform="rotate(-10 108 118)"/><rect x="96" y="62" width="104" height="152" rx="14" transform="rotate(10 148 138)" fill="currentColor" opacity=".72"/><path d="M148 101l10 20 22 4-16 16 4 22-20-10-20 10 4-22-16-16 22-4z" fill="var(--bg)"/></svg>`,
+  brain: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M86 42c-25 0-42 18-42 42 0 4 1 8 2 12-17 8-28 25-28 45 0 27 21 49 48 51 7 16 23 26 42 26h8V42zm84 0c25 0 42 18 42 42 0 4-1 8-2 12 17 8 28 25 28 45 0 27-21 49-48 51-7 16-23 26-42 26h-8V42z"/><path d="M78 86c18 0 32 13 34 30M84 150c18 0 31 10 36 26M178 86c-18 0-32 13-34 30M172 150c-18 0-31 10-36 26" stroke="var(--bg)" stroke-width="14" stroke-linecap="round" fill="none"/></svg>`,
+  copy: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><rect x="72" y="72" width="128" height="148" rx="16"/><rect x="48" y="36" width="128" height="148" rx="16" opacity=".55"/></svg>`,
+  pencil: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M42 174l-10 50 50-10 120-120-40-40z"/><path d="M174 42l20-20 40 40-20 20z"/></svg>`,
+  trash: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M70 76h116l-8 146H78z"/><path d="M58 46h140v24H58zM96 24h64l10 22H86z"/></svg>`,
+  download: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M116 28h24v104l34-34 17 17-63 63-63-63 17-17 34 34z"/><path d="M48 198h160v26H48z"/></svg>`,
+  upload: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M116 178h24V74l34 34 17-17-63-63-63 63 17 17 34-34z"/><path d="M48 198h160v26H48z"/></svg>`,
+  medal: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M80 24h96l-28 68h-40z"/><circle cx="128" cy="154" r="70"/><path d="M128 106l15 31 34 5-25 24 6 34-30-16-30 16 6-34-25-24 34-5z" fill="var(--bg)"/></svg>`,
+  x: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M70 52l58 58 58-58 18 18-58 58 58 58-18 18-58-58-58 58-18-18 58-58-58-58z"/></svg>`,
+  gear: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M150 24l8 25a85 85 0 0 1 18 10l25-6 22 38-18 19a82 82 0 0 1 0 20l18 19-22 38-25-6a85 85 0 0 1-18 10l-8 25h-44l-8-25a85 85 0 0 1-18-10l-25 6-22-38 18-19a82 82 0 0 1 0-20L31 91l22-38 25 6a85 85 0 0 1 18-10l8-25z"/><circle cx="128" cy="128" r="34" fill="var(--bg)"/></svg>`,
+  diamond: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M128 22l86 106-86 106-86-106z"/></svg>`,
+  question: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M126 30c-42 0-70 24-74 60l34 6c3-19 17-32 38-32 22 0 36 13 36 31 0 16-9 26-31 39-24 14-34 31-34 59h34c0-16 7-25 28-38 27-16 41-34 41-62 0-38-29-63-72-63z"/><circle cx="112" cy="216" r="20"/></svg>`,
+  calendar: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><rect x="34" y="48" width="188" height="174" rx="20"/><path d="M34 88h188v28H34zM76 24h24v46H76zm80 0h24v46h-24z" fill="var(--bg)"/></svg>`,
+  eye: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M20 128s40-72 108-72 108 72 108 72-40 72-108 72S20 128 20 128z"/><circle cx="128" cy="128" r="34" fill="var(--bg)"/><circle cx="128" cy="128" r="16"/></svg>`,
+  refresh: `<svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M211 122a83 83 0 0 0-148-43l29 3-2 24-72-8 8-72 24 2-3 28a111 111 0 0 1 192 66zM45 134a83 83 0 0 0 148 43l-29-3 2-24 72 8-8 72-24-2 3-28a111 111 0 0 1-192-66z"/></svg>`
+};
+function PH(name){ return PHOSPHOR_ICONS[name] || PHOSPHOR_ICONS.sparkle; }
+
+
+/* ==========================================================================
+   資料：78張牌、示範牌義、節氣對照表、牌陣定義
+   ========================================================================== */
+
+var MAJOR_ARCANA = ["愚者","魔術師","女祭司","皇后","皇帝","教皇","戀人","戰車","力量","隱士","命運之輪","正義","吊人","死神","節制","惡魔","高塔","星星","月亮","太陽","審判","世界"];
+var SUIT_INFO = {
+  wands:{label:"權杖"}, cups:{label:"聖杯"}, swords:{label:"寶劍"}, pentacles:{label:"錢幣"}
+};
+var NUM_CN = ["一","二","三","四","五","六","七","八","九","十"];
+var COURTS = ["侍者","騎士","皇后","國王"];
+
+var ALL_CARDS = []; // {name, suit} suit:'major'|'wands'|'cups'|'swords'|'pentacles'
+MAJOR_ARCANA.forEach(function(n){ ALL_CARDS.push({name:n, suit:'major'}); });
+Object.keys(SUIT_INFO).forEach(function(s){
+  var label = SUIT_INFO[s].label;
+  NUM_CN.forEach(function(n){ ALL_CARDS.push({name:label+n, suit:s}); });
+  COURTS.forEach(function(c){ ALL_CARDS.push({name:label+c, suit:s}); });
+});
+var ALL_CARD_NAMES = ALL_CARDS.map(function(c){return c.name;});
+
+var RWS_IMAGE_BASE = "https://sacred-texts.com/tarot/pkt/img/";
+var RWS_MAJOR_CODES = {
+  "愚者":"ar00","魔術師":"ar01","女祭司":"ar02","皇后":"ar03","皇帝":"ar04","教皇":"ar05","戀人":"ar06","戰車":"ar07","力量":"ar08","隱士":"ar09","命運之輪":"ar10","正義":"ar11","吊人":"ar12","死神":"ar13","節制":"ar14","惡魔":"ar15","高塔":"ar16","星星":"ar17","月亮":"ar18","太陽":"ar19","審判":"ar20","世界":"ar21"
+};
+var RWS_SUIT_CODES = {
+  "權杖":"wa",
+  "聖杯":"cu",
+  "寶劍":"sw",
+  "錢幣":"pe"
+};
+var RWS_RANK_CODES = {
+  "一":"ac","二":"02","三":"03","四":"04","五":"05","六":"06","七":"07","八":"08","九":"09","十":"10",
+  "侍者":"pa","騎士":"kn","皇后":"qu","國王":"ki"
+};
+
+function rwsCardCode(cardName){
+  if(RWS_MAJOR_CODES[cardName]) return RWS_MAJOR_CODES[cardName];
+  var suits = Object.keys(RWS_SUIT_CODES);
+  for(var i=0;i<suits.length;i++){
+    var suit = suits[i];
+    if(cardName.indexOf(suit) === 0){
+      var rank = cardName.slice(suit.length);
+      return RWS_SUIT_CODES[suit] + RWS_RANK_CODES[rank];
+    }
+  }
+  return "";
+}
+
+function getRwsCardImage(cardName){
+  var code = rwsCardCode(cardName || "");
+  return code ? RWS_IMAGE_BASE + code + ".jpg" : "";
+}
+
+function bgImageHtml(src, cls, alt){
+  if(!src) return '<div class="tarot-img-fallback">'+PH('sparkle')+'</div>';
+  return '<div class="'+escapeHtml(cls || "rws-card-img")+'" role="img" aria-label="'+escapeHtml(alt || "Tarot card image")+'" style="background-image:url(\''+String(src).replace(/'/g, "%27")+'\');"></div>';
+}
+
+function cardImageHtml(cardName, cls, alt){
+  var src = getRwsCardImage(cardName);
+  return bgImageHtml(src, cls || "rws-card-img", alt || cardName || "Rider-Waite Tarot card");
+}
+
+function tarotSafeAreaSelector(){
+  return ".rws-card-img,.rws-tray-img,.rws-tile-img,.rws-preview-img,.rws-summary-img,.meaning-card-large,.meaning-card-preview,.spread-preview-board,.spread-layout,.draw-tray,.card-tile,.tray-card,.preview-card,.summary-card-thumb,#meaning-modal";
+}
+
+function hardenTarotImageInteractions(root){
+  var scope = root || document;
+  var blocked = tarotSafeAreaSelector();
+  scope.querySelectorAll(blocked + ", img").forEach(function(el){
+    el.setAttribute("draggable", "false");
+    el.setAttribute("data-no-download-ui", "true");
+    ["dragstart","drag","dragenter","dragover","drop","contextmenu","selectstart"].forEach(function(type){
+      el.addEventListener(type, function(e){ e.preventDefault(); e.stopPropagation(); return false; }, {capture:true, passive:false});
+    });
+  });
+}
+
+// 禁止 Rider-Waite 牌圖與牌陣區域觸發瀏覽器圖片下載、拖曳、長按選單。
+["dragstart","drag","dragenter","dragover","drop","contextmenu","selectstart","auxclick"].forEach(function(type){
+  document.addEventListener(type, function(e){
+    if(e.target && e.target.closest && e.target.closest(tarotSafeAreaSelector() + ", img")){
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+  }, {capture:true, passive:false});
+});
+
+// 不再攔截 touchstart / touchend，避免手機在檢視紀錄時被鎖住無法上下滑動。
+// 下載／儲存提示改由 CSS callout、contextmenu、drag/drop 防護處理；點擊事件保留給看牌義與放大牌面。
+["mousedown","mouseup","pointerdown","pointerup"].forEach(function(type){
+  document.addEventListener(type, function(e){
+    if(e.target && e.target.closest && e.target.closest(".rws-card-img,.rws-tray-img,.rws-tile-img,.rws-preview-img,.rws-summary-img,.meaning-card-large,.meaning-card-preview")){
+      e.stopPropagation();
+    }
+  }, {capture:true, passive:true});
+});
+
+window.addEventListener("load", function(){ hardenTarotImageInteractions(document); });
+
+var CARD_MEANINGS = {
+"愚者": {
+    upright:"新的旅程、冒險、自由、信任直覺，適合踏出第一步。",
+    reversed:"魯莽、逃避責任、準備不足，或因害怕未知而不敢開始。"
+  },
+"魔術師": {
+    upright:"資源到位、主動創造、表達能力，把想法落地的力量。",
+    reversed:"能量分散、操控、口惠不實，或明明有工具卻沒有使用。"
+  },
+"女祭司": {
+    upright:"直覺、潛意識、靜觀、祕密，答案正在內在深處。",
+    reversed:"直覺被噪音蓋住、資訊不透明，或有事情被壓著不說。"
+  },
+"皇后": {
+    upright:"滋養、豐盛、創造力、身體感受，讓事物自然生長。",
+    reversed:"過度付出、依賴照顧、創造力受阻，或忽略自己的需求。"
+  },
+"皇帝": {
+    upright:"秩序、責任、界線、領導力，用結構保護重要事物。",
+    reversed:"控制欲、僵化、權威壓迫，或缺乏規劃與承擔。"
+  },
+"教皇": {
+    upright:"傳統、學習、制度、信念，向可靠的知識或前輩取經。",
+    reversed:"盲從規範、信念僵化，或需要走出既有框架。"
+  },
+"戀人": {
+    upright:"選擇、關係、價值觀一致，心與行動需要對齊。",
+    reversed:"價值衝突、逃避選擇、關係失衡，或被欲望牽著走。"
+  },
+"戰車": {
+    upright:"意志、前進、掌控方向，在拉扯中仍能抵達目標。",
+    reversed:"失控、硬衝、方向混亂，或外強中乾地逞強。"
+  },
+"力量": {
+    upright:"溫柔的勇氣、自我馴服、耐心，用穩定感化衝動。",
+    reversed:"自我懷疑、壓抑怒氣、失去耐性，或力量用錯地方。"
+  },
+"隱士": {
+    upright:"獨處、沉思、尋找內在指引，暫時離開人群看清自己。",
+    reversed:"孤立、逃避互動、過度鑽牛角尖，或拒絕求助。"
+  },
+"命運之輪": {
+    upright:"轉機、循環、時機改變，順勢調整會帶來突破。",
+    reversed:"停滯、反覆同樣模式，或抗拒生命正在轉向。"
+  },
+"正義": {
+    upright:"公平、因果、判斷、契約，面對事實並承擔結果。",
+    reversed:"不公、偏見、逃避責任，或事情尚未被誠實看見。"
+  },
+"吊人": {
+    upright:"暫停、換角度、犧牲短期利益，等待新的理解浮現。",
+    reversed:"卡住、無謂犧牲、拖延，或看似忍耐其實不敢決定。"
+  },
+"死神": {
+    upright:"結束、轉化、斷捨離，舊階段退場才有新空間。",
+    reversed:"抗拒改變、抓著已逝之物，或轉變被延後。"
+  },
+"節制": {
+    upright:"調和、療癒、節奏感，把不同元素慢慢混成可行方案。",
+    reversed:"失衡、過量或不足，節奏混亂，需要重新校準。"
+  },
+"惡魔": {
+    upright:"慾望、束縛、成癮、權力關係，看見自己被什麼綁住。",
+    reversed:"鬆綁、看破誘惑，或正在掙脫不健康的依附。"
+  },
+"高塔": {
+    upright:"突發崩解、真相震動、舊結構瓦解，逼你面對現實。",
+    reversed:"害怕崩壞、延後爆點，或小震盪正在提醒你先修補。"
+  },
+"星星": {
+    upright:"希望、療癒、靈感、長期願景，黑夜後看見方向。",
+    reversed:"失望、信心不足，或理想太遠而忘了照顧眼前。"
+  },
+"月亮": {
+    upright:"迷霧、夢境、恐懼、直覺，事情尚未完全明朗。",
+    reversed:"迷霧散開、恐懼浮現，或開始分辨直覺與投射。"
+  },
+"太陽": {
+    upright:"喜悅、成功、清晰、生命力，事情走向明朗與坦然。",
+    reversed:"快樂打折、過度樂觀，或需要重新找回自信。"
+  },
+"審判": {
+    upright:"覺醒、召喚、回顧與更新，做出更成熟的回應。",
+    reversed:"自責、逃避召喚，或遲遲不肯替過去下結論。"
+  },
+"世界": {
+    upright:"完成、整合、畢業、抵達階段性成果，準備進入新循環。",
+    reversed:"未完成、缺最後一步，或成果尚未真正整合進生命。"
+  },
+"權杖一": {
+    upright:"靈感、起心動念、創業火花，行動力剛被點燃。",
+    reversed:"熱情熄火、延遲開始，或有想法但缺乏推進。"
+  },
+"權杖二": {
+    upright:"規劃、遠景、選擇路線，站在門口看更大的世界。",
+    reversed:"猶豫、視野受限，或計畫缺乏實際下一步。"
+  },
+"權杖三": {
+    upright:"擴張、等待成果、合作遠行，前期行動開始回應。",
+    reversed:"延誤、合作不順，或期待落空需要調整策略。"
+  },
+"權杖四": {
+    upright:"慶祝、穩定基地、團聚，階段成果值得被看見。",
+    reversed:"表面安穩、歸屬感不足，或慶祝被延後。"
+  },
+"權杖五": {
+    upright:"競爭、磨合、意見碰撞，混亂中測試真正實力。",
+    reversed:"衝突降溫、避免爭執，或暗地裡的不滿尚未處理。"
+  },
+"權杖六": {
+    upright:"勝利、被看見、肯定，努力得到掌聲與位置。",
+    reversed:"害怕曝光、驕傲受挫，或外界肯定不如預期。"
+  },
+"權杖七": {
+    upright:"防守立場、堅持、面對挑戰，守住自己爭取來的位置。",
+    reversed:"疲於防衛、立場鬆動，或不值得的戰場該退出。"
+  },
+"權杖八": {
+    upright:"快速推進、訊息、旅行，事情進入加速通道。",
+    reversed:"延遲、溝通塞車，或太快導致方向失準。"
+  },
+"權杖九": {
+    upright:"韌性、戒備、最後防線，受過傷但仍沒有倒下。",
+    reversed:"過度防備、疲憊，或把過去的傷帶進現在。"
+  },
+"權杖十": {
+    upright:"負擔、責任過重、撐到終點，需要重新分配重量。",
+    reversed:"卸下重擔、拒絕過勞，或責任終於有機會被整理。"
+  },
+"權杖侍者": {
+    upright:"好奇、熱情新手、探索可能，想試試看就先靠近。",
+    reversed:"三分鐘熱度、消息延遲，或缺乏成熟計畫。"
+  },
+"權杖騎士": {
+    upright:"衝勁、冒險、快速行動，帶著火焰往前闖。",
+    reversed:"急躁、衝動、半途轉向，或熱情失控。"
+  },
+"權杖皇后": {
+    upright:"自信、魅力、創造力，能把熱情變成感染力。",
+    reversed:"自我懷疑、嫉妒、能量外洩，或過度迎合他人眼光。"
+  },
+"權杖國王": {
+    upright:"願景領導、決斷、成熟行動，把火焰變成方向。",
+    reversed:"專斷、急於掌控，或有野心但缺乏同理。"
+  },
+"聖杯一": {
+    upright:"情感開啟、愛、療癒、靈感之泉，心重新流動。",
+    reversed:"情感堵塞、空杯、愛自己不足，或感受被壓住。"
+  },
+"聖杯二": {
+    upright:"連結、互相理解、合作或親密關係的平衡。",
+    reversed:"失和、誤解、關係不對等，或需要重新溝通。"
+  },
+"聖杯三": {
+    upright:"朋友、慶祝、支持系統，喜悅透過分享放大。",
+    reversed:"小圈圈、過度社交、八卦，或支持感不足。"
+  },
+"聖杯四": {
+    upright:"倦怠、無感、重新評估，機會在眼前但心還沒打開。",
+    reversed:"重新接受機會、走出麻木，或開始看見新的可能。"
+  },
+"聖杯五": {
+    upright:"失落、遺憾、哀傷，注意力停在已經倒掉的杯子。",
+    reversed:"從悲傷中復原、看見剩下的資源，願意回頭前進。"
+  },
+"聖杯六": {
+    upright:"回憶、童年、熟悉感、單純的善意與舊日連結。",
+    reversed:"沉溺過去、幼稚化，或需要從舊模式中長大。"
+  },
+"聖杯七": {
+    upright:"幻想、選項很多、誘惑，想像力豐富但需要篩選。",
+    reversed:"做出選擇、看清幻象，或從白日夢回到現實。"
+  },
+"聖杯八": {
+    upright:"離開、尋找更深意義，放下不再滋養你的情感容器。",
+    reversed:"不敢離開、反覆回頭，或尚未準備好告別。"
+  },
+"聖杯九": {
+    upright:"滿足、願望成真、享受成果，情感上感到豐盛。",
+    reversed:"空虛的滿足、過度享樂，或願望實現後仍不快樂。"
+  },
+"聖杯十": {
+    upright:"幸福、家庭、情感圓滿，心中理想的歸屬感。",
+    reversed:"家庭失衡、期待落差，或表面和諧下仍有裂縫。"
+  },
+"聖杯侍者": {
+    upright:"溫柔訊息、直覺、創意萌芽，心裡的小魚在說話。",
+    reversed:"情緒幼稚、逃避表達，或直覺訊號被忽略。"
+  },
+"聖杯騎士": {
+    upright:"浪漫、邀約、理想主義，跟隨心意靠近某個人事物。",
+    reversed:"情緒化、承諾不穩，或美麗話語缺乏行動。"
+  },
+"聖杯皇后": {
+    upright:"共感、照顧、深層直覺，能接住自己與他人的情緒。",
+    reversed:"情緒淹沒、界線模糊，或過度吸收他人的感受。"
+  },
+"聖杯國王": {
+    upright:"情緒成熟、慈悲、穩定支持，風浪中仍能保持心的定錨。",
+    reversed:"壓抑情緒、冷處理，或以成熟之名逃避感受。"
+  },
+"寶劍一": {
+    upright:"清晰、真相、新想法，像刀光切開迷霧。",
+    reversed:"混亂、誤判、話語傷人，或真相尚未被整理清楚。"
+  },
+"寶劍二": {
+    upright:"僵持、兩難、暫時閉眼，需要做出理性選擇。",
+    reversed:"逃避解除、資訊浮現，或不得不面對決定。"
+  },
+"寶劍三": {
+    upright:"心痛、真相刺傷、分離，痛苦來自必須承認事實。",
+    reversed:"療傷、放下怨氣，或舊傷口正在癒合。"
+  },
+"寶劍四": {
+    upright:"休息、暫停、恢復思緒，先讓大腦退燒。",
+    reversed:"休息不足、重新出發，或拖太久需要醒來。"
+  },
+"寶劍五": {
+    upright:"衝突、贏了也受傷、權力角力，勝利代價過高。",
+    reversed:"停止爭鬥、承認損失，或從無效戰爭中退出。"
+  },
+"寶劍六": {
+    upright:"過渡、離開風暴、慢慢好轉，帶著經驗去下一岸。",
+    reversed:"卡在過去、難以前進，或旅程被延宕。"
+  },
+"寶劍七": {
+    upright:"策略、隱瞞、偷走一部分真相，需要辨識動機。",
+    reversed:"坦白、露餡，或不再用迂迴方式處理問題。"
+  },
+"寶劍八": {
+    upright:"受限、自我困住、看不見出口，限制可能先在想法裡。",
+    reversed:"解綁、新觀點、恢復自由，開始看見自己有選擇。"
+  },
+"寶劍九": {
+    upright:"焦慮、失眠、內疚，腦中劇場把恐懼放大。",
+    reversed:"求助、希望回來，或開始從焦慮中抽身。"
+  },
+"寶劍十": {
+    upright:"結束、崩潰、到底了，痛苦階段已經無法再假裝。",
+    reversed:"最壞已過、重新站起，或仍害怕承認結束。"
+  },
+"寶劍侍者": {
+    upright:"觀察、學習、訊息、好奇提問，腦袋正在磨刀。",
+    reversed:"八卦、資訊不準、嘴快，或想太多卻行動太少。"
+  },
+"寶劍騎士": {
+    upright:"果斷、衝刺、辯論，帶著想法快速切入。",
+    reversed:"魯莽言語、急於證明，或思考速度快過現實。"
+  },
+"寶劍皇后": {
+    upright:"清醒、界線、獨立判斷，溫柔但不失鋒利。",
+    reversed:"尖刻、冷漠、防衛過強，或理性變成隔離牆。"
+  },
+"寶劍國王": {
+    upright:"理性權威、判斷、公正溝通，用清楚原則做決策。",
+    reversed:"專斷、冷酷、語言控制，或理性被用來壓人。"
+  },
+"錢幣一": {
+    upright:"新資源、機會、實際起點，種子可以種進土裡。",
+    reversed:"錯失機會、資源不足，或想法尚未落地。"
+  },
+"錢幣二": {
+    upright:"平衡、調度、時間金錢管理，在變動中維持節奏。",
+    reversed:"失衡、分身乏術，或需要重新排優先順序。"
+  },
+"錢幣三": {
+    upright:"合作、技術、被看見的專業，透過協作建造成果。",
+    reversed:"合作卡關、品質不穩，或專業沒有被尊重。"
+  },
+"錢幣四": {
+    upright:"守成、安全感、保留資源，但也可能太緊抓。",
+    reversed:"放鬆控制、財務流動，或安全感結構正在鬆動。"
+  },
+"錢幣五": {
+    upright:"匱乏、被排除、現實壓力，提醒你尋找可用支援。",
+    reversed:"得到援助、走出困境，或重新看見自己的資源。"
+  },
+"錢幣六": {
+    upright:"給予與接受、資源分配、互助，檢查權力是否平衡。",
+    reversed:"不平等交換、施捨感，或付出與回收失衡。"
+  },
+"錢幣七": {
+    upright:"等待收成、評估投資，耐心看長期成果。",
+    reversed:"急躁、投資回報不佳，或需要調整耕種方式。"
+  },
+"錢幣八": {
+    upright:"練習、職人精神、穩定累積，用重複打造能力。",
+    reversed:"倦怠、敷衍、技能停滯，或努力方向需要校準。"
+  },
+"錢幣九": {
+    upright:"自給自足、品味、成果享受，靠累積換來自由感。",
+    reversed:"依賴、財務不安，或外在漂亮但內在不踏實。"
+  },
+"錢幣十": {
+    upright:"家族、長期穩定、資產與傳承，成果進入可延續狀態。",
+    reversed:"家庭資源壓力、傳承問題，或長期安全感出現裂縫。"
+  },
+"錢幣侍者": {
+    upright:"學習實作、務實新手、金錢或技能的新計畫。",
+    reversed:"拖延學習、眼高手低，或機會在手卻沒有投入。"
+  },
+"錢幣騎士": {
+    upright:"穩定、勤奮、按部就班，用可靠行動慢慢推進。",
+    reversed:"停滯、固執、過度保守，或效率被完美主義拖慢。"
+  },
+"錢幣皇后": {
+    upright:"照顧現實、豐盛、身心生活管理，把資源變得舒服可用。",
+    reversed:"過度操心、物質焦慮，或照顧他人卻忘了自己。"
+  },
+"錢幣國王": {
+    upright:"穩固成果、財務成熟、管理資源，讓願景有地基。",
+    reversed:"貪婪、保守霸權，或把價值感完全綁在成就上。"
+  }
+};
+var DEFAULT_MEANING = "這張牌目前沒有收錄到簡易牌義。先看圖像、位置與直覺，再補充你熟悉的牌義來源。";
+
+// 節氣對照表（春分/夏至/秋分/冬至，西元2020-2050，台北時區近似日期，格式 MM-DD）
+var SOLAR_TERMS = {
+  2020:{spring:"03-20",summer:"06-21",autumn:"09-22",winter:"12-21"},
+  2021:{spring:"03-20",summer:"06-21",autumn:"09-23",winter:"12-21"},
+  2022:{spring:"03-20",summer:"06-21",autumn:"09-23",winter:"12-22"},
+  2023:{spring:"03-21",summer:"06-21",autumn:"09-23",winter:"12-22"},
+  2024:{spring:"03-20",summer:"06-21",autumn:"09-22",winter:"12-21"},
+  2025:{spring:"03-20",summer:"06-21",autumn:"09-23",winter:"12-21"},
+  2026:{spring:"03-20",summer:"06-21",autumn:"09-23",winter:"12-22"},
+  2027:{spring:"03-21",summer:"06-21",autumn:"09-23",winter:"12-22"},
+  2028:{spring:"03-20",summer:"06-21",autumn:"09-22",winter:"12-21"},
+  2029:{spring:"03-20",summer:"06-21",autumn:"09-22",winter:"12-21"},
+  2030:{spring:"03-20",summer:"06-21",autumn:"09-23",winter:"12-21"},
+  2031:{spring:"03-21",summer:"06-21",autumn:"09-23",winter:"12-22"},
+  2032:{spring:"03-20",summer:"06-21",autumn:"09-22",winter:"12-21"},
+  2033:{spring:"03-20",summer:"06-21",autumn:"09-22",winter:"12-21"},
+  2034:{spring:"03-20",summer:"06-21",autumn:"09-23",winter:"12-21"},
+  2035:{spring:"03-21",summer:"06-21",autumn:"09-23",winter:"12-22"},
+  2036:{spring:"03-20",summer:"06-20",autumn:"09-22",winter:"12-21"},
+  2037:{spring:"03-20",summer:"06-21",autumn:"09-22",winter:"12-21"},
+  2038:{spring:"03-20",summer:"06-21",autumn:"09-23",winter:"12-21"},
+  2039:{spring:"03-21",summer:"06-21",autumn:"09-23",winter:"12-22"},
+  2040:{spring:"03-20",summer:"06-21",autumn:"09-22",winter:"12-21"},
+  2041:{spring:"03-20",summer:"06-21",autumn:"09-22",winter:"12-21"},
+  2042:{spring:"03-20",summer:"06-21",autumn:"09-23",winter:"12-21"},
+  2043:{spring:"03-21",summer:"06-21",autumn:"09-23",winter:"12-22"},
+  2044:{spring:"03-20",summer:"06-21",autumn:"09-22",winter:"12-21"},
+  2045:{spring:"03-20",summer:"06-21",autumn:"09-22",winter:"12-21"},
+  2046:{spring:"03-20",summer:"06-21",autumn:"09-23",winter:"12-21"},
+  2047:{spring:"03-21",summer:"06-21",autumn:"09-23",winter:"12-22"},
+  2048:{spring:"03-20",summer:"06-20",autumn:"09-22",winter:"12-21"},
+  2049:{spring:"03-20",summer:"06-21",autumn:"09-22",winter:"12-21"},
+  2050:{spring:"03-20",summer:"06-21",autumn:"09-23",winter:"12-21"}
+};
+var TERM_SYMBOL = {spring:"flower",summer:"sun",autumn:"leaf",winter:"snow"};
+var TERM_NAME = {spring:"春分",summer:"夏至",autumn:"秋分",winter:"冬至"};
+
+// 牌陣定義： positions 陣列, restriction 每個位置對應可抽花色 ('major'|'wands'|'cups'|'swords'|'pentacles'|'any')
+var SPREADS = {
+  single:{
+    name:"單牌", positions:["單牌"], restriction:{"單牌":"any"},
+    help:"快速確認今日能量、單一問題的核心提醒。適合還不想展開長篇劇情，只想先抽一根心理溫度計。",
+    layout:{"單牌":[50,50]}
+  },
+  timeflow:{
+    name:"時間之流", positions:["過去","現在","未來"],
+    restriction:{"過去":"any","現在":"any","未來":"any"},
+    help:"適合看一件事的前因後果、狀態如何演變，也很適合複盤自己的決策軌跡。",
+    layout:{"過去":[22,50],"現在":[50,50],"未來":[78,50]}
+  },
+  relationship:{
+    name:"關係牌陣", positions:["問卜人狀況","對象的狀況","兩人現狀","未來發展／結果"],
+    restriction:{"問卜人狀況":"any","對象的狀況":"any","兩人現狀":"any","未來發展／結果":"any"},
+    help:"適合感情、合作、朋友或家人關係。重點不是猜對方腦內劇場，而是看雙方狀態與互動結構。",
+    layout:{"問卜人狀況":[25,35],"對象的狀況":[75,35],"兩人現狀":[50,58],"未來發展／結果":[50,82]}
+  },
+  twochoice:{
+    name:"二選一牌陣", positions:["問卜現況","A選項的過程","A選項的結果","B選項的過程","B選項的結果"],
+    restriction:{"問卜現況":"any","A選項的過程":"any","A選項的結果":"any","B選項的過程":"any","B選項的結果":"any"},
+    help:"適合選工作、選方案、要不要開始或停止。它不替你擲硬幣，而是把兩條路的代價與可能收穫攤開。",
+    layout:{"問卜現況":[50,50],"A選項的過程":[24,28],"A選項的結果":[24,73],"B選項的過程":[76,28],"B選項的結果":[76,73]}
+  },
+  cup:{
+    name:"杯型牌陣", positions:["杯底：根源","左杯壁：情緒流向","右杯壁：外在回應","杯中：真正渴望","杯緣：下一步"],
+    restriction:{"杯底：根源":"any","左杯壁：情緒流向":"any","右杯壁：外在回應":"any","杯中：真正渴望":"any","杯緣：下一步":"any"},
+    help:"適合情緒整理、需求辨識、療癒與自我照顧。像把內心倒進杯裡，看沉澱物也看浮沫。",
+    layout:{"杯底：根源":[50,82],"左杯壁：情緒流向":[28,58],"右杯壁：外在回應":[72,58],"杯中：真正渴望":[50,52],"杯緣：下一步":[50,22]}
+  },
+  star:{
+    name:"星型牌陣", positions:["核心課題","上方指引","左方資源","右方挑戰","下方落地","整體結果"],
+    restriction:{"核心課題":"any","上方指引":"any","左方資源":"any","右方挑戰":"any","下方落地":"any","整體結果":"any"},
+    help:"適合看一個較大的主題：創作、職涯、人生方向。星星不會幫你上班，但會指出哪裡有光。",
+    layout:{"核心課題":[50,50],"上方指引":[50,18],"左方資源":[22,42],"右方挑戰":[78,42],"下方落地":[35,78],"整體結果":[65,78]}
+  },
+  heartvoice:{
+    name:"心之聲牌陣", positions:["表層想法","真實感受","被壓住的需求","害怕面對的事","心真正想說的話"],
+    restriction:{"表層想法":"any","真實感受":"any","被壓住的需求":"any","害怕面對的事":"any","心真正想說的話":"any"},
+    help:"適合卡住、憤怒、委屈、焦慮但說不清楚時使用。它不是雞湯，是心裡那隻小獸終於拿到麥克風。",
+    layout:{"表層想法":[50,22],"真實感受":[30,45],"被壓住的需求":[70,45],"害怕面對的事":[40,72],"心真正想說的話":[60,72]}
+  },
+  smallcross:{
+    name:"小十字", positions:["過去","現在","不久未來","預期的狀況","結果"],
+    restriction:{"過去":"any","現在":"any","不久未來":"any","預期的狀況":"any","結果":"any"},
+    help:"適合中等複雜度事件，尤其是想知道目前卡點、短期發展與結果時。",
+    layout:{"過去":[22,50],"現在":[50,50],"不久未來":[78,50],"預期的狀況":[50,25],"結果":[50,76]}
+  },
+  celtic:{
+    name:"凱爾特十字",
+    positions:["現況","挑戰","遠因","近因","可能發展","近未來","自身態度","外在環境","希望或恐懼","最終結果"],
+    restriction:{"現況":"any","挑戰":"any","遠因":"any","近因":"any","可能發展":"any","近未來":"any","自身態度":"any","外在環境":"any","希望或恐懼":"any","最終結果":"any"},
+    help:"適合重大問題與長線分析。資訊量很大，像把事件拆成一座小型迷宮，適合有時間好好寫覺察時使用。",
+    layout:{"現況":[35,50],"挑戰":[35,50],"遠因":[35,78],"近因":[35,24],"可能發展":[18,50],"近未來":[54,50],"自身態度":[78,82],"外在環境":[78,60],"希望或恐懼":[78,38],"最終結果":[78,16]}
+  },
+  fourElementsFixed:{
+    name:"四元素牌陣（限定花色）", positions:["主牌","火","水","風","土"],
+    restriction:{"主牌":"major","火":"wands","水":"cups","風":"swords","土":"pentacles"},
+    help:"適合檢查行動、情緒、思考與現實資源是否平衡。限定花色版更像元素體檢。",
+    layout:{"主牌":[50,50],"火":[50,20],"水":[24,58],"風":[76,58],"土":[50,82]}
+  },
+  fourElementsFree:{
+    name:"四元素牌陣（不限花色）", positions:["主牌","火","水","風","土"],
+    restriction:{"主牌":"major","火":"any","水":"any","風":"any","土":"any"},
+    help:"適合看同一件事在不同層面的狀態。不限花色版更自由，適合直覺派。",
+    layout:{"主牌":[50,50],"火":[50,20],"水":[24,58],"風":[76,58],"土":[50,82]}
+  }
+};
+
+/* ==========================================================================
+   IndexedDB 封裝
+   ========================================================================== */
+var DB_NAME = "TarotJournalDB";
+var DB_VERSION = 1;
+var dbPromise = null;
+
+function openDB(){
+  if(dbPromise) return dbPromise;
+  dbPromise = new Promise(function(resolve, reject){
+    var req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = function(e){
+      var db = e.target.result;
+      if(!db.objectStoreNames.contains("records")){
+        var store = db.createObjectStore("records", {keyPath:"id", autoIncrement:true});
+        store.createIndex("date", "date", {unique:false});
+      }
+    };
+    req.onsuccess = function(e){ resolve(e.target.result); };
+    req.onerror = function(e){ reject(e.target.error); };
+  });
+  return dbPromise;
+}
+
+function dbAdd(record){
+  return openDB().then(function(db){
+    return new Promise(function(resolve,reject){
+      var tx = db.transaction("records","readwrite");
+      var req = tx.objectStore("records").add(record);
+      req.onsuccess = function(e){ resolve(e.target.result); };
+      req.onerror = function(e){ reject(e.target.error); };
+    });
+  });
+}
+function dbPut(record){
+  return openDB().then(function(db){
+    return new Promise(function(resolve,reject){
+      var tx = db.transaction("records","readwrite");
+      var req = tx.objectStore("records").put(record);
+      req.onsuccess = function(e){ resolve(e.target.result); };
+      req.onerror = function(e){ reject(e.target.error); };
+    });
+  });
+}
+function dbDelete(id){
+  // 用 cursor 在同一個 readwrite transaction 裡找 key 並刪除。
+  // 這比 getAllKeys + getAll 穩：不會因為其中一個 request 尚未完成就讀 result 而中止交易。
+  return openDB().then(function(db){
+    return new Promise(function(resolve,reject){
+      var tx = db.transaction("records","readwrite");
+      var store = tx.objectStore("records");
+      var target = String(id);
+      var deleted = false;
+
+      tx.onerror = function(){ reject(tx.error || new Error("IndexedDB delete failed")); };
+      tx.onabort = function(){ reject(tx.error || new Error("IndexedDB delete aborted")); };
+      tx.oncomplete = function(){ resolve(deleted); };
+
+      var cursorReq = store.openCursor();
+      cursorReq.onerror = function(e){ reject(e.target.error); };
+      cursorReq.onsuccess = function(e){
+        var cursor = e.target.result;
+        if(!cursor) return;
+        var rec = cursor.value || {};
+        var key = cursor.key;
+        if(String(key) === target || String(rec.id) === target || String(rec.__dbKey) === target){
+          deleted = true;
+          cursor.delete();
+          return;
+        }
+        cursor.continue();
+      };
+    });
+  });
+}
+function dbClearAll(){
+  return openDB().then(function(db){
+    return new Promise(function(resolve,reject){
+      var tx = db.transaction("records","readwrite");
+      var req = tx.objectStore("records").clear();
+      req.onsuccess = function(){ resolve(); };
+      req.onerror = function(e){ reject(e.target.error); };
+    });
+  });
+}
+function dbGetAll(){
+  return openDB().then(function(db){
+    return new Promise(function(resolve,reject){
+      var tx = db.transaction("records","readonly");
+      var store = tx.objectStore("records");
+      var valsReq = store.getAll();
+      var keysReq = store.getAllKeys ? store.getAllKeys() : null;
+      function finish(){
+        var vals = valsReq.result || [];
+        var keys = keysReq ? (keysReq.result || []) : [];
+        vals.forEach(function(r, i){
+          if(r && keys.length){ r.__dbKey = keys[i]; }
+          if(r && (r.id === undefined || r.id === null) && keys.length){ r.id = keys[i]; }
+        });
+        resolve(vals);
+      }
+      valsReq.onerror = function(e){ reject(e.target.error); };
+      if(keysReq){
+        keysReq.onerror = function(e){ reject(e.target.error); };
+        var valsDone = false, keysDone = false;
+        valsReq.onsuccess = function(){ valsDone = true; if(keysDone) finish(); };
+        keysReq.onsuccess = function(){ keysDone = true; if(valsDone) finish(); };
+      }else{
+        valsReq.onsuccess = finish;
+      }
+    });
+  });
+}
+function recId(r){ return r ? (r.__dbKey !== undefined && r.__dbKey !== null ? r.__dbKey : r.id) : null; }
+function sameRecordId(a,b){ return String(a) === String(b); }
+
+/* ==========================================================================
+   工具函式
+   ========================================================================== */
+function pad2(n){ return n<10 ? "0"+n : ""+n; }
+function fmtDate(d){ return d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate()); }
+function todayStr(){ return fmtDate(new Date()); }
+function parseDate(s){ var p=s.split("-"); return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2])); }
+function shuffle(arr){
+  var a = arr.slice();
+  for(var i=a.length-1;i>0;i--){
+    var j = Math.floor(Math.random()*(i+1));
+    var t=a[i]; a[i]=a[j]; a[j]=t;
+  }
+  return a;
+}
+function showToast(msg){
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(function(){ t.classList.remove("show"); }, 1800);
+}
+function escapeHtml(s){
+  return (s||"").replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+  });
+}
+
+/* ==========================================================================
+   應用狀態
+   ========================================================================== */
+var state = {
+  calYear: new Date().getFullYear(),
+  calMonth: new Date().getMonth(), // 0-11
+  selectedDate: null,
+  allRecords: [],
+  currentMode: "manual", // manual | online
+  drawMode: "noreplace", // noreplace | independent
+  pendingCards: null, // 抽牌/手動選牌暫存結果 [{position,cardName,orientation}]
+  pendingPhoto: null,
+  pendingCroppedCards: {},
+  cropIndex: 0,
+  currentDetailId: null
+};
+
+/* ==========================================================================
+   畫面切換
+   ========================================================================== */
+function showView(id){
+  document.querySelectorAll(".view").forEach(function(v){ v.classList.remove("active"); });
+  document.getElementById(id).classList.add("active");
+  document.getElementById("btn-fab-add").style.display = (id === "view-calendar") ? "flex" : "none";
+  window.scrollTo(0,0);
+}
+
+/* ==========================================================================
+   日曆渲染
+   ========================================================================== */
+
+function renderMonthReviewReminder(){
+  var box = document.getElementById("month-review-reminder");
+  if(!box) return;
+  var now = new Date();
+  var lastDay = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+  var isViewingCurrentMonth = state.calYear === now.getFullYear() && state.calMonth === now.getMonth();
+  var shouldShow = isViewingCurrentMonth && now.getDate() === lastDay;
+  box.classList.toggle("active", shouldShow);
+}
+
+function renderCalendar(){
+  var y = state.calYear, m = state.calMonth;
+  document.getElementById("cal-month-label").textContent = y + " 年 " + (m+1) + " 月";
+
+  var firstDay = new Date(y,m,1).getDay();
+  var daysInMonth = new Date(y,m+1,0).getDate();
+
+  var recordsByDate = {};
+  state.allRecords.forEach(function(r){
+    recordsByDate[r.date] = (recordsByDate[r.date]||0)+1;
+  });
+
+  var termsThisYear = SOLAR_TERMS[y];
+  var termDates = {}; // "MM-DD" -> key
+  if(termsThisYear){
+    Object.keys(termsThisYear).forEach(function(k){
+      termDates[termsThisYear[k]] = k;
+    });
+  }
+
+  var html = "";
+  for(var i=0;i<firstDay;i++){
+    html += '<div class="cal-cell empty"></div>';
+  }
+  var todayS = todayStr();
+  for(var d=1; d<=daysInMonth; d++){
+    var dateStr = y+"-"+pad2(m+1)+"-"+pad2(d);
+    var mmdd = pad2(m+1)+"-"+pad2(d);
+    var classes = ["cal-cell"];
+    if(dateStr === todayS) classes.push("today");
+    if(d === daysInMonth) classes.push("month-end");
+    if(dateStr === state.selectedDate) classes.push("selected");
+    var termKey = termDates[mmdd];
+    var termAttr = "";
+    if(termKey){
+      classes.push("term");
+      termAttr = ' data-term-key="'+termKey+'" title="'+TERM_NAME[termKey]+'"';
+    }
+    var dotCount = recordsByDate[dateStr] || 0;
+    var dotsHtml = "";
+    if(dotCount>0){
+      var show = Math.min(dotCount,3);
+      dotsHtml = '<div class="dots">';
+      for(var k=0;k<show;k++){ dotsHtml += "<span></span>"; }
+      dotsHtml += "</div>";
+    }
+    html += '<div class="'+classes.join(" ")+'" data-date="'+dateStr+'"'+termAttr+'>'+
+              (termKey ? '<span class="term-icon">'+PH(TERM_SYMBOL[termKey])+'</span>' : '')+'<span class="num">'+d+'</span>'+dotsHtml+(d === daysInMonth ? '<span class="month-end-hint">月結</span>' : '')+
+            '</div>';
+  }
+  document.getElementById("cal-grid").innerHTML = html;
+
+  document.querySelectorAll(".cal-cell[data-date]").forEach(function(cell){
+    cell.addEventListener("click", function(){
+      var dt = this.getAttribute("data-date");
+      state.selectedDate = (state.selectedDate === dt) ? null : dt;
+      renderCalendar();
+      renderDayRecords();
+    });
+  });
+
+  renderReview();
+  renderMonthReviewReminder();
+}
+
+function renderDayRecords(){
+  var wrap = document.getElementById("day-records-wrap");
+  if(!state.selectedDate){
+    wrap.style.display = "none";
+    return;
+  }
+  var recs = state.allRecords.filter(function(r){ return r.date === state.selectedDate; });
+  var dateObj = parseDate(state.selectedDate);
+  var isMonthEnd = dateObj && dateObj.getDate() === new Date(dateObj.getFullYear(), dateObj.getMonth()+1, 0).getDate();
+  wrap.style.display = "block";
+  document.getElementById("day-records-title").textContent = state.selectedDate + (isMonthEnd ? " 的月度結算與占卜紀錄" : " 的占卜紀錄（"+recs.length+"）");
+  var list = document.getElementById("day-records-list");
+  var html = "";
+  if(recs.length === 0){
+    html += '<div class="empty-hint">這天還沒有占卜紀錄。'+(isMonthEnd ? '但月度結算仍會統計整個月份 ◆' : '點選下方按鈕新增一筆吧 ◆')+'</div>';
+  }else{
+    html += recs.map(function(r){
+      var spreadName = SPREADS[r.spreadType] ? SPREADS[r.spreadType].name : r.spreadType;
+      return '<div class="record-chip" data-id="'+recId(r)+'">'+
+        '<div class="info"><div class="q">'+PH('target')+' 我想探索的問題｜'+escapeHtml(r.question || "（未填寫問題）")+'</div>'+ 
+        '<div class="meta">'+spreadName+'</div></div>'+ 
+        '<button class="del" data-del="'+recId(r)+'" type="button" aria-label="刪除紀錄">'+PH('x')+'</button></div>';
+    }).join("");
+  }
+  if(isMonthEnd){
+    html += buildMonthlyFullReport(dateObj.getFullYear(), dateObj.getMonth());
+  }
+  list.innerHTML = html;
+
+  list.querySelectorAll(".record-chip").forEach(function(chip){
+    chip.addEventListener("click", function(e){
+      if(e.target.closest("[data-del]")) return;
+      openDetail(chip.getAttribute("data-id"));
+    });
+  });
+  list.querySelectorAll("[data-del]").forEach(function(btn){
+    btn.addEventListener("click", function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var id = btn.getAttribute("data-del");
+      if(confirm("確定要刪除這筆占卜紀錄嗎？此動作無法復原。")){
+        deleteRecordAndRefresh(id);
+      }
+    });
+  });
+  if(isMonthEnd){
+    var stats = collectMonthStats(dateObj.getFullYear(), dateObj.getMonth());
+    attachMonthlyReportActions(dateObj.getFullYear(), dateObj.getMonth(), stats);
+  }
+}
+
+/* ==========================================================================
+   每月回顧
+   ========================================================================== */
+function renderReview(){
+  var y = state.calYear, m = state.calMonth;
+  var stats = collectMonthStats(y, m);
+  var body = document.getElementById("review-body");
+
+  if(stats.recs.length === 0){
+    body.innerHTML = '<div class="review-stat">本月共占卜 0 次</div>'+ 
+      '<div class="empty-hint" style="padding:10px 0;">這個月還沒有紀錄。等第一張牌落下，本月回顧就會開始長出脈絡 ◆</div>';
+    return;
+  }
+
+  var statHtml = '<div class="review-stat">本月簡易回顧，不含圖表。圖表與完整結算請點月曆上的最後一天。</div>'+ 
+    '<div class="review-grid">'+
+      '<div class="review-pill"><div class="num">'+stats.recs.length+'</div><div class="label">占卜次數</div></div>'+ 
+      '<div class="review-pill"><div class="num">'+stats.totalCards+'</div><div class="label">累積牌數</div></div>'+ 
+      '<div class="review-pill"><div class="num">'+stats.reversedRate+'%</div><div class="label">逆位比例</div></div>'+ 
+    '</div>'+
+    '<div class="review-stat">正位 '+stats.orientCounts.upright+' 張｜逆位 '+stats.orientCounts.reversed+' 張</div>';
+
+  var cardsHtml = '<div class="review-block"><h4>常出現的牌</h4>';
+  if(stats.topCards.length === 0){
+    cardsHtml += '<p>本月還沒有足夠牌卡資料。</p>';
+  }else{
+    cardsHtml += stats.topCards.slice(0,5).map(function(item,idx){
+      return '<div class="review-item"><span><span class="rank">'+(idx+1)+'</span>'+escapeHtml(item.name)+'</span><span class="count">'+item.count+' 次</span></div>';
+    }).join('');
+  }
+  cardsHtml += '</div>';
+
+  body.innerHTML = statHtml + cardsHtml;
+}
+
+function collectMonthStats(y, m){
+  var prefix = y+"-"+pad2(m+1);
+  var recs = state.allRecords.filter(function(r){ return r.date.indexOf(prefix) === 0; });
+  var cardCounts = {}, spreadCounts = {}, orientCounts = {upright:0, reversed:0}, suitCounts = {major:0,wands:0,cups:0,swords:0,pentacles:0};
+  var questionWords = {};
+  var totalCards = 0;
+
+  recs.forEach(function(r){
+    var spreadName = SPREADS[r.spreadType] ? SPREADS[r.spreadType].name : r.spreadType;
+    spreadCounts[spreadName] = (spreadCounts[spreadName]||0)+1;
+    extractQuestionKeywords(r.question || "").forEach(function(w){ questionWords[w]=(questionWords[w]||0)+1; });
+    (r.cards||[]).forEach(function(c){
+      totalCards++;
+      cardCounts[c.cardName] = (cardCounts[c.cardName]||0)+1;
+      orientCounts[c.orientation === "reversed" ? "reversed" : "upright"]++;
+      var info = ALL_CARDS.find(function(x){ return x.name === c.cardName; });
+      if(info && suitCounts.hasOwnProperty(info.suit)) suitCounts[info.suit]++;
+    });
+  });
+
+  var topCards = rankObj(cardCounts).slice(0,5);
+  var topSpreads = rankObj(spreadCounts).slice(0,3);
+  var topWords = rankObj(questionWords).slice(0,8);
+  var topSuit = rankObj(suitCounts).filter(function(x){return x.count>0;})[0];
+  var reversedRate = totalCards ? Math.round(orientCounts.reversed / totalCards * 100) : 0;
+  var trend = buildEnergyTrend(recs);
+  return {recs:recs,totalCards:totalCards,orientCounts:orientCounts,suitCounts:suitCounts,topCards:topCards,topSpreads:topSpreads,topWords:topWords,topSuit:topSuit,reversedRate:reversedRate,trend:trend};
+}
+
+
+function creatorInfoHtml(){
+  return '<div class="creator-card compact"><strong>工具製作／塔羅覺察：</strong> <a href="https://www.instagram.com/hahachilltarot" target="_blank" rel="noopener noreferrer">@hahachilltarot</a><br>把每一次抽牌當成覺察存檔，而不是命運判決書。</div>';
+}
+
+function buildMonthlyFullReport(y, m){
+  var stats = collectMonthStats(y, m);
+  if(stats.recs.length === 0){
+    return '<div class="settlement-card"><div class="settlement-title"><h4>'+PH('medal')+' 月度結算畫面</h4><div class="grade-badge"><div class="grade">-</div><div class="label">覺察評等</div></div></div>'+ 
+      '<div class="settlement-summary">這個月還沒有占卜紀錄，因此暫不評等。先讓第一筆紀錄落地，結算畫面才有素材可以料理。</div></div>';
+  }
+  var settlement = buildMonthlySettlement(stats.recs, stats.totalCards, stats.reversedRate, stats.topCards, stats.topWords, stats.topSuit, stats.trend);
+  var spreadHtml = '<div class="review-block"><h4>常用牌陣</h4>' + (stats.topSpreads.length ? stats.topSpreads.map(function(item){
+    return '<div class="review-item"><span>'+escapeHtml(item.name)+'</span><span class="count">'+item.count+' 次</span></div>';
+  }).join('') : '<p>本月尚無牌陣資料。</p>') + '</div>';
+  var wordsHtml = '<div class="review-block"><h4>熱門提問主題</h4>';
+  if(stats.topWords.length){
+    wordsHtml += '<div class="keyword-cloud">'+stats.topWords.map(function(item){return '<span>'+escapeHtml(item.name)+' × '+item.count+'</span>';}).join('')+'</div>';
+  }else{
+    wordsHtml += '<p>提問文字太少，暫時還抓不到明顯主題。</p>';
+  }
+  wordsHtml += '</div>';
+  var monthTheme = buildMonthReflection(stats.recs.length, stats.topCards, stats.topSuit, stats.reversedRate, stats.topWords);
+  var prompt = buildMonthlyAiPrompt(y, m, stats.recs, stats.totalCards, stats.reversedRate, stats.topCards, stats.topWords, stats.topSuit, stats.trend);
+  var savedNote = getMonthlyAiNote(y, m);
+  var reflectionHtml = '<div class="review-block"><h4>本月覆盤提示</h4><p>'+monthTheme+'</p></div>';
+  var aiHtml = '<div class="review-block monthly-ai-note"><h4>AI 覆盤回貼區</h4>'+ 
+    '<p>此工具沒有內建 AI。你可以先複製提示詞貼到 AI，再把回覆貼回這裡，會存在本機瀏覽器。</p>'+ 
+    '<div class="review-actions"><button class="btn btn-gold" type="button" id="btn-copy-monthly-prompt-day">' + PH('copy') + ' 複製本月覆盤提示詞</button><button class="btn btn-ghost" type="button" id="btn-save-monthly-ai-note-day">儲存覆盤文字</button></div>'+ 
+    '<textarea id="monthly-ai-note-day" placeholder="把 AI 回覆或自己的月末覆盤貼在這裡……">'+escapeHtml(savedNote)+'</textarea></div>';
+  return settlement + spreadHtml + wordsHtml + reflectionHtml + aiHtml;
+}
+
+function attachMonthlyReportActions(y, m, stats){
+  var prompt = buildMonthlyAiPrompt(y, m, stats.recs, stats.totalCards, stats.reversedRate, stats.topCards, stats.topWords, stats.topSuit, stats.trend);
+  var copyBtn = document.getElementById("btn-copy-monthly-prompt-day");
+  if(copyBtn){
+    copyBtn.addEventListener("click", function(){ copyToClipboard(prompt).then(function(){ showToast("已複製本月覆盤提示詞"); }).catch(function(){ showToast("複製失敗，請手動選取文字"); }); });
+  }
+  var saveBtn = document.getElementById("btn-save-monthly-ai-note-day");
+  if(saveBtn){
+    saveBtn.addEventListener("click", function(){
+      var ta = document.getElementById("monthly-ai-note-day");
+      saveMonthlyAiNote(y, m, ta ? ta.value : "");
+      showToast("已儲存本月覆盤文字");
+    });
+  }
+}
+
+function rankObj(obj){
+  return Object.keys(obj).map(function(k){ return {name:k, count:obj[k]}; })
+    .sort(function(a,b){ return b.count - a.count || a.name.localeCompare(b.name); });
+}
+
+function buildMonthlySettlement(recs, totalCards, reversedRate, topCards, topWords, topSuit, trend){
+  var gradeInfo = calcMonthlyGrade(recs.length, totalCards, reversedRate, topCards.length, topWords.length);
+  var chartHtml = renderEnergyTrendChart(trend);
+  var topCardText = topCards.length ? topCards.slice(0,5).map(function(x){return escapeHtml(x.name)+" × "+x.count;}).join("、") : "本月牌卡資料不足，暫不評選。";
+  var wordText = topWords.length ? topWords.slice(0,6).map(function(x){return escapeHtml(x.name)+" × "+x.count;}).join("、") : "問題字數太少，關鍵字暫缺。";
+  var suitText = topSuit ? suitDisplayName(topSuit.name) + "｜" + suitHint(topSuit.name) : "資料不足，尚未形成明顯能量花色。";
+  return '<div class="settlement-card">'+
+    '<div class="settlement-title"><h4>'+PH('medal')+' 月度結算畫面</h4><div class="grade-badge"><div class="grade">'+gradeInfo.grade+'</div><div class="label">覺察評等</div></div></div>'+
+    '<div class="settlement-summary">'+escapeHtml(gradeInfo.text)+'</div>'+chartHtml+
+    '<div class="review-block"><h4>結算摘要</h4>'+ 
+      '<div class="review-item"><span>常問／出現關鍵字</span><span class="count">'+wordText+'</span></div>'+ 
+      '<div class="review-item"><span>精選常出現牌 TOP</span><span class="count">'+topCardText+'</span></div>'+ 
+      '<div class="review-item"><span>本月能量主軸</span><span class="count">'+escapeHtml(suitText)+'</span></div>'+ 
+    '</div></div>';
+}
+
+function calcMonthlyGrade(recordCount, totalCards, reversedRate, cardTypes, keywordTypes){
+  var score = 0;
+  score += Math.min(recordCount * 12, 48);
+  score += Math.min(totalCards * 3, 24);
+  score += Math.min(keywordTypes * 4, 16);
+  score += Math.min(cardTypes * 3, 12);
+  if(reversedRate >= 25 && reversedRate <= 55) score += 8;
+  var grade = "C";
+  if(score >= 86) grade = "S";
+  else if(score >= 72) grade = "A";
+  else if(score >= 56) grade = "B";
+  var text = "本月共留下 "+recordCount+" 筆紀錄、"+totalCards+" 張牌。";
+  if(grade === "S") text += "資料量很豐富，已經可以做出一份像遊戲通關報告的月度覆盤。";
+  else if(grade === "A") text += "紀錄脈絡足夠，適合整理出本月主線任務與反覆卡關點。";
+  else if(grade === "B") text += "已有可觀察的線索，但還需要更多紀錄讓模式浮出水面。";
+  else text += "目前比較像序章，先不強行解讀，繼續記錄會更準。";
+  return {grade:grade, score:score, text:text};
+}
+
+function buildEnergyTrend(recs){
+  var byDate = {};
+  recs.forEach(function(r){
+    var score = 0, count = 0;
+    (r.cards||[]).forEach(function(c){
+      var info = ALL_CARDS.find(function(x){ return x.name === c.cardName; });
+      var base = info ? (info.suit === "major" ? 4 : 3) : 3;
+      if(c.orientation === "reversed") base -= 1;
+      score += Math.max(base,1);
+      count++;
+    });
+    if(!byDate[r.date]) byDate[r.date] = {sum:0,count:0};
+    byDate[r.date].sum += score;
+    byDate[r.date].count += Math.max(count,1);
+  });
+  return Object.keys(byDate).sort().map(function(date){
+    return {date:date, label:date.slice(5), value:Math.round((byDate[date].sum / byDate[date].count) * 10) / 10};
+  });
+}
+
+function renderEnergyTrendChart(data){
+  if(!data || data.length === 0){
+    return '<div class="trend-chart"><div class="empty-hint" style="padding:38px 0;">還沒有足夠資料繪製能量趨勢。</div></div>';
+  }
+  var w = 320, h = 120, padL = 28, padR = 12, padT = 12, padB = 24;
+  var vals = data.map(function(d){return d.value;});
+  var min = Math.min.apply(null, vals.concat([1]));
+  var max = Math.max.apply(null, vals.concat([5]));
+  if(max === min){ max += 1; min -= 1; }
+  var xStep = data.length > 1 ? (w-padL-padR)/(data.length-1) : 0;
+  function x(i){ return padL + (data.length>1 ? xStep*i : (w-padL-padR)/2); }
+  function y(v){ return padT + (max-v)/(max-min)*(h-padT-padB); }
+  var points = data.map(function(d,i){ return x(i)+','+y(d.value); }).join(' ');
+  var circles = data.map(function(d,i){ return '<circle class="dot" cx="'+x(i)+'" cy="'+y(d.value)+'" r="3"><title>'+escapeHtml(d.label)+'：'+d.value+'</title></circle>'; }).join('');
+  var labels = data.map(function(d,i){ if(data.length>7 && i%2===1) return ''; return '<text x="'+x(i)+'" y="'+(h-7)+'" text-anchor="middle">'+escapeHtml(d.label)+'</text>'; }).join('');
+  return '<div class="trend-chart"><svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="本月能量趨勢圖">'+
+    '<line class="grid" x1="'+padL+'" y1="'+padT+'" x2="'+(w-padR)+'" y2="'+padT+'"></line>'+ 
+    '<line class="grid" x1="'+padL+'" y1="'+((h-padB+padT)/2)+'" x2="'+(w-padR)+'" y2="'+((h-padB+padT)/2)+'"></line>'+ 
+    '<line class="grid" x1="'+padL+'" y1="'+(h-padB)+'" x2="'+(w-padR)+'" y2="'+(h-padB)+'"></line>'+ 
+    '<polyline class="line" points="'+points+'"></polyline>'+circles+labels+
+    '<text x="2" y="'+(padT+3)+'">高</text><text x="2" y="'+(h-padB+3)+'">低</text>'+ 
+    '</svg></div>';
+}
+
+function buildMonthlyAiPrompt(y, m, recs, totalCards, reversedRate, topCards, topWords, topSuit, trend){
+  var lines = [];
+  lines.push("請幫我做塔羅月末覆盤。請不要替我算命，而是協助我整理覺察、問題模式與下個月行動提醒。");
+  lines.push("月份："+y+" 年 "+(m+1)+" 月");
+  lines.push("占卜次數："+recs.length+"；累積牌數："+totalCards+"；逆位比例："+reversedRate+"%");
+  lines.push("常出現的牌："+(topCards.length ? topCards.map(function(x){return x.name+"×"+x.count;}).join("、") : "暫無"));
+  lines.push("提問關鍵字："+(topWords.length ? topWords.map(function(x){return x.name+"×"+x.count;}).join("、") : "暫無"));
+  lines.push("能量主軸："+(topSuit ? suitDisplayName(topSuit.name)+"，"+suitHint(topSuit.name) : "暫無"));
+  lines.push("能量趨勢："+(trend.length ? trend.map(function(x){return x.label+"="+x.value;}).join("、") : "暫無"));
+  lines.push("請用以下結構回覆：1. 本月主線任務 2. 反覆卡關點 3. 我可能正在逃避或誤判的地方 4. 下個月可以實驗的三個小行動 5. 一句適合貼回占卜日誌的總結。");
+  return lines.join("\n");
+}
+
+function monthlyNoteKey(y,m){ return "tarot-monthly-ai-note-"+y+"-"+pad2(m+1); }
+function getMonthlyAiNote(y,m){ try{return localStorage.getItem(monthlyNoteKey(y,m)) || "";}catch(e){return "";} }
+function saveMonthlyAiNote(y,m,val){ try{localStorage.setItem(monthlyNoteKey(y,m), val || "");}catch(e){} }
+
+function extractQuestionKeywords(q){
+  var stop = "我你他她它們的是了嗎呢啊喔與和或在有想要可以是否如果怎麼什麼這個那個一個自己對方關係占卜問題狀況結果未來目前";
+  var cleaned = q.replace(/[\s，。！？、：；,.!?/\\()（）\[\]【】「」『』…]/g," ");
+  var chunks = cleaned.split(/\s+/).filter(Boolean);
+  var out = [];
+  chunks.forEach(function(chunk){
+    if(/[A-Za-z0-9]/.test(chunk)){
+      if(chunk.length >= 2) out.push(chunk.toLowerCase());
+    }else{
+      for(var i=0;i<chunk.length-1;i++){
+        var w = chunk.slice(i,i+2);
+        if(stop.indexOf(w[0])>=0 || stop.indexOf(w[1])>=0) continue;
+        out.push(w);
+      }
+      if(chunk.length >= 3){
+        for(var j=0;j<chunk.length-2;j++){
+          var w3 = chunk.slice(j,j+3);
+          if(stop.indexOf(w3[0])>=0 || stop.indexOf(w3[2])>=0) continue;
+          out.push(w3);
+        }
+      }
+    }
+  });
+  return out.slice(0,30);
+}
+
+function suitDisplayName(suit){
+  return {major:"大牌", wands:"權杖", cups:"聖杯", swords:"寶劍", pentacles:"錢幣"}[suit] || suit;
+}
+
+function buildMonthReflection(recordCount, topCards, topSuit, reversedRate, topWords){
+  var parts = [];
+  if(topCards.length && topCards[0].count >= 2){
+    parts.push("「"+escapeHtml(topCards[0].name)+"」本月出現最多，可以回頭看它分別落在哪些位置：它是在提醒同一個模式，還是在不同問題裡換裝登場？");
+  }else{
+    parts.push("本月牌卡分布還算分散，適合觀察每次占卜背後的問題脈絡，而不是急著找單一結論。");
+  }
+  if(topSuit){
+    parts.push("牌面能量以「"+suitDisplayName(topSuit.name)+"」較明顯，可留意這個月的焦點偏向"+suitHint(topSuit.name)+"。");
+  }
+  if(reversedRate >= 45){
+    parts.push("逆位比例偏高，建議覆盤時特別標記：哪些事情不是外界沒有答案，而是自己還沒準備好行動或承認。 ");
+  }else if(reversedRate <= 20){
+    parts.push("逆位比例偏低，這個月的訊息比較外顯，適合把直覺轉成具體行動清單。 ");
+  }
+  if(topWords.length){
+    parts.push("提問主題可作為月度主題索引，尤其是「"+escapeHtml(topWords[0].name)+"」這類反覆出現的字眼，可能就是你的內在書籤。");
+  }
+  return parts.join(" ");
+}
+
+function suitHint(suit){
+  return {
+    major:"人生階段、核心課題與較大的轉折",
+    wands:"行動力、熱情、創作與衝動",
+    cups:"情感、關係、需求與內在感受",
+    swords:"想法、判斷、溝通與焦慮",
+    pentacles:"現實資源、金錢、身體與穩定感"
+  }[suit] || "當下最常被觸發的主題";
+}
+
+
+document.getElementById("review-header").addEventListener("click", function(){
+  this.classList.toggle("open");
+  document.getElementById("review-body").classList.toggle("open");
+});
+
+/* ==========================================================================
+   月份切換
+   ========================================================================== */
+document.getElementById("cal-prev").addEventListener("click", function(){
+  state.calMonth--;
+  if(state.calMonth<0){ state.calMonth=11; state.calYear--; }
+  state.selectedDate = null;
+  renderCalendar(); renderDayRecords();
+});
+document.getElementById("cal-next").addEventListener("click", function(){
+  state.calMonth++;
+  if(state.calMonth>11){ state.calMonth=0; state.calYear++; }
+  state.selectedDate = null;
+  renderCalendar(); renderDayRecords();
+});
+
+/* ==========================================================================
+   載入所有紀錄
+   ========================================================================== */
+function loadAllRecords(){
+  return dbGetAll().then(function(recs){
+    state.allRecords = recs;
+    renderCalendar();
+  });
+}
+
+function deleteRecordAndRefresh(id, options){
+  options = options || {};
+  if(id === null || id === undefined || id === '' || String(id) === 'NaN'){
+    showToast("找不到要刪除的紀錄");
+    return Promise.resolve(false);
+  }
+
+  return dbDelete(id).then(function(deleted){
+    state.allRecords = state.allRecords.filter(function(r){ return !sameRecordId(recId(r), id); });
+    if(sameRecordId(state.currentDetailId, id)) state.currentDetailId = null;
+    return loadAllRecords().then(function(){ return deleted; });
+  }).then(function(deleted){
+    renderCalendar();
+    renderDayRecords();
+    if(options.backToCalendar) showView("view-calendar");
+    showToast(deleted ? "已刪除紀錄" : "沒有找到這筆紀錄，已重新整理畫面");
+    return deleted;
+  }).catch(function(err){
+    console.error(err);
+    showToast("刪除失敗：" + (err && err.message ? err.message : "請再試一次"));
+    return false;
+  });
+}
+
+/* ==========================================================================
+   新增紀錄頁
+   ========================================================================== */
+var spreadSelect = document.getElementById("add-spread");
+Object.keys(SPREADS).forEach(function(key){
+  var opt = document.createElement("option");
+  opt.value = key;
+  opt.textContent = SPREADS[key].name;
+  spreadSelect.appendChild(opt);
+});
+
+function setOnlineDrawLocked(locked){
+  var btn = document.getElementById("btn-start-draw");
+  if(btn){
+    btn.disabled = !!locked;
+    btn.classList.toggle("disabled", !!locked);
+    btn.setAttribute("aria-disabled", locked ? "true" : "false");
+    btn.textContent = locked ? "已儲存，無法重新抽牌" : "開始抽牌";
+  }
+}
+
+function resetOnlineDrawUi(){
+  drawSession = null;
+  state.pendingCards = null;
+  setOnlineDrawLocked(false);
+  var overlay = document.getElementById("draw-overlay");
+  if(overlay) overlay.classList.remove("active");
+  var confirmBtn = document.getElementById("btn-confirm-draw");
+  if(confirmBtn){ confirmBtn.disabled = false; confirmBtn.style.display = "none"; }
+  var reshuffleBtn = document.getElementById("btn-reshuffle");
+  if(reshuffleBtn) reshuffleBtn.disabled = false;
+  var revealBtn = document.getElementById("btn-reveal");
+  if(revealBtn){ revealBtn.disabled = false; revealBtn.style.display = "none"; }
+  var hint = document.getElementById("draw-hint");
+  if(hint) hint.textContent = "點擊下方牌堆，依序抽出所需的牌";
+  var tray = document.getElementById("draw-tray");
+  if(tray) tray.innerHTML = "";
+  var stage = document.getElementById("fan-stage");
+  if(stage) stage.innerHTML = "";
+  var onlineResult = document.getElementById("online-result");
+  if(onlineResult) onlineResult.innerHTML = "";
+}
+
+function resetAddForm(){
+  document.getElementById("add-date").value = state.selectedDate || todayStr();
+  document.getElementById("add-question").value = "";
+  document.getElementById("add-question").classList.remove("field-error");
+  var qErr = document.getElementById("add-question-error");
+  if(qErr) qErr.style.display = "none";
+  spreadSelect.value = "single";
+  state.currentMode = "manual";
+  state.drawMode = "noreplace";
+  state.pendingCards = null;
+  state.pendingPhoto = null;
+  state.pendingCroppedCards = {};
+  resetOnlineDrawUi();
+  updateSpreadHelp();
+  document.getElementById("mode-manual").classList.add("active");
+  document.getElementById("mode-online").classList.remove("active");
+  document.getElementById("manual-block").style.display = "block";
+  document.getElementById("online-block").style.display = "none";
+  document.getElementById("draw-noreplace").classList.add("active");
+  document.getElementById("draw-independent").classList.remove("active");
+  document.getElementById("photo-preview").style.display = "none";
+  document.getElementById("photo-preview").src = "";
+  document.getElementById("photo-input").value = "";
+  document.getElementById("crop-actions").style.display = "none";
+  document.getElementById("cropped-card-list").innerHTML = "";
+  document.getElementById("online-result").innerHTML = "";
+  renderManualCardSelects();
+}
+
+function openAddView(){
+  resetAddForm();
+  showView("view-add");
+}
+
+document.getElementById("btn-fab-add").addEventListener("click", openAddView);
+document.getElementById("btn-cancel-add").addEventListener("click", function(){ showView("view-calendar"); });
+
+document.getElementById("mode-manual").addEventListener("click", function(){
+  state.currentMode = "manual";
+  this.classList.add("active");
+  document.getElementById("mode-online").classList.remove("active");
+  document.getElementById("manual-block").style.display = "block";
+  document.getElementById("online-block").style.display = "none";
+});
+document.getElementById("mode-online").addEventListener("click", function(){
+  state.currentMode = "online";
+  this.classList.add("active");
+  document.getElementById("mode-manual").classList.remove("active");
+  document.getElementById("online-block").style.display = "block";
+  document.getElementById("manual-block").style.display = "none";
+});
+document.getElementById("draw-noreplace").addEventListener("click", function(){
+  state.drawMode = "noreplace";
+  this.classList.add("active");
+  document.getElementById("draw-independent").classList.remove("active");
+});
+document.getElementById("draw-independent").addEventListener("click", function(){
+  state.drawMode = "independent";
+  this.classList.add("active");
+  document.getElementById("draw-noreplace").classList.remove("active");
+});
+
+spreadSelect.addEventListener("change", function(){
+  updateSpreadHelp();
+  renderManualCardSelects();
+  document.getElementById("online-result").innerHTML = "";
+  state.pendingCards = null;
+});
+
+function eligibleNamesForRestriction(restriction){
+  if(restriction === "any") return ALL_CARD_NAMES;
+  return ALL_CARDS.filter(function(c){ return c.suit === restriction; }).map(function(c){return c.name;});
+}
+
+function updateSpreadHelp(){
+  var spread = SPREADS[spreadSelect.value];
+  var el = document.getElementById("spread-help");
+  if(!el || !spread) return;
+  el.innerHTML = '<strong>適用狀況：</strong>' + escapeHtml(spread.help || "");
+  renderSpreadPreview();
+}
+
+function renderSpreadPreview(){
+  var spread = SPREADS[spreadSelect.value];
+  var el = document.getElementById("spread-preview");
+  if(!el || !spread) return;
+  var cards = spread.positions.map(function(pos, idx){
+    var point = spread.layout && spread.layout[pos] ? spread.layout[pos] : [50,50];
+    var crossed = spreadSelect.value === "celtic" && pos === "挑戰";
+    return '<div class="spread-preview-card '+(crossed ? 'crossed' : '')+'" title="'+escapeHtml(pos)+'" style="left:'+point[0]+'%;top:'+point[1]+'%;">'+
+      '<div class="preview-back"><div class="num">'+(idx+1)+'</div></div>'+
+      '<div class="label">'+escapeHtml(pos)+'</div>'+
+    '</div>';
+  }).join("");
+  el.innerHTML = '<div class="spread-preview-title"><span>'+'牌陣預覽</span><span>'+spread.positions.length+' 張</span></div>'+
+    '<div class="spread-preview-board" data-spread="'+escapeHtml(spreadSelect.value)+'">'+cards+'</div>';
+  hardenTarotImageInteractions(el);
+}
+
+function renderManualCardSelects(){
+  var spread = SPREADS[spreadSelect.value];
+  var wrap = document.getElementById("manual-card-selects");
+  wrap.innerHTML = spread.positions.map(function(pos, idx){
+    var names = eligibleNamesForRestriction(spread.restriction[pos]);
+    var options = '<option value="">－ 選擇牌名 －</option>' + names.map(function(n){
+      return '<option value="'+n+'">'+n+'</option>';
+    }).join("");
+    return '<div class="card-select-row">'+
+      '<div class="pos-label">'+pos+'</div>'+
+      '<select style="flex:1;" data-pos-idx="'+idx+'" class="manual-card-name">'+options+'</select>'+
+      '<div class="orient-toggle" data-pos-idx="'+idx+'">'+
+        '<button type="button" class="orient-btn active" data-orient="upright">正</button>'+
+        '<button type="button" class="orient-btn" data-orient="reversed">逆</button>'+
+      '</div>'+
+    '</div>';
+  }).join("");
+
+  wrap.querySelectorAll(".orient-toggle").forEach(function(tg){
+    tg.querySelectorAll("button").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        tg.querySelectorAll("button").forEach(function(b){ b.classList.remove("active"); });
+        btn.classList.add("active");
+      });
+    });
+  });
+}
+
+// 照片上傳（壓縮）
+document.getElementById("photo-upload-trigger").addEventListener("click", function(){
+  document.getElementById("photo-input").click();
+});
+document.getElementById("photo-input").addEventListener("change", function(e){
+  var file = e.target.files[0];
+  if(!file) return;
+  compressImage(file, 1200, 0.8).then(function(dataUrl){
+    state.pendingPhoto = dataUrl;
+    var img = document.getElementById("photo-preview");
+    img.src = dataUrl;
+    img.style.display = "block";
+    document.getElementById("crop-actions").style.display = "grid";
+    state.pendingCroppedCards = {};
+    renderCroppedCardList();
+  }).catch(function(err){
+    showToast("圖片處理失敗");
+    console.error(err);
+  });
+});
+
+function compressImage(file, maxWidth, quality){
+  return new Promise(function(resolve, reject){
+    var reader = new FileReader();
+    reader.onload = function(e){
+      var img = new Image();
+      img.onload = function(){
+        var scale = Math.min(1, maxWidth / img.width);
+        var w = Math.round(img.width * scale);
+        var h = Math.round(img.height * scale);
+        var canvas = document.createElement("canvas");
+        canvas.width = w; canvas.height = h;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function requireAddQuestionBeforeDraw(){
+  var input = document.getElementById("add-question");
+  var error = document.getElementById("add-question-error");
+  if(input.value.trim()) {
+    input.classList.remove("field-error");
+    if(error) error.style.display = "none";
+    return true;
+  }
+  input.classList.add("field-error");
+  if(error) error.style.display = "block";
+  showToast("請先填寫想探索的問題");
+  input.scrollIntoView({behavior:"smooth", block:"center"});
+  setTimeout(function(){ input.focus(); }, 260);
+  return false;
+}
+
+document.getElementById("add-question").addEventListener("input", function(){
+  if(this.value.trim()){
+    this.classList.remove("field-error");
+    var error = document.getElementById("add-question-error");
+    if(error) error.style.display = "none";
+  }
+});
+
+/* ==========================================================================
+   線上抽牌（扇形鋪牌）
+   ========================================================================== */
+var drawSession = null; // {spread, positions, filled:[], remainingDeck}
+
+document.getElementById("btn-start-draw").addEventListener("click", function(){
+  if(this.disabled) return;
+  if(!requireAddQuestionBeforeDraw()) return;
+  var spread = SPREADS[spreadSelect.value];
+  drawSession = {
+    spread: spread,
+    filled: [], // {position, cardName, suit, orientation}
+    remainingDeck: shuffle(ALL_CARDS)
+  };
+  openDrawOverlay(spread);
+});
+
+function resetDrawSession(){
+  if(!drawSession) return;
+  var spread = drawSession.spread;
+  drawSession.filled = [];
+  drawSession.remainingDeck = shuffle(ALL_CARDS);
+  document.getElementById("btn-reveal").style.display = "none";
+  document.getElementById("btn-confirm-draw").style.display = "none";
+  document.getElementById("draw-hint").textContent = "已重新洗牌。深呼吸一下，再選擇讓你有感覺的牌";
+  document.getElementById("draw-tray").innerHTML = spread.positions.map(function(pos, idx){
+    return '<div class="tray-slot" id="tray-slot-'+idx+'"><span class="slot-label">'+pos+'</span></div>';
+  }).join("");
+  buildFan();
+  showToast("已重新洗牌");
+}
+
+document.getElementById("btn-reshuffle").addEventListener("click", resetDrawSession);
+
+function openDrawOverlay(spread){
+  document.getElementById("draw-title").textContent = spread.name + " ・ 請依序點選 "+spread.positions.length+" 張牌";
+  document.getElementById("draw-hint").textContent = "左右滑動瀏覽牌堆，保持專注後點擊卡背依序抽牌";
+  var revealBtn = document.getElementById("btn-reveal");
+  var confirmBtn = document.getElementById("btn-confirm-draw");
+  var reshuffleBtn = document.getElementById("btn-reshuffle");
+  if(revealBtn){ revealBtn.disabled = false; revealBtn.style.display = "none"; }
+  if(confirmBtn){ confirmBtn.disabled = false; confirmBtn.style.display = "none"; }
+  if(reshuffleBtn) reshuffleBtn.disabled = false;
+
+  // 建立牌堆槽位（tray）
+  var tray = document.getElementById("draw-tray");
+  tray.innerHTML = spread.positions.map(function(pos, idx){
+    return '<div class="tray-slot" id="tray-slot-'+idx+'"><span class="slot-label">'+pos+'</span></div>';
+  }).join("");
+
+  document.getElementById("draw-overlay").classList.add("active");
+  // overlay 顯示後再計算寬度，避免不同瀏覽器拿到 0 或錯誤寬度造成整排偏左。
+  requestAnimationFrame(function(){
+    buildFan();
+  });
+}
+
+function buildFan(){
+  var stage = document.getElementById("fan-stage");
+  var wrap = document.getElementById("fan-wrap");
+  // 橫式洗牌：78 張全部保留為可點擊牌背，改用水平滑動避免任何牌跑出畫面外。
+  var visualCount = drawSession && drawSession.remainingDeck ? drawSession.remainingDeck.length : 78;
+  var isSmall = window.innerWidth <= 720;
+  var cardW = isSmall ? 38 : 58;
+  var step = isSmall ? 15 : 23; // 數字越小，牌疊得越密。
+  var centerIndex = Math.floor(visualCount / 2);
+  var totalW = Math.max((visualCount - 1) * step + cardW, (wrap ? wrap.clientWidth - 100 : 320));
+  stage.style.width = totalW + "px";
+
+  var html = "";
+  for(var i=0;i<visualCount;i++){
+    var x = i * step;
+    var z = i + 1;
+    var lift = isSmall ? -10 : -14;
+    var transform = "translateX("+x.toFixed(2)+"px)";
+    var hover = "translate("+x.toFixed(2)+"px,"+lift+"px)";
+    var cls = "fan-card" + (i === centerIndex ? " center-card" : "");
+    html += '<div class="'+cls+'" data-fan-idx="'+i+'" style="z-index:'+z+';transform:'+transform+';--fan-transform-hover:'+hover+';"></div>';
+  }
+  stage.innerHTML = html;
+  hardenTarotImageInteractions(stage);
+  stage.querySelectorAll(".fan-card").forEach(function(card){
+    card.addEventListener("click", function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      onFanCardClick(card);
+    });
+  });
+  if(wrap) wrap.scrollLeft = Math.max(0, (stage.offsetWidth - wrap.clientWidth) / 2);
+}
+
+function onFanCardClick(cardEl){
+  if(!drawSession) return;
+  var idx = drawSession.filled.length;
+  if(idx >= drawSession.spread.positions.length) return; // 已抽滿
+  if(cardEl.classList.contains("used")) return;
+
+  var pos = drawSession.spread.positions[idx];
+  var restriction = drawSession.spread.restriction[pos];
+  var drawn = drawCardForPosition(restriction);
+  if(!drawn){ showToast("牌堆已無可用的牌"); return; }
+
+  var orientation = Math.random() < 0.5 ? "upright" : "reversed";
+  drawSession.filled.push({position:pos, cardName:drawn.name, suit:drawn.suit, orientation:orientation, cardImage:getRwsCardImage(drawn.name)});
+
+  cardEl.classList.add("used");
+
+  var slot = document.getElementById("tray-slot-"+idx);
+  slot.innerHTML = '<div class="tray-card" id="tray-card-'+idx+'">'+
+      '<div class="face back-face">🂠</div>'+
+      '<div class="face front-face">'+cardImageHtml(drawn.name, 'rws-tray-img', drawn.name)+'</div>'+
+    '</div><span class="slot-label">'+pos+'</span>';
+  hardenTarotImageInteractions(slot);
+
+  var remaining = drawSession.spread.positions.length - drawSession.filled.length;
+  if(remaining > 0){
+    document.getElementById("draw-hint").textContent = "還需抽 "+remaining+" 張，繼續點選牌堆";
+  }
+  if(drawSession.filled.length >= drawSession.spread.positions.length){
+    document.getElementById("draw-hint").textContent = "已抽滿所有位置，按下揭曉查看結果";
+    document.getElementById("btn-reveal").style.display = "inline-flex";
+  }
+}
+
+function drawCardForPosition(restriction){
+  var pool;
+  if(state.drawMode === "noreplace"){
+    pool = drawSession.remainingDeck.filter(function(c){
+      return restriction === "any" || c.suit === restriction;
+    });
+    if(pool.length === 0) return null;
+    var pick = pool[Math.floor(Math.random()*pool.length)];
+    var i = drawSession.remainingDeck.indexOf(pick);
+    drawSession.remainingDeck.splice(i,1);
+    return pick;
+  } else {
+    pool = ALL_CARDS.filter(function(c){
+      return restriction === "any" || c.suit === restriction;
+    });
+    return pool[Math.floor(Math.random()*pool.length)];
+  }
+}
+
+document.getElementById("btn-reveal").addEventListener("click", function(){
+  drawSession.filled.forEach(function(c, idx){
+    var el = document.getElementById("tray-card-"+idx);
+    el.classList.add("revealed");
+    if(c.orientation === "reversed") el.classList.add("reversed");
+    el.setAttribute("role", "button");
+    el.setAttribute("tabindex", "0");
+    el.setAttribute("title", "點擊查看放大牌面與簡易牌義");
+    function openTrayCard(e){
+      e.preventDefault();
+      e.stopPropagation();
+      openMeaningModal(c);
+    }
+    el.addEventListener("click", openTrayCard);
+    el.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " ") openTrayCard(e); });
+  });
+  document.getElementById("draw-hint").textContent = "揭曉完成，確認後即可帶回紀錄";
+  document.getElementById("btn-reveal").style.display = "none";
+  document.getElementById("btn-confirm-draw").style.display = "inline-flex";
+});
+
+document.getElementById("btn-confirm-draw").addEventListener("click", function(){
+  if(!drawSession || !drawSession.filled || drawSession.filled.length === 0) return;
+  var confirmBtn = this;
+  confirmBtn.disabled = true;
+  state.currentMode = "online";
+  state.pendingCards = drawSession.filled.map(function(c){
+    return {position:c.position, cardName:c.cardName, orientation:c.orientation, cardImage:c.cardImage || getRwsCardImage(c.cardName)};
+  });
+  setOnlineDrawLocked(true);
+  document.getElementById("btn-reshuffle").disabled = true;
+  document.getElementById("btn-reveal").style.display = "none";
+  document.getElementById("draw-hint").textContent = "正在儲存紀錄……";
+  renderOnlineResultSummary();
+  document.getElementById("draw-overlay").classList.remove("active");
+  saveCurrentAddRecord({fromDraw:true}).then(function(ok){
+    if(!ok){
+      confirmBtn.disabled = false;
+      document.getElementById("btn-reshuffle").disabled = false;
+      setOnlineDrawLocked(false);
+    }
+  });
+});
+
+document.getElementById("draw-close").addEventListener("click", function(){
+  document.getElementById("draw-overlay").classList.remove("active");
+});
+window.addEventListener("resize", function(){
+  if(document.getElementById("draw-overlay").classList.contains("active")){
+    buildFan();
+  }
+});
+
+function renderOnlineResultSummary(){
+  var wrap = document.getElementById("online-result");
+  if(!state.pendingCards){ wrap.innerHTML = ""; return; }
+  wrap.innerHTML = '<div class="section-label" style="margin-top:0;">已抽出的牌</div>' +
+    '<div class="source-note">牌圖來源：sacred-texts Rider-Waite / Pamela-A 圖庫，線上模式會以網路圖片顯示。</div>' +
+    state.pendingCards.map(function(c, idx){
+      var rev = c.orientation === "reversed";
+      return '<div class="summary-card-row '+(rev ? 'reversed' : '')+'" data-summary-card-idx="'+idx+'" role="button" tabindex="0" title="點擊查看放大牌面與簡易牌義">'+
+        '<div class="summary-card-thumb">'+cardImageHtml(c.cardName, 'rws-summary-img', c.cardName)+'</div>'+
+        '<div class="summary-card-main"><div class="pos-name">'+escapeHtml(c.position)+'：'+escapeHtml(c.cardName)+'</div>'+
+        '<div class="src-note">Rider-Waite 網路牌圖</div></div>'+
+        '<span class="count">'+(rev ? "逆位" : "正位")+'</span></div>';
+    }).join("");
+  hardenTarotImageInteractions(wrap);
+  wrap.querySelectorAll(".summary-card-row[data-summary-card-idx]").forEach(function(row){
+    function openFromRow(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var idx = parseInt(row.getAttribute("data-summary-card-idx"), 10);
+      if(state.pendingCards && state.pendingCards[idx]) openMeaningModal(state.pendingCards[idx]);
+    }
+    row.addEventListener("click", openFromRow);
+    row.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " ") openFromRow(e); });
+  });
+}
+
+
+window.addEventListener("resize", function(){
+  if(document.getElementById("draw-overlay").classList.contains("active")){
+    clearTimeout(window.__tarotFanResizeTimer);
+    window.__tarotFanResizeTimer = setTimeout(buildFan, 120);
+  }
+});
+
+/* ==========================================================================
+   儲存紀錄
+   ========================================================================== */
+function saveCurrentAddRecord(options){
+  options = options || {};
+  var date = document.getElementById("add-date").value || todayStr();
+  var question = document.getElementById("add-question").value.trim();
+  var spreadType = spreadSelect.value;
+  var mode = state.currentMode;
+
+  var cards = [];
+  var photo = null;
+
+  if(mode === "manual"){
+    var rows = document.querySelectorAll("#manual-card-selects .card-select-row");
+    var spread = SPREADS[spreadType];
+    var ok = true;
+    rows.forEach(function(row, idx){
+      var sel = row.querySelector(".manual-card-name");
+      var name = sel.value;
+      if(!name){ ok = false; }
+      var activeOrientBtn = row.querySelector(".orient-btn.active");
+      var orientation = activeOrientBtn ? activeOrientBtn.getAttribute("data-orient") : "upright";
+      cards.push({position: spread.positions[idx], cardName: name, orientation: orientation, cardImage: state.pendingCroppedCards[idx] || null});
+    });
+    if(!ok){
+      showToast("請完整選擇每個位置的牌名");
+      return Promise.resolve(false);
+    }
+    photo = state.pendingPhoto || null;
+  } else {
+    if(!state.pendingCards || state.pendingCards.length === 0){
+      showToast("請先完成線上抽牌");
+      return Promise.resolve(false);
+    }
+    cards = state.pendingCards;
+  }
+
+  var record = {
+    date: date,
+    question: question,
+    spreadType: spreadType,
+    mode: mode,
+    photo: photo,
+    cards: cards,
+    thoughts: "",
+    aiReading: "",
+    followUp: "",
+    createdAt: Date.now()
+  };
+
+  return dbAdd(record).then(function(newId){
+    return loadAllRecords().then(function(){
+      showToast(options.fromDraw ? "已儲存紀錄，抽牌結果已鎖定" : "紀錄已儲存");
+      openDetail(newId);
+      return true;
+    });
+  }).catch(function(err){
+    console.error(err);
+    showToast("儲存失敗，請再試一次");
+    return false;
+  });
+}
+
+document.getElementById("btn-save-record").addEventListener("click", function(){
+  saveCurrentAddRecord();
+});
+
+/* ==========================================================================
+   紀錄與覺察頁
+   ========================================================================== */
+function openDetail(id){
+  state.currentDetailId = id;
+  var rec = state.allRecords.find(function(r){ return sameRecordId(recId(r), id); });
+  if(!rec){
+    dbGetAll().then(function(all){
+      state.allRecords = all;
+      rec = all.find(function(r){ return sameRecordId(recId(r), id); });
+      if(rec) renderDetail(rec);
+    });
+    return;
+  }
+  renderDetail(rec);
+}
+
+function renderDetail(rec){
+  var spread = SPREADS[rec.spreadType] || {name:rec.spreadType, positions:[]};
+  document.getElementById("detail-meta").innerHTML =
+    '<div class="q-label">'+PH('target')+' 我想探索的問題</div>'+
+    '<div class="q">'+escapeHtml(rec.question || "（未填寫問題）")+'</div>'+
+    '<div class="tags"><span>'+rec.date+'</span><span>'+spread.name+'</span>'+
+    '<span>'+(rec.mode==="manual"?"手動輸入":"線上抽牌")+'</span></div>';
+
+  var photoEl = document.getElementById("detail-photo");
+  if(rec.photo){
+    photoEl.src = rec.photo;
+    photoEl.style.display = "block";
+  } else {
+    photoEl.style.display = "none";
+  }
+
+  var grid = document.getElementById("detail-cards");
+  grid.className = "spread-layout";
+  grid.setAttribute("data-spread", rec.spreadType);
+  var layout = spread.layout || {};
+  grid.innerHTML = rec.cards.map(function(c, idx){
+    var reversedClass = c.orientation === "reversed" ? " reversed" : "";
+    var pt = layout[c.position] || defaultLayoutPoint(idx, rec.cards.length);
+    var extraStyle = '';
+    if(rec.spreadType === "celtic" && c.position === "挑戰") extraStyle = ' rotate(90deg)';
+    var imageSrc = c.cardImage || getRwsCardImage(c.cardName);
+    var thumb = imageSrc ? bgImageHtml(imageSrc, "rws-tile-img", c.cardName) : '<div class="art">'+PH('sparkle')+'</div>';
+    return '<div class="card-tile'+reversedClass+'" data-card-idx="'+idx+'" style="left:'+pt[0]+'%;top:'+pt[1]+'%;transform:translate(-50%,-50%)'+extraStyle+';">'+
+      '<div class="pos">'+escapeHtml(c.position)+'</div>'+
+      thumb+
+      '<div class="name">'+escapeHtml(c.cardName)+'</div>'+
+      '<div class="orient">'+(c.orientation==="reversed"?"逆位":"正位")+'</div>'+
+    '</div>';
+  }).join("");
+  hardenTarotImageInteractions(grid);
+
+  grid.querySelectorAll(".card-tile").forEach(function(tile){
+    tile.addEventListener("click", function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var idx = parseInt(tile.getAttribute("data-card-idx"));
+      openMeaningModal(rec.cards[idx]);
+    });
+  });
+
+  document.getElementById("detail-thoughts").value = rec.thoughts || "";
+  document.getElementById("detail-ai-reading").value = rec.aiReading || "";
+  document.getElementById("detail-follow-up").value = rec.followUp || "";
+  document.getElementById("detail-edit-panel").style.display = "none";
+  document.getElementById("btn-edit-record").style.display = "inline-flex";
+  showView("view-detail");
+}
+
+function openDetailEdit(){
+  if(state.currentDetailId == null) return;
+  var rec = state.allRecords.find(function(r){ return sameRecordId(recId(r), state.currentDetailId); });
+  if(!rec) return;
+  document.getElementById("edit-date").value = rec.date || todayStr();
+  document.getElementById("edit-question").value = rec.question || "";
+  document.getElementById("detail-edit-panel").style.display = "block";
+  document.getElementById("btn-edit-record").style.display = "none";
+  document.getElementById("edit-question").focus();
+}
+
+function closeDetailEdit(){
+  document.getElementById("detail-edit-panel").style.display = "none";
+  document.getElementById("btn-edit-record").style.display = "inline-flex";
+}
+
+document.getElementById("btn-edit-record").addEventListener("click", openDetailEdit);
+document.getElementById("btn-cancel-edit").addEventListener("click", closeDetailEdit);
+document.getElementById("btn-save-edit").addEventListener("click", function(){
+  if(state.currentDetailId == null) return;
+  var rec = state.allRecords.find(function(r){ return sameRecordId(recId(r), state.currentDetailId); });
+  if(!rec) return;
+  rec.date = document.getElementById("edit-date").value || todayStr();
+  rec.question = document.getElementById("edit-question").value.trim();
+  rec.updatedAt = Date.now();
+  dbPut(rec).then(function(){
+    return loadAllRecords();
+  }).then(function(){
+    var fresh = state.allRecords.find(function(r){ return sameRecordId(recId(r), state.currentDetailId); }) || rec;
+    showToast("問題已更新");
+    renderDetail(fresh);
+    renderDayRecords();
+  }).catch(function(err){
+    console.error(err);
+    showToast("修改失敗，請再試一次");
+  });
+});
+
+function defaultLayoutPoint(idx, total){
+  if(total <= 1) return [50,50];
+  var angle = -90 + (360 / total) * idx;
+  var rad = angle * Math.PI / 180;
+  return [50 + Math.cos(rad)*30, 50 + Math.sin(rad)*30];
+}
+
+function renderCroppedCardList(){
+  var wrap = document.getElementById("cropped-card-list");
+  var spread = SPREADS[spreadSelect.value];
+  if(!wrap || !spread) return;
+  var items = spread.positions.map(function(pos, idx){
+    var img = state.pendingCroppedCards[idx];
+    if(!img) return '';
+    return '<div class="cropped-card-item"><img src="'+img+'"><div>'+escapeHtml(pos)+'</div></div>';
+  }).join('');
+  wrap.innerHTML = items;
+}
+
+function getCropPositionsForSpread(){
+  var spread = SPREADS[spreadSelect.value];
+  var positions = spread.positions;
+  var layout = spread.layout || {};
+  return positions.map(function(pos, idx){
+    return {pos:pos, idx:idx, point:layout[pos] || defaultLayoutPoint(idx, positions.length)};
+  });
+}
+
+function autoCropBySpread(){
+  if(!state.pendingPhoto){ showToast("請先上傳牌陣照片"); return; }
+  var img = new Image();
+  img.onload = function(){
+    var w = img.naturalWidth, h = img.naturalHeight;
+    var cropW = Math.round(Math.min(w, h) * 0.18);
+    var cropH = Math.round(cropW * 1.48);
+    getCropPositionsForSpread().forEach(function(item){
+      var cx = w * item.point[0] / 100, cy = h * item.point[1] / 100;
+      state.pendingCroppedCards[item.idx] = cropFromImage(img, cx-cropW/2, cy-cropH/2, cropW, cropH);
+    });
+    renderCroppedCardList();
+    showToast("已依牌陣位置預估裁切，可再手動微調");
+  };
+  img.src = state.pendingPhoto;
+}
+
+function cropFromImage(img, sx, sy, sw, sh){
+  sx = Math.max(0, Math.min(img.naturalWidth-1, sx));
+  sy = Math.max(0, Math.min(img.naturalHeight-1, sy));
+  sw = Math.max(10, Math.min(img.naturalWidth - sx, sw));
+  sh = Math.max(10, Math.min(img.naturalHeight - sy, sh));
+  var canvas = document.createElement("canvas");
+  canvas.width = 420; canvas.height = 630;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
+  return canvas.toDataURL("image/jpeg", 0.78);
+}
+
+var cropState = {drag:false, resize:false, startX:0, startY:0, box:{x:20,y:20,w:120,h:180}};
+function openCropModal(idx){
+  if(!state.pendingPhoto){ showToast("請先上傳牌陣照片"); return; }
+  state.cropIndex = idx || 0;
+  var img = document.getElementById("crop-img");
+  img.onload = function(){ resetCropBoxByLayout(); };
+  img.src = state.pendingPhoto;
+  document.getElementById("crop-modal").classList.add("active");
+  updateCropTitle();
+}
+function updateCropTitle(){
+  var spread = SPREADS[spreadSelect.value];
+  var pos = spread.positions[state.cropIndex];
+  document.getElementById("crop-title").textContent = "裁切牌卡：" + pos;
+  document.getElementById("crop-guide").textContent = "第 " + (state.cropIndex+1) + " / " + spread.positions.length + " 張。拖曳框框對準牌卡，拉右下角調整大小。";
+}
+function resetCropBoxByLayout(){
+  var img = document.getElementById("crop-img");
+  var rect = img.getBoundingClientRect();
+  var item = getCropPositionsForSpread()[state.cropIndex];
+  var bw = Math.min(rect.width * 0.22, 130);
+  var bh = bw * 1.48;
+  cropState.box = {x:rect.width*item.point[0]/100-bw/2, y:rect.height*item.point[1]/100-bh/2, w:bw, h:bh};
+  applyCropBox();
+}
+function applyCropBox(){
+  var b = cropState.box, img = document.getElementById("crop-img");
+  var rect = img.getBoundingClientRect();
+  b.w = Math.max(44, Math.min(rect.width - b.x, b.w));
+  b.h = Math.max(66, Math.min(rect.height - b.y, b.h));
+  b.x = Math.max(0, Math.min(rect.width - b.w, b.x));
+  b.y = Math.max(0, Math.min(rect.height - b.h, b.y));
+  var el = document.getElementById("crop-box");
+  el.style.left = b.x + "px"; el.style.top = b.y + "px"; el.style.width = b.w + "px"; el.style.height = b.h + "px";
+}
+function saveCurrentCrop(){
+  var imgEl = document.getElementById("crop-img");
+  var source = new Image();
+  source.onload = function(){
+    var rect = imgEl.getBoundingClientRect();
+    var scaleX = source.naturalWidth / rect.width;
+    var scaleY = source.naturalHeight / rect.height;
+    var b = cropState.box;
+    state.pendingCroppedCards[state.cropIndex] = cropFromImage(source, b.x*scaleX, b.y*scaleY, b.w*scaleX, b.h*scaleY);
+    renderCroppedCardList();
+    showToast("已存入這張牌卡截圖");
+  };
+  source.src = state.pendingPhoto;
+}
+function moveCrop(delta){
+  var spread = SPREADS[spreadSelect.value];
+  state.cropIndex = (state.cropIndex + delta + spread.positions.length) % spread.positions.length;
+  updateCropTitle();
+  resetCropBoxByLayout();
+}
+
+document.getElementById("btn-auto-crop").addEventListener("click", autoCropBySpread);
+document.getElementById("btn-open-crop").addEventListener("click", function(){ openCropModal(0); });
+document.getElementById("crop-close").addEventListener("click", function(){ document.getElementById("crop-modal").classList.remove("active"); });
+document.getElementById("crop-prev").addEventListener("click", function(){ saveCurrentCrop(); setTimeout(function(){ moveCrop(-1); }, 60); });
+document.getElementById("crop-next").addEventListener("click", function(){ saveCurrentCrop(); setTimeout(function(){ moveCrop(1); }, 60); });
+document.getElementById("crop-save-next").addEventListener("click", function(){ saveCurrentCrop(); });
+
+(function setupCropDrag(){
+  var box = document.getElementById("crop-box");
+  function pos(e){ var t=e.touches?e.touches[0]:e; return {x:t.clientX,y:t.clientY}; }
+  box.addEventListener("pointerdown", function(e){
+    var r = box.getBoundingClientRect();
+    cropState.resize = (e.clientX > r.right - 24 && e.clientY > r.bottom - 24);
+    cropState.drag = !cropState.resize; cropState.startX=e.clientX; cropState.startY=e.clientY; box.setPointerCapture(e.pointerId);
+  });
+  box.addEventListener("pointermove", function(e){
+    if(!cropState.drag && !cropState.resize) return;
+    var dx=e.clientX-cropState.startX, dy=e.clientY-cropState.startY; cropState.startX=e.clientX; cropState.startY=e.clientY;
+    if(cropState.resize){ cropState.box.w += dx; cropState.box.h += dy; } else { cropState.box.x += dx; cropState.box.y += dy; }
+    applyCropBox();
+  });
+  box.addEventListener("pointerup", function(){ cropState.drag=false; cropState.resize=false; });
+})();
+
+function bindAutoSaveTextarea(elementId, recordKey){
+  var el = document.getElementById(elementId);
+  if(!el) return;
+  el.addEventListener("change", function(){
+    if(state.currentDetailId == null) return;
+    var rec = state.allRecords.find(function(r){ return sameRecordId(recId(r), state.currentDetailId); });
+    if(!rec) return;
+    rec[recordKey] = this.value;
+    rec.updatedAt = Date.now();
+    dbPut(rec).then(function(){
+      return loadAllRecords();
+    }).then(function(){
+      showToast("已自動儲存");
+    });
+  });
+}
+bindAutoSaveTextarea("detail-thoughts", "thoughts");
+bindAutoSaveTextarea("detail-ai-reading", "aiReading");
+bindAutoSaveTextarea("detail-follow-up", "followUp");
+
+document.getElementById("btn-back-calendar").addEventListener("click", function(){ showView("view-calendar"); });
+
+document.getElementById("btn-delete-record").addEventListener("click", function(e){
+  e.preventDefault();
+  if(state.currentDetailId == null) return;
+  if(!confirm("確定要刪除這筆占卜紀錄嗎？此動作無法復原。")) return;
+  deleteRecordAndRefresh(state.currentDetailId, {backToCalendar:true});
+});
+
+
+// 全域保險：即使按到 SVG path/use，刪除事件仍會被正確攔截。
+document.addEventListener("click", function(e){
+  var listDel = e.target.closest && e.target.closest("[data-del]");
+  if(listDel){
+    e.preventDefault();
+    e.stopPropagation();
+    if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+    var id = listDel.getAttribute("data-del");
+    if(confirm("確定要刪除這筆占卜紀錄嗎？此動作無法復原。")){
+      deleteRecordAndRefresh(id);
+    }
+    return;
+  }
+  var detailDel = e.target.closest && e.target.closest("#btn-delete-record");
+  if(detailDel){
+    e.preventDefault();
+    e.stopPropagation();
+    if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+    if(state.currentDetailId == null) return;
+    if(confirm("確定要刪除這筆占卜紀錄嗎？此動作無法復原。")){
+      deleteRecordAndRefresh(state.currentDetailId, {backToCalendar:true});
+    }
+  }
+}, true);
+
+/* ---------- 牌義彈窗 ---------- */
+function openMeaningModal(card){
+  document.getElementById("meaning-card-name").textContent = card.cardName;
+  document.getElementById("meaning-orient").textContent = card.orientation === "reversed" ? "逆位" : "正位";
+  var imageSrc = card.cardImage || getRwsCardImage(card.cardName);
+  var preview = document.getElementById("meaning-card-preview");
+  preview.innerHTML = imageSrc ? bgImageHtml(imageSrc, "meaning-card-large" + (card.orientation === "reversed" ? " reversed" : ""), card.cardName + " 放大牌面") : '<div class="tarot-img-fallback">'+PH('sparkle')+'</div>';
+  hardenTarotImageInteractions(preview);
+  var meaning = CARD_MEANINGS[card.cardName];
+  var text = meaning ? (card.orientation === "reversed" ? meaning.reversed : meaning.upright) : DEFAULT_MEANING;
+  document.getElementById("meaning-text").textContent = text;
+  document.getElementById("meaning-modal").classList.add("active");
+}
+document.getElementById("meaning-close").addEventListener("click", function(){
+  document.getElementById("meaning-modal").classList.remove("active");
+});
+document.getElementById("meaning-modal").addEventListener("click", function(e){
+  if(e.target === this) this.classList.remove("active");
+});
+
+/* ---------- 複製提示詞問 AI ---------- */
+document.getElementById("btn-copy-prompt").addEventListener("click", function(){
+  if(state.currentDetailId == null) return;
+  var rec = state.allRecords.find(function(r){ return sameRecordId(recId(r), state.currentDetailId); });
+  if(!rec) return;
+  var spread = SPREADS[rec.spreadType] || {name:rec.spreadType};
+  var lines = [];
+  lines.push("【占卜日期】"+rec.date);
+  lines.push("【我想探索的問題】"+(rec.question || "（未填寫）"));
+  lines.push("【使用牌陣】"+spread.name);
+  lines.push("【抽到的牌】");
+  rec.cards.forEach(function(c){
+    lines.push("- "+c.position+"："+c.cardName+"（"+(c.orientation==="reversed"?"逆位":"正位")+"）");
+  });
+  lines.push("【我的覺察筆記：當下想法與第一直覺】");
+  lines.push(rec.thoughts && rec.thoughts.trim() ? rec.thoughts.trim() : "（尚未填寫）");
+  lines.push("");
+  lines.push("請根據以上塔羅牌陣，幫我做深入的解讀與分析。請包含：牌義解讀、可能忽略的盲點、可實驗的行動，以及值得後續驗證的觀察點。");
+  var text = lines.join("\n");
+
+  copyToClipboard(text).then(function(){
+    showToast("已複製提示詞，可貼到你常用的 AI 對話中");
+  }).catch(function(){
+    showToast("複製失敗，請手動選取文字");
+  });
+});
+
+function copyToClipboard(text){
+  return new Promise(function(resolve, reject){
+    function fallback(){
+      try{
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.top = "0";
+        ta.style.left = "0";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        var ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        if(ok){ resolve(); } else { reject(new Error("execCommand copy failed")); }
+      }catch(err){
+        reject(err);
+      }
+    }
+    // file:// 開啟時瀏覽器通常視為非安全來源，navigator.clipboard 會被拒絕，
+    // 因此優先嘗試 Clipboard API，失敗時一律退回 execCommand 方式。
+    if(window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(resolve).catch(fallback);
+    } else {
+      fallback();
+    }
+  });
+}
+
+/* ==========================================================================
+   設定頁：匯出／匯入
+   ========================================================================== */
+document.getElementById("btn-settings").addEventListener("click", function(){
+  showView("view-settings");
+  renderStoragePathInfo();
+});
+document.getElementById("btn-settings-back").addEventListener("click", function(){ showView("view-calendar"); });
+
+function renderStoragePathInfo(){
+  var el = document.getElementById("storage-path-info");
+  var origin = location.protocol === "file:" ? ("本機檔案：" + location.pathname.split("/").pop()) : location.origin;
+  var lines = [];
+  lines.push("來源（origin）：" + origin);
+  lines.push("資料庫名稱：" + DB_NAME + "（IndexedDB，第 " + DB_VERSION + " 版）");
+  el.textContent = lines.join("　｜　");
+
+  if(navigator.storage && navigator.storage.estimate){
+    navigator.storage.estimate().then(function(est){
+      var usedMB = ((est.usage||0)/1024/1024).toFixed(2);
+      var quotaMB = ((est.quota||0)/1024/1024).toFixed(0);
+      el.textContent += "　｜　目前已使用約 " + usedMB + " MB（瀏覽器配額約 " + quotaMB + " MB）";
+    }).catch(function(){});
+  }
+}
+
+document.getElementById("btn-clear-all").addEventListener("click", function(){
+  if(!confirm("即將刪除所有占卜紀錄與照片，且無法復原。確定要繼續嗎？")) return;
+  if(!confirm("再次確認：真的要清除全部資料嗎？建議先前往「匯出 JSON 備份」保存。")) return;
+  dbClearAll().then(function(){
+    return loadAllRecords();
+  }).then(function(){
+    state.selectedDate = null;
+    renderDayRecords();
+    showToast("已清除所有資料");
+  }).catch(function(err){
+    console.error(err);
+    showToast("清除失敗，請再試一次");
+  });
+});
+
+document.getElementById("btn-export").addEventListener("click", function(e){
+  if(e){ e.preventDefault(); e.stopPropagation(); }
+  dbGetAll().then(function(all){
+    var payload = {
+      app: "塔羅覺察日誌",
+      exportedAt: new Date().toISOString(),
+      records: all
+    };
+    var json = JSON.stringify(payload, null, 2);
+    var blob = new Blob([json], {type:"application/json"});
+
+    var filename;
+    if(all.length === 0){
+      filename = "tarot_journal_"+todayStr().replace(/-/g,"")+".json";
+    }else{
+      var dates = all.map(function(r){return r.date;}).sort();
+      var min = dates[0].replace(/-/g,"");
+      var max = dates[dates.length-1].replace(/-/g,"");
+      filename = "tarot_journal_"+min+"~"+max+".json";
+    }
+
+    // 優先使用一般下載；若瀏覽器擋掉，也會留下可手動點擊的備用連結。
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.textContent = "下載剛剛匯出的 JSON 備份：" + filename;
+    a.style.display = "block";
+    a.style.marginTop = "10px";
+    a.style.color = "var(--gold-bright)";
+    a.setAttribute("data-export-link", "true");
+
+    var old = document.querySelector("[data-export-link]");
+    if(old && old.parentNode) old.parentNode.removeChild(old);
+    document.getElementById("btn-export").insertAdjacentElement("afterend", a);
+
+    if(window.navigator && window.navigator.msSaveOrOpenBlob){
+      window.navigator.msSaveOrOpenBlob(blob, filename);
+    }else{
+      a.click();
+    }
+    showToast("已建立備份檔：" + filename + "。通常會在瀏覽器的下載資料夾。若沒跳出下載，請點下方連結。");
+  }).catch(function(err){
+    console.error(err);
+    showToast("匯出失敗：" + (err && err.message ? err.message : "請再試一次"));
+  });
+});
+
+document.getElementById("btn-import").addEventListener("click", function(){
+  document.getElementById("import-input").click();
+});
+document.getElementById("import-input").addEventListener("change", function(e){
+  var file = e.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(evt){
+    try{
+      var data = JSON.parse(evt.target.result);
+      var records = data.records || [];
+      if(!Array.isArray(records) || records.length === 0){
+        showToast("備份檔中沒有可匯入的紀錄");
+        return;
+      }
+      var chain = Promise.resolve();
+      records.forEach(function(r){
+        var clean = {
+          date: r.date, question: r.question, spreadType: r.spreadType,
+          mode: r.mode, photo: r.photo || null, cards: (r.cards || []).map(function(c){ return {position:c.position, cardName:c.cardName, orientation:c.orientation || "upright", cardImage:c.cardImage || null}; }),
+          thoughts: r.thoughts || "", aiReading: r.aiReading || "", followUp: r.followUp || "", createdAt: r.createdAt || Date.now()
+        };
+        chain = chain.then(function(){ return dbAdd(clean); });
+      });
+      chain.then(function(){
+        return loadAllRecords();
+      }).then(function(){
+        showToast("已匯入 "+records.length+" 筆紀錄");
+        document.getElementById("import-input").value = "";
+      });
+    }catch(err){
+      console.error(err);
+      showToast("備份檔格式錯誤，無法匯入");
+    }
+  };
+  reader.readAsText(file);
+});
+
+
+document.getElementById("btn-month-review-add").addEventListener("click", function(){
+  document.getElementById("add-date").value = todayStr();
+  document.getElementById("add-question").value = "這個月我最需要回顧、整理與帶走的提醒是什麼？";
+  spreadSelect.value = "smallcross";
+  updateSpreadUI();
+  state.currentMode = "manual";
+  document.getElementById("mode-manual").classList.add("active");
+  document.getElementById("mode-online").classList.remove("active");
+  document.getElementById("manual-block").style.display = "block";
+  document.getElementById("online-block").style.display = "none";
+  showView("view-add");
+  showToast("已帶入月末回顧問題");
+});
+
+/* ==========================================================================
+   初始化
+   ========================================================================== */
+function initializeCalendarOpenState(){
+  // 初次直接開啟檔案時，先把今天設為選取日，再渲染當日紀錄。
+  // 否則只有月曆格被畫出來，下面的「當日紀錄」區會保持收合，
+  // 需要手動切換月份才會重新觸發 renderDayRecords。
+  var initialDate = state.selectedDate || todayStr();
+  state.selectedDate = initialDate;
+  var parsed = parseDate(initialDate);
+  if(parsed && !isNaN(parsed.getTime())){
+    state.calYear = parsed.getFullYear();
+    state.calMonth = parsed.getMonth();
+  }
+  renderCalendar();
+  renderDayRecords();
+}
+
+document.getElementById("add-date").value = todayStr();
+loadAllRecords().then(function(){
+  initializeCalendarOpenState();
+}).catch(function(err){
+  console.error(err);
+  initializeCalendarOpenState();
+});
+
+})();
+</script>
+</body>
+</html>
