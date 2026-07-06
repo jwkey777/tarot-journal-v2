@@ -1384,6 +1384,23 @@ function cardImageHtml(cardName, cls, alt){
   return bgImageHtml(src, cls || "rws-card-img", alt || cardName || "Rider-Waite Tarot card");
 }
 
+// 圖片來源判斷：線上 Rider-Waite 牌圖才需要依逆位旋轉；
+// 手動拍照／裁切的圖片已經保留當下桌面方向，不能再 rotate，否則逆位會被轉正。
+function isManualCardImage(card){
+  if(!card) return false;
+  if(card.cardImageSource === "manual") return true;
+  if(card.cardImageSource === "rws" || card.cardImageSource === "online") return false;
+  var src = card.cardImage || "";
+  return /^data:image\//.test(src);
+}
+function shouldRotateCardImage(card){
+  return !!card && card.orientation === "reversed" && !isManualCardImage(card);
+}
+function normalizedCardImageSource(src, fallback){
+  if(/^data:image\//.test(src || "")) return "manual";
+  return fallback || (src ? "rws" : "");
+}
+
 function tarotSafeAreaSelector(){
   return ".rws-card-img,.rws-tray-img,.rws-tile-img,.rws-preview-img,.rws-summary-img,.meaning-card-large,.meaning-card-preview,.spread-preview-board,.spread-layout,.draw-tray,.card-tile,.tray-card,.preview-card,.summary-card-thumb,#meaning-modal";
 }
@@ -2978,7 +2995,7 @@ function onFanCardClick(cardEl){
   if(!drawn){ showToast("牌堆已無可用的牌"); return; }
 
   var orientation = Math.random() < 0.5 ? "upright" : "reversed";
-  drawSession.filled.push({position:pos, cardName:drawn.name, suit:drawn.suit, orientation:orientation, cardImage:getRwsCardImage(drawn.name)});
+  drawSession.filled.push({position:pos, cardName:drawn.name, suit:drawn.suit, orientation:orientation, cardImage:getRwsCardImage(drawn.name), cardImageSource:"rws"});
 
   if(state.drawMode === "noreplace"){
     cardEl.classList.add("used");
@@ -3063,7 +3080,7 @@ document.getElementById("btn-confirm-draw").addEventListener("click", function()
   confirmBtn.disabled = true;
   state.currentMode = "online";
   state.pendingCards = drawSession.filled.map(function(c){
-    return {position:c.position, cardName:c.cardName, orientation:c.orientation, cardImage:c.cardImage || getRwsCardImage(c.cardName)};
+    return {position:c.position, cardName:c.cardName, orientation:c.orientation, cardImage:c.cardImage || getRwsCardImage(c.cardName), cardImageSource:c.cardImageSource || "rws"};
   });
   setOnlineDrawLocked(true);
   document.getElementById("btn-reshuffle").disabled = true;
@@ -3146,7 +3163,7 @@ function saveCurrentAddRecord(options){
       if(!name){ ok = false; }
       var activeOrientBtn = row.querySelector(".orient-btn.active");
       var orientation = activeOrientBtn ? activeOrientBtn.getAttribute("data-orient") : "upright";
-      cards.push({position: spread.positions[idx], cardName: name, orientation: orientation, cardImage: state.pendingCroppedCards[idx] || null});
+      cards.push({position: spread.positions[idx], cardName: name, orientation: orientation, cardImage: state.pendingCroppedCards[idx] || null, cardImageSource: state.pendingCroppedCards[idx] ? "manual" : ""});
     });
     if(!ok){
       showToast("請完整選擇每個位置的牌名");
@@ -3231,7 +3248,7 @@ function renderDetail(rec){
   if(celticHint) celticHint.style.display = rec.spreadType === "celtic" ? "block" : "none";
   var layout = spread.layout || {};
   grid.innerHTML = rec.cards.map(function(c, idx){
-    var reversedClass = c.orientation === "reversed" ? " reversed" : "";
+    var reversedClass = shouldRotateCardImage(c) ? " reversed" : "";
     var pt = layout[c.position] || defaultLayoutPoint(idx, rec.cards.length);
     var extraStyle = '';
     if(rec.spreadType === "celtic" && (c.position === "橫在你眼前的事" || c.position === "挑戰")) extraStyle = ' rotate(90deg)';
@@ -3528,7 +3545,7 @@ function openMeaningModal(card){
   }
   var imageSrc = card.cardImage || getRwsCardImage(card.cardName);
   var preview = document.getElementById("meaning-card-preview");
-  preview.innerHTML = imageSrc ? bgImageHtml(imageSrc, "meaning-card-large" + (card.orientation === "reversed" ? " reversed" : ""), card.cardName + " 放大牌面") : '<div class="tarot-img-fallback">'+PH('sparkle')+'</div>';
+  preview.innerHTML = imageSrc ? bgImageHtml(imageSrc, "meaning-card-large" + (shouldRotateCardImage(card) ? " reversed" : ""), card.cardName + " 放大牌面") : '<div class="tarot-img-fallback">'+PH('sparkle')+'</div>';
   hardenTarotImageInteractions(preview);
   var meaning = CARD_MEANINGS[card.cardName];
   var text = meaning ? (card.orientation === "reversed" ? meaning.reversed : meaning.upright) : DEFAULT_MEANING;
@@ -3839,7 +3856,7 @@ document.getElementById("import-input").addEventListener("change", function(e){
       records.forEach(function(r){
         var clean = {
           date: r.date, question: r.question, spreadType: r.spreadType,
-          mode: r.mode, photo: r.photo || null, cards: (r.cards || []).map(function(c){ return {position:c.position, cardName:c.cardName, orientation:c.orientation || "upright", cardImage:c.cardImage || null}; }),
+          mode: r.mode, photo: r.photo || null, cards: (r.cards || []).map(function(c){ return {position:c.position, cardName:c.cardName, orientation:c.orientation || "upright", cardImage:c.cardImage || null, cardImageSource:c.cardImageSource || normalizedCardImageSource(c.cardImage || null, r.mode === "online" ? "rws" : "")}; }),
           thoughts: r.thoughts || "", aiReading: r.aiReading || "", followUp: r.followUp || "", createdAt: r.createdAt || Date.now()
         };
         chain = chain.then(function(){ return dbAdd(clean); });
