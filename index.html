@@ -487,7 +487,7 @@
   }
   .fan-card::before{content:"";position:absolute;inset:3px;border-radius:8px;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.14);pointer-events:none;}
   .fan-card.center-card{filter:brightness(1.08);box-shadow:0 14px 24px rgba(0,0,0,0.62), 0 0 16px rgba(232,200,116,0.20), inset 0 0 0 1px rgba(255,255,255,0.10);}
-  .fan-card:hover{filter:brightness(1.18);transform:var(--fan-transform-hover)!important;box-shadow:0 18px 28px rgba(0,0,0,0.62), 0 0 18px rgba(232,200,116,0.25);}
+  .fan-card:hover{filter:brightness(1.18);transform:var(--fan-transform-base)!important;box-shadow:0 18px 28px rgba(0,0,0,0.62), 0 0 18px rgba(232,200,116,0.25);}
   .fan-card.used{opacity:0;pointer-events:none;}
   .fan-card.flash-picked{filter:brightness(1.3);box-shadow:0 0 22px rgba(232,200,116,.42),0 14px 24px rgba(0,0,0,.62);}
   /* === 重新取樣（整副重抽）動畫：抽完一張後，扇形牌堆先往中央收攏合成一副牌，
@@ -1008,6 +1008,400 @@
   .fan-card{bottom:12px;}
   .fan-swipe-hint{margin-bottom:8px;}
 }
+
+/* === 2026-07-08 抽牌手感調整：等待抽牌放大 1.3 倍，取消 hover 位移 === */
+.fan-stage{
+  width:min(1800px, 250vw);
+  min-width:min(1800px, 250vw);
+  height:clamp(370px, 49vw, 480px);
+}
+.fan-card{
+  width:clamp(62px, 7.8vw, 96px);
+}
+.fan-card:hover{
+  filter:brightness(1.18);
+  transform:var(--fan-transform-base)!important;
+  box-shadow:0 18px 28px rgba(0,0,0,0.62), 0 0 18px rgba(232,200,116,0.25);
+}
+
+@media (max-width:720px){
+  .fan-stage{
+    width:min(1320px, 330vw);
+    min-width:min(1320px, 330vw);
+    height:clamp(300px, 45vh, 390px);
+  }
+  .fan-card{
+    width:clamp(55px, 15vw, 75px);
+  }
+  .fan-wrap{
+    min-height:clamp(300px, 48vh, 410px);
+  }
+}
+
+@media (max-height:650px){
+  .fan-stage{height:260px;}
+  .fan-wrap{min-height:265px;}
+}
+
+@media (max-width:360px){
+  .fan-card{width:52px;}
+  .fan-stage{height:290px;}
+}
+
+
+/* === 2026-07-08 抽牌選中手感：手機先推出，桌機點選後也有上推回饋 === */
+.fan-card.mobile-selected,
+.fan-card.pick-confirmed{
+  filter:brightness(1.34) saturate(1.08);
+  transform:var(--fan-transform-select, var(--fan-transform-base))!important;
+  box-shadow:
+    0 28px 42px rgba(0,0,0,0.72),
+    0 0 0 3px rgba(232,200,116,0.92),
+    0 0 24px rgba(232,200,116,0.72),
+    0 0 52px rgba(201,162,75,0.36),
+    inset 0 0 0 2px rgba(255,255,255,0.20);
+}
+.fan-card.mobile-selected::after,
+.fan-card.pick-confirmed::after{
+  content:"";position:absolute;inset:-6px;border-radius:14px;
+  border:2px solid rgba(232,200,116,.95);
+  box-shadow:0 0 20px rgba(232,200,116,.45);
+  pointer-events:none;
+}
+.fan-card.pick-confirmed{
+  transition:filter .12s ease, transform .16s cubic-bezier(.16,1,.3,1), box-shadow .16s ease;
+}
+@media (max-width:720px), (hover:none){
+  .fan-wrap{
+    padding-left:max(56px, var(--draw-safe-edge));
+    padding-right:max(56px, var(--draw-safe-edge));
+  }
+  .fan-card.mobile-selected{
+    filter:brightness(1.38) saturate(1.1);
+  }
+}
+
+
+/* === 2026-07-08 手機精準選牌：按住後鎖定牌池，用手指左右微調最近的牌 === */
+.fan-aim-preview{display:none!important;}
+.fan-card.fan-aiming{
+  filter:brightness(1.42) saturate(1.12);
+  transform:var(--fan-transform-select, var(--fan-transform-base))!important;
+  box-shadow:
+    0 24px 40px rgba(0,0,0,.76),
+    0 0 0 5px rgba(232,200,116,1),
+    0 0 30px rgba(232,200,116,.82),
+    0 0 64px rgba(201,162,75,.42),
+    inset 0 0 0 2px rgba(255,255,255,.20);
+}
+.fan-card.fan-aiming::after{
+  content:"";position:absolute;inset:-8px;border-radius:16px;
+  border:2px solid rgba(255,238,168,.98);
+  box-shadow:0 0 28px rgba(232,200,116,.62);
+  pointer-events:none;
+}
+.draw-overlay.precision-aiming .fan-wrap{
+  touch-action:none;
+  overflow-x:hidden;
+  cursor:grabbing;
+}
+.draw-overlay.precision-aiming .fan-card{pointer-events:auto;}
+@media (min-width:721px) and (hover:hover){
+  .fan-card:hover{
+    filter:brightness(1.42) saturate(1.10);
+    /* 桌機版：滑鼠指到時只往上推，不再把牌拉到最上層，避免扇形圖層關係跳動。 */
+    transform:var(--fan-transform-hover, var(--fan-transform-base))!important;
+    box-shadow:
+      0 20px 32px rgba(0,0,0,.68),
+      0 0 0 4px rgba(232,200,116,.96),
+      0 0 30px rgba(232,200,116,.72),
+      0 0 56px rgba(201,162,75,.36),
+      inset 0 0 0 2px rgba(255,255,255,.18);
+  }
+}
+@media (max-width:720px), (hover:none){
+  .fan-wrap{
+    padding-left:max(86px, var(--draw-safe-edge));
+    padding-right:max(86px, var(--draw-safe-edge));
+  }
+}
+
+
+/* === 2026-07-08 手機抽牌改為 Drag & Release：長按進入精準模式，放開即抽 === */
+@media (max-width:720px), (hover:none){
+  .draw-overlay.precision-aiming .fan-wrap{
+    touch-action:none;
+    overflow-x:hidden;
+    cursor:grabbing;
+  }
+  .draw-overlay.precision-aiming .fan-swipe-hint{
+    animation-play-state:paused;
+    opacity:.38;
+  }
+  .fan-card.fan-aiming{
+    filter:brightness(1.44) saturate(1.12);
+    /* 手機版：比照桌機的「往上推 + 亮金框」，但不改變原本圖層順序。 */
+    transform:var(--fan-transform-select, var(--fan-transform-hover, var(--fan-transform-base)))!important;
+    box-shadow:
+      0 24px 38px rgba(0,0,0,.76),
+      0 0 0 4px rgba(232,200,116,.98),
+      0 0 30px rgba(232,200,116,.76),
+      0 0 58px rgba(201,162,75,.38),
+      inset 0 0 0 2px rgba(255,255,255,.22);
+  }
+}
+
+
+
+/* === 2026-07-08 桌機 hover 手感修正：亮牌 + 上推，但保留原扇形圖層順序 === */
+@media (min-width:721px) and (hover:hover){
+  .fan-card:hover{
+    transform:var(--fan-transform-hover, var(--fan-transform-base))!important;
+  }
+}
+
+
+/* === 2026-07-08 手機抽牌微調：按住鎖定牌堆，左右微調目前預選牌；空白處才滑動看整副牌 === */
+.draw-overlay.precision-aiming{
+  touch-action:none;
+  overscroll-behavior:contain;
+}
+.draw-overlay.precision-aiming .fan-wrap{
+  touch-action:none!important;
+  overflow-x:hidden!important;
+}
+@media (max-width:720px), (hover:none){
+  .fan-card.fan-aiming{
+    filter:brightness(1.55) saturate(1.18);
+    transform:var(--fan-transform-select, var(--fan-transform-base))!important;
+    box-shadow:
+      0 30px 46px rgba(0,0,0,.80),
+      0 0 0 6px rgba(255,229,142,1),
+      0 0 34px rgba(255,229,142,.95),
+      0 0 72px rgba(201,162,75,.50),
+      inset 0 0 0 2px rgba(255,255,255,.26);
+  }
+  .fan-card.fan-aiming::after{
+    content:"";position:absolute;inset:-10px;border-radius:18px;
+    border:3px solid rgba(255,239,174,.98);
+    box-shadow:0 0 30px rgba(232,200,116,.75), 0 0 70px rgba(201,162,75,.36);
+    pointer-events:none;
+  }
+}
+.tray-slot.just-filled{
+  animation:traySlotGlow .9s ease-out;
+}
+.tray-card.just-filled-card{
+  animation:trayCardGlow .95s ease-out;
+}
+@keyframes traySlotGlow{
+  0%{border-color:rgba(255,239,174,1);box-shadow:0 0 0 0 rgba(232,200,116,.85),0 0 34px rgba(232,200,116,.70),inset 0 0 18px rgba(232,200,116,.22);}
+  55%{border-color:rgba(232,200,116,.92);box-shadow:0 0 0 7px rgba(232,200,116,.10),0 0 24px rgba(232,200,116,.45),inset 0 0 12px rgba(232,200,116,.16);}
+  100%{box-shadow:inset 0 0 14px rgba(150,120,207,0.08),0 6px 16px rgba(0,0,0,.22);}
+}
+@keyframes trayCardGlow{
+  0%{filter:brightness(1.45) saturate(1.12);box-shadow:0 0 28px rgba(232,200,116,.85),0 0 0 2px rgba(255,239,174,.95);}
+  100%{filter:brightness(1);box-shadow:none;}
+}
+
+
+
+/* === 2026-07-08 手機虛擬滑鼠修正版：按住牌時用座標選最近牌，空白處仍可滑動看牌 === */
+@media (max-width:720px), (hover:none){
+  .fan-card{
+    touch-action:none;
+  }
+  .draw-overlay.precision-aiming .fan-card.fan-aiming{
+    filter:brightness(1.55) saturate(1.18);
+    transform:var(--fan-transform-select, var(--fan-transform-hover, var(--fan-transform-base)))!important;
+    box-shadow:
+      0 30px 46px rgba(0,0,0,.80),
+      0 0 0 6px rgba(255,229,142,1),
+      0 0 34px rgba(255,229,142,.95),
+      0 0 70px rgba(201,162,75,.48),
+      inset 0 0 0 2px rgba(255,255,255,.24);
+  }
+}
+
+
+
+/* === 2026-07-09 牌位槽微縮版：保留進度可見度，但把抽牌牌堆重新拉回主視覺 === */
+.draw-tray{
+  width:min(620px, calc(100vw - (var(--draw-safe-edge) * 2)));
+  gap:10px;
+  padding-top:4px;
+  padding-bottom:0;
+}
+.tray-row{gap:14px;}
+.tray-slot,
+.tray-card{
+  width:58px;
+  height:86px;
+  border-radius:10px;
+}
+.slot-number{
+  width:34px;
+  height:34px;
+  font-size:17px;
+}
+.tray-card .face{border-radius:10px;}
+.tray-card .front-face .rws-tray-img{border-radius:10px;}
+.fan-wrap{
+  margin-top:-12px;
+  padding-top:0;
+}
+@media (max-width:720px){
+  .draw-tray{
+    width:calc(100vw - 28px);
+    max-width:calc(100vw - 28px);
+    gap:8px;
+    padding-top:4px;
+  }
+  .tray-row{gap:8px;}
+  .tray-slot,
+  .tray-card{
+    width:clamp(40px, 12.6vw, 52px);
+    height:auto;
+    aspect-ratio:2/3;
+    border-radius:8px;
+  }
+  .slot-number{
+    width:26px;
+    height:26px;
+    font-size:14px;
+  }
+  .tray-card .face,
+  .tray-card .front-face .rws-tray-img{border-radius:8px;}
+  .fan-wrap{
+    margin-top:-18px;
+    min-height:clamp(282px, 45vh, 390px);
+    padding-top:0;
+    padding-bottom:4px;
+  }
+  .fan-stage{
+    height:clamp(286px, 43vh, 380px);
+  }
+  .fan-swipe-hint{margin-top:-4px;}
+}
+@media (max-height:650px){
+  .draw-tray{gap:6px;padding-top:2px;}
+  .tray-row{gap:7px;}
+  .tray-slot,
+  .tray-card{
+    width:clamp(36px, 11vw, 46px);
+  }
+  .slot-number{width:22px;height:22px;font-size:12px;}
+  .fan-wrap{margin-top:-20px;min-height:238px;}
+  .fan-stage{height:242px;}
+  .fan-swipe-hint{margin-top:-6px;}
+}
+
+
+/* === 2026-07-09 版面微調：拉開標題/牌位槽、牌堆/提示距離，首頁單日紀錄可捲動 === */
+#day-records-list{
+  max-height:42vh;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  padding-right:4px;
+  padding-bottom:18px;
+}
+#day-records-list .record-chip:last-child{margin-bottom:2px;}
+
+.draw-tray{
+  padding-top:16px;
+}
+.fan-swipe-hint{
+  margin-top:12px;
+}
+@media (max-width:720px){
+  .draw-tray{
+    padding-top:18px;
+  }
+  .fan-wrap{
+    margin-top:-8px;
+    padding-bottom:20px;
+  }
+  .fan-swipe-hint{
+    margin-top:12px;
+    margin-bottom:10px;
+  }
+  #day-records-list{
+    max-height:38vh;
+  }
+}
+@media (max-height:650px){
+  .draw-tray{
+    padding-top:12px;
+  }
+  .fan-wrap{
+    margin-top:-10px;
+    padding-bottom:16px;
+  }
+  .fan-swipe-hint{
+    margin-top:10px;
+  }
+  #day-records-list{
+    max-height:34vh;
+  }
+}
+
+
+/* === 2026-07-09 完成抽牌後壓縮下方牌堆高度：減少中間空白，讓按鈕不用滑太久就看見 === */
+@media (max-width:720px), (hover:none){
+  .draw-overlay.draw-selection-complete .fan-wrap,
+  .draw-overlay.draw-revealed .fan-wrap{
+    min-height:clamp(150px, 24vh, 205px);
+    margin-top:-26px;
+    padding-top:0;
+    padding-bottom:8px;
+  }
+  .draw-overlay.draw-selection-complete .fan-stage,
+  .draw-overlay.draw-revealed .fan-stage{
+    height:clamp(150px, 23vh, 200px);
+  }
+  .draw-overlay.draw-selection-complete .fan-card,
+  .draw-overlay.draw-revealed .fan-card{
+    bottom:8px;
+  }
+  .draw-overlay.draw-selection-complete .fan-swipe-hint,
+  .draw-overlay.draw-revealed .fan-swipe-hint{
+    margin-top:6px;
+    margin-bottom:8px;
+  }
+  .draw-overlay.draw-revealed .draw-bottom{
+    padding-bottom:10px;
+  }
+}
+@media (max-height:650px){
+  .draw-overlay.draw-selection-complete .fan-wrap,
+  .draw-overlay.draw-revealed .fan-wrap{
+    min-height:132px;
+    margin-top:-30px;
+    padding-bottom:4px;
+  }
+  .draw-overlay.draw-selection-complete .fan-stage,
+  .draw-overlay.draw-revealed .fan-stage{
+    height:136px;
+  }
+}
+
+
+/* === 2026-07-09 追加：長按選牌下滑取消 === */
+.draw-overlay.precision-aiming.cancel-aiming .fan-card.fan-aiming{
+  filter:brightness(.72) saturate(.72);
+  transform:var(--fan-transform-base)!important;
+  box-shadow:
+    0 12px 22px rgba(0,0,0,.58),
+    0 0 0 3px rgba(193,89,76,.82),
+    0 0 22px rgba(193,89,76,.42),
+    inset 0 0 0 1px rgba(255,255,255,.12);
+}
+.draw-overlay.precision-aiming.cancel-aiming .fan-card.fan-aiming::after{
+  border-color:rgba(193,89,76,.95);
+  box-shadow:0 0 22px rgba(193,89,76,.55);
+}
+
 </style>
 </head>
 <body>
@@ -1257,10 +1651,11 @@
     <div class="icon-btn" id="draw-close"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M70 52l58 58 58-58 18 18-58 58 58 58-18 18-58-58-58 58-18-18 58-58-58-58z"/></svg></div>
   </div>
   <div class="draw-tray" id="draw-tray"></div>
+  <div class="fan-aim-preview" id="fan-aim-preview" aria-hidden="true"><div class="fan-aim-card"></div><div class="fan-aim-text" id="fan-aim-text">目前指向這張牌<small>放開後會先推出，再點一次確認抽牌</small></div></div>
   <div class="fan-wrap" id="fan-wrap">
     <div class="fan-stage" id="fan-stage"></div>
   </div>
-  <div class="fan-swipe-hint" id="fan-swipe-hint"><span class="arrow">←</span><span>左右滑動選牌</span><span class="arrow">→</span></div>
+  <div class="fan-swipe-hint" id="fan-swipe-hint"><span class="arrow">←</span><span>空白處滑動平移畫面</span><span class="arrow">→</span></div>
   <div class="draw-bottom">
     <div class="draw-focus-tip" id="draw-focus-tip">小提示：先想著你的問題，保持專注，再點選讓你有感覺的牌。</div>
     <div class="draw-hint" id="draw-hint">點擊下方牌堆，依序抽出所需的牌</div>
@@ -2554,17 +2949,17 @@ function resetOnlineDrawUi(){
   state.pendingCards = null;
   setOnlineDrawLocked(false);
   var overlay = document.getElementById("draw-overlay");
-  if(overlay) overlay.classList.remove("active");
+  if(overlay) overlay.classList.remove("active", "draw-selection-complete", "draw-revealed");
   var confirmBtn = document.getElementById("btn-confirm-draw");
   if(confirmBtn){ confirmBtn.disabled = false; confirmBtn.style.display = "none"; }
   var reshuffleBtn = document.getElementById("btn-reshuffle");
   if(reshuffleBtn) reshuffleBtn.disabled = false;
   var revealBtn = document.getElementById("btn-reveal");
-  if(revealBtn){ revealBtn.disabled = false; revealBtn.style.display = "none"; }
+  if(revealBtn){ revealBtn.disabled = false; revealBtn.style.display = "none"; revealBtn.dataset.action = "reveal"; revealBtn.textContent = "揭曉"; revealBtn.classList.add("btn-gold"); revealBtn.classList.remove("btn-primary"); }
   var hint = document.getElementById("draw-hint");
   if(hint) hint.textContent = "點擊下方牌堆，依序抽出所需的牌";
   var tray = document.getElementById("draw-tray");
-  if(tray){ tray.innerHTML = ""; tray.removeAttribute("data-spread"); }
+  if(tray){ tray.innerHTML = ""; tray.removeAttribute("data-spread"); tray.classList.remove("final-complete-glow"); }
   var stage = document.getElementById("fan-stage");
   if(stage) stage.innerHTML = "";
   var onlineResult = document.getElementById("online-result");
@@ -2775,6 +3170,323 @@ document.getElementById("add-question").addEventListener("input", function(){
    ========================================================================== */
 var drawSession = null; // {spread, positions, filled:[], remainingDeck}；independent 模式每個牌位都從符合條件的完整牌池重新取樣
 
+var mobileSelectedFanCard = null;
+var fanPickLocked = false;
+var fanAimingCard = null;
+var fanPointerAim = null;
+var suppressFanClickUntil = 0;
+var fanTouchAim = null;
+
+function isMobileDrawConfirmMode(){
+  return window.innerWidth <= 720 || (window.matchMedia && window.matchMedia("(hover:none)").matches);
+}
+function clearMobileFanSelection(){
+  if(mobileSelectedFanCard && mobileSelectedFanCard.classList){
+    mobileSelectedFanCard.classList.remove("mobile-selected");
+  }
+  mobileSelectedFanCard = null;
+}
+function clearFanAimingCard(){
+  if(fanAimingCard && fanAimingCard.classList){
+    fanAimingCard.classList.remove("fan-aiming");
+  }
+  fanAimingCard = null;
+}
+function updateFanAimPreview(cardEl, mode){
+  // 手機版不再使用上方預覽，避免使用者在「預覽牌」與「手指下的牌」之間分心。
+  // 目前指向的牌直接以金框、亮度與上推位移標示。
+}
+function hideFanAimPreview(){
+  clearFanAimingCard();
+  var overlay = document.getElementById("draw-overlay");
+  if(overlay) overlay.classList.remove("precision-aiming", "cancel-aiming");
+}
+function setFanAimCancelState(cancelled){
+  var overlay = document.getElementById("draw-overlay");
+  if(overlay) overlay.classList.toggle("cancel-aiming", !!cancelled);
+  var hint = document.getElementById("draw-hint");
+  if(hint) hint.textContent = cancelled ? "放開取消選取" : "往下滑可取消選取";
+}
+function isFanAimCancelled(pointerState, y){
+  if(!pointerState) return false;
+  var dy = y - pointerState.startY;
+  var dx = Math.abs((pointerState.x || pointerState.startX) - pointerState.startX);
+  return dy > 58 && dy > dx * 0.75;
+}
+function setFanAimingCard(cardEl){
+  if(!cardEl || cardEl.classList.contains("used")) return;
+  if(fanAimingCard === cardEl) return updateFanAimPreview(cardEl, "aiming");
+  clearFanAimingCard();
+  fanAimingCard = cardEl;
+  cardEl.classList.add("fan-aiming");
+  updateFanAimPreview(cardEl, "aiming");
+}
+function getLiveFanCards(){
+  var stage = document.getElementById("fan-stage");
+  if(!stage) return [];
+  return Array.prototype.slice.call(stage.querySelectorAll(".fan-card:not(.used)"));
+}
+function getFanCardFromPoint(x, y){
+  var cards = getLiveFanCards();
+  if(!cards.length) return null;
+  // 手機版虛擬滑鼠：用手指座標找「視覺上最接近」的牌，而不是依賴 hover / pointerenter。
+  // X 軸權重最高，Y 軸只做輔助，避免手指略微遮到牌下緣時判定跳掉。
+  var best = null;
+  var bestScore = Infinity;
+  cards.forEach(function(card){
+    var r = card.getBoundingClientRect();
+    var cx = r.left + r.width / 2;
+    var cy = r.top + r.height / 2;
+    var dx = Math.abs(cx - x);
+    var dy = Math.abs(cy - y);
+    var score = dx + dy * 0.12;
+    if(score < bestScore){ bestScore = score; best = card; }
+  });
+  return best;
+}
+function getFanCardByDragDelta(pointerState, x){
+  if(!pointerState) return null;
+  var cards = getLiveFanCards();
+  if(!cards.length) return null;
+  var startIndex = Math.max(0, Math.min(cards.length - 1, pointerState.startIndex || 0));
+  var startWidth = pointerState.startCardWidth || 60;
+  // 手機精準微調：不必真的滑到下一張中心，只要左右移動約半張牌寬，就切到隔壁牌。
+  // 這樣手指不用離開原本區域，也能在附近牌之間清楚挑選。
+  var step = Math.max(18, Math.min(34, startWidth * 0.42));
+  var offset = Math.round((x - pointerState.startX) / step);
+  var targetIndex = Math.max(0, Math.min(cards.length - 1, startIndex + offset));
+  return cards[targetIndex] || cards[startIndex] || null;
+}
+function getFanCardBySmoothDragDelta(pointerState, x){
+  if(!pointerState) return null;
+  var cards = getLiveFanCards();
+  if(!cards.length) return null;
+  var startIndex = Math.max(0, Math.min(cards.length - 1, pointerState.startIndex || 0));
+  var startWidth = pointerState.startCardWidth || 60;
+  // 手機防抖：用「起點 + 位移」推算目標牌，不用即時 hit-test。
+  // hit-test 會因為選中牌上推、亮框、手指遮擋而在相鄰牌之間鬼打牆。
+  var step = Math.max(26, Math.min(52, startWidth * 0.68));
+  var now = Date.now();
+  var lastX = (typeof pointerState.smoothX === 'number') ? pointerState.smoothX : pointerState.startX;
+  pointerState.smoothX = lastX * 0.62 + x * 0.38;
+  var dx = pointerState.smoothX - pointerState.startX;
+  if(Math.abs(dx) < Math.max(10, startWidth * 0.16)){
+    return cards[pointerState.currentIndex ?? startIndex] || cards[startIndex] || null;
+  }
+  var targetIndex = Math.max(0, Math.min(cards.length - 1, startIndex + Math.round(dx / step)));
+  var currentIndex = Math.max(0, Math.min(cards.length - 1, pointerState.currentIndex ?? startIndex));
+  // 最短切換間隔，讓肉肉手指左右微移時不會變成牌在震動。
+  if(targetIndex !== currentIndex && pointerState.lastSwitchAt && now - pointerState.lastSwitchAt < 80){
+    targetIndex = currentIndex;
+  }
+  if(targetIndex !== currentIndex){
+    pointerState.currentIndex = targetIndex;
+    pointerState.lastSwitchAt = now;
+  }
+  return cards[pointerState.currentIndex ?? targetIndex] || cards[startIndex] || null;
+}
+function activateFanDragAim(e, cardEl){
+  if(!fanPointerAim || fanPointerAim.pointerId !== e.pointerId) return;
+  var overlay = document.getElementById("draw-overlay");
+  if(overlay) overlay.classList.add("precision-aiming");
+  var cards = getLiveFanCards();
+  var card = getFanCardFromPoint(fanPointerAim.x, fanPointerAim.y) || cardEl;
+  fanPointerAim.startIndex = Math.max(0, cards.indexOf(card));
+  var startRect = card.getBoundingClientRect ? card.getBoundingClientRect() : null;
+  fanPointerAim.startCardWidth = startRect ? startRect.width : 60;
+  fanPointerAim.active = true;
+  fanPointerAim.card = card;
+  setFanAimingCard(card);
+  setFanAimCancelState(false);
+}
+function cancelFanAimTimer(){
+  if(fanPointerAim && fanPointerAim.timer){
+    clearTimeout(fanPointerAim.timer);
+    fanPointerAim.timer = null;
+  }
+}
+
+function onFanPointerAimStart(e, cardEl){
+  if(!isMobileDrawConfirmMode() || fanPickLocked || !drawSession) return;
+  if(!cardEl || cardEl.classList.contains("used")) return;
+  // 手機版改為 Drag & Release：一按下就進入精準選牌，放開即抽。
+  // 取消 0.15 秒等待，避免短點、長按判斷與合成 click 互相打架，導致完全抽不到牌。
+  if(e.cancelable) e.preventDefault();
+  if(cardEl.setPointerCapture){
+    try{ cardEl.setPointerCapture(e.pointerId); }catch(err){}
+  }
+  fanPointerAim = {
+    pointerId:e.pointerId,
+    card:cardEl,
+    x:e.clientX,
+    y:e.clientY,
+    startX:e.clientX,
+    startY:e.clientY,
+    startIndex:0,
+    startCardWidth:60,
+    active:true,
+    timer:null
+  };
+  activateFanDragAim(e, cardEl);
+}
+function onFanPointerAimMove(e){
+  if(!fanPointerAim || fanPointerAim.pointerId !== e.pointerId || !isMobileDrawConfirmMode()) return;
+  fanPointerAim.x = e.clientX;
+  fanPointerAim.y = e.clientY;
+  if(!fanPointerAim.active) return;
+  if(e.cancelable) e.preventDefault();
+  fanPointerAim.cancelled = isFanAimCancelled(fanPointerAim, e.clientY);
+  setFanAimCancelState(fanPointerAim.cancelled);
+  if(fanPointerAim.cancelled) return;
+  var card = getFanCardByDragDelta(fanPointerAim, e.clientX) || getFanCardFromPoint(e.clientX, e.clientY);
+  if(card && !card.classList.contains("used")){
+    fanPointerAim.card = card;
+    setFanAimingCard(card);
+  }
+}
+function onFanPointerAimEnd(e){
+  if(!fanPointerAim || fanPointerAim.pointerId !== e.pointerId || !isMobileDrawConfirmMode()) return;
+  cancelFanAimTimer();
+  if(e.cancelable) e.preventDefault();
+  // 放開時優先使用目前已鎖定的 aiming card；避免 release 點被手指遮擋或牌重疊時判不到。
+  var cancelled = fanPointerAim.cancelled || isFanAimCancelled(fanPointerAim, e.clientY);
+  var card = fanPointerAim.card || getFanCardFromPoint(e.clientX, e.clientY);
+  fanPointerAim = null;
+  var overlay = document.getElementById("draw-overlay");
+  if(overlay) overlay.classList.remove("precision-aiming", "cancel-aiming");
+  suppressFanClickUntil = Date.now() + 700;
+  if(cancelled){
+    clearFanAimingCard();
+    var hintCancel = document.getElementById("draw-hint");
+    if(hintCancel) hintCancel.textContent = "已取消選取";
+    return;
+  }
+  if(card && !card.classList.contains("used")){
+    clearMobileFanSelection();
+    clearFanAimingCard();
+    fanPickLocked = true;
+    card.classList.add("pick-confirmed");
+    setTimeout(function(){
+      card.classList.remove("pick-confirmed");
+      commitFanCardPick(card);
+    }, 120);
+  } else {
+    clearFanAimingCard();
+    var hint = document.getElementById("draw-hint");
+    if(hint) hint.textContent = "按住牌，放開抽";
+  }
+}
+function onFanPointerAimCancel(e){
+  if(fanPointerAim && fanPointerAim.pointerId === e.pointerId){
+    cancelFanAimTimer();
+    fanPointerAim = null;
+    var overlay = document.getElementById("draw-overlay");
+    if(overlay) overlay.classList.remove("precision-aiming", "cancel-aiming");
+    clearFanAimingCard();
+  }
+}
+
+// 觸控版「虛擬滑鼠」：手指按在牌上後，鎖住牌堆；左右拖曳時用座標即時換牌；放開直接抽。
+// 這套不依賴手機不存在的 hover / pointerenter，比 pointer capture 在行動瀏覽器上穩定。
+function getTouchPoint(e){
+  var t = null;
+  if(fanTouchAim && e.changedTouches){
+    for(var i=0;i<e.changedTouches.length;i++){
+      if(e.changedTouches[i].identifier === fanTouchAim.identifier){ t = e.changedTouches[i]; break; }
+    }
+  }
+  if(!t && e.touches && e.touches.length) t = e.touches[0];
+  if(!t && e.changedTouches && e.changedTouches.length) t = e.changedTouches[0];
+  return t;
+}
+function startFanTouchAim(e, cardEl){
+  if(!isMobileDrawConfirmMode() || fanPickLocked || !drawSession) return;
+  if(!cardEl || cardEl.classList.contains('used')) return;
+  var t = getTouchPoint(e);
+  if(!t) return;
+  e.preventDefault();
+  e.stopPropagation();
+  var overlay = document.getElementById('draw-overlay');
+  if(overlay) overlay.classList.add('precision-aiming');
+  var cards = getLiveFanCards();
+  var startRect = cardEl.getBoundingClientRect ? cardEl.getBoundingClientRect() : null;
+  fanTouchAim = {
+    identifier:t.identifier,
+    card:cardEl,
+    startX:t.clientX,
+    startY:t.clientY,
+    x:t.clientX,
+    y:t.clientY,
+    smoothX:t.clientX,
+    startIndex:Math.max(0, cards.indexOf(cardEl)),
+    currentIndex:Math.max(0, cards.indexOf(cardEl)),
+    startCardWidth:startRect ? startRect.width : 60,
+    lastSwitchAt:Date.now()
+  };
+  fanPointerAim = null;
+  setFanAimingCard(cardEl);
+  setFanAimCancelState(false);
+}
+function moveFanTouchAim(e){
+  if(!fanTouchAim || !isMobileDrawConfirmMode()) return;
+  var t = getTouchPoint(e);
+  if(!t) return;
+  e.preventDefault();
+  e.stopPropagation();
+  fanTouchAim.x = t.clientX;
+  fanTouchAim.y = t.clientY;
+  fanTouchAim.cancelled = isFanAimCancelled(fanTouchAim, t.clientY);
+  setFanAimCancelState(fanTouchAim.cancelled);
+  if(fanTouchAim.cancelled) return;
+  var card = getFanCardBySmoothDragDelta(fanTouchAim, t.clientX);
+  if(card && !card.classList.contains('used')){
+    fanTouchAim.card = card;
+    setFanAimingCard(card);
+  }
+}
+function endFanTouchAim(e){
+  if(!fanTouchAim || !isMobileDrawConfirmMode()) return;
+  var t = getTouchPoint(e);
+  var releaseY = t ? t.clientY : fanTouchAim.y;
+  var cancelled = fanTouchAim.cancelled || isFanAimCancelled(fanTouchAim, releaseY);
+  var card = fanTouchAim.card || fanAimingCard;
+  e.preventDefault();
+  e.stopPropagation();
+  fanTouchAim = null;
+  fanPointerAim = null;
+  var overlay = document.getElementById('draw-overlay');
+  if(overlay) overlay.classList.remove('precision-aiming', 'cancel-aiming');
+  suppressFanClickUntil = Date.now() + 800;
+  if(cancelled){
+    clearMobileFanSelection();
+    clearFanAimingCard();
+    var hintCancel = document.getElementById('draw-hint');
+    if(hintCancel) hintCancel.textContent = '已取消選取';
+    return;
+  }
+  if(card && !card.classList.contains('used')){
+    clearMobileFanSelection();
+    clearFanAimingCard();
+    fanPickLocked = true;
+    card.classList.add('pick-confirmed');
+    setTimeout(function(){
+      card.classList.remove('pick-confirmed');
+      commitFanCardPick(card);
+    }, 120);
+  } else {
+    clearFanAimingCard();
+  }
+}
+
+// 手機按住滑選時，部分瀏覽器不會穩定把 pointermove 派發到原本那張牌。
+// 這裡用 document capture 兜底，確保手指左右微調時一定會重新計算目標牌。
+document.addEventListener("pointermove", function(e){ if(e.pointerType !== "touch") onFanPointerAimMove(e); }, {capture:true, passive:false});
+document.addEventListener("pointerup", function(e){ if(e.pointerType !== "touch") onFanPointerAimEnd(e); }, {capture:true, passive:false});
+document.addEventListener("pointercancel", function(e){ if(e.pointerType !== "touch") onFanPointerAimCancel(e); }, {capture:true, passive:true});
+document.addEventListener("touchmove", moveFanTouchAim, {capture:true, passive:false});
+document.addEventListener("touchend", endFanTouchAim, {capture:true, passive:false});
+document.addEventListener("touchcancel", endFanTouchAim, {capture:true, passive:false});
+
 document.getElementById("btn-start-draw").addEventListener("click", function(){
   if(this.disabled) return;
   if(!requireAddQuestionBeforeDraw()) return;
@@ -2830,19 +3542,32 @@ function updateDrawProgress(message){
   var hint = document.getElementById("draw-hint");
   var focusTip = document.getElementById("draw-focus-tip");
   if(title) title.textContent = "第 " + current + " / " + total + " 張 · " + getDrawModeShortLabel();
-  if(hint) hint.textContent = message || "請選擇一張有感覺的牌";
+  if(hint) hint.textContent = message || (isMobileDrawConfirmMode() ? "空白處滑動平移畫面" : "請選擇一張有感覺的牌");
   if(focusTip) focusTip.textContent = getDrawModeLabel();
 }
 function resetDrawSession(){
   if(!drawSession) return;
+  clearMobileFanSelection();
+  var overlay = document.getElementById("draw-overlay");
+  if(overlay) overlay.classList.remove("draw-selection-complete", "draw-revealed");
   var spread = drawSession.spread;
   drawSession.filled = [];
   drawSession.remainingDeck = shuffle(ALL_CARDS);
-  document.getElementById("btn-reveal").style.display = "none";
-  document.getElementById("btn-confirm-draw").style.display = "none";
+  var resetRevealBtn = document.getElementById("btn-reveal");
+  if(resetRevealBtn){
+    resetRevealBtn.style.display = "none";
+    resetRevealBtn.disabled = false;
+    resetRevealBtn.dataset.action = "reveal";
+    resetRevealBtn.textContent = "揭曉";
+    resetRevealBtn.classList.add("btn-gold");
+    resetRevealBtn.classList.remove("btn-primary");
+  }
+  var resetConfirmBtn = document.getElementById("btn-confirm-draw");
+  if(resetConfirmBtn){ resetConfirmBtn.style.display = "none"; resetConfirmBtn.disabled = false; }
   updateDrawProgress(state.drawMode === "independent" ? "已重新洗牌。每個牌位仍會重新取樣完整牌池" : "已重新洗牌。深呼吸一下，再選擇讓你有感覺的牌");
   var resetTray = document.getElementById("draw-tray");
   resetTray.setAttribute("data-spread", spreadSelect.value);
+  resetTray.classList.remove("final-complete-glow");
   resetTray.innerHTML = buildTrayRowsHTML(spread.positions);
   buildFan();
   showToast("已重新洗牌");
@@ -2851,20 +3576,24 @@ function resetDrawSession(){
 document.getElementById("btn-reshuffle").addEventListener("click", resetDrawSession);
 
 function openDrawOverlay(spread){
-  updateDrawProgress(state.drawMode === "independent" ? "左右滑動牌堆；每點一張，下一個牌位都會重新洗入完整牌池" : "左右滑動牌堆，點擊有感覺的卡背依序抽牌");
+  clearMobileFanSelection();
+  updateDrawProgress(state.drawMode === "independent" ? "手機長按牌背選牌，往下滑可取消選取；下一牌位會重新洗入完整牌池" : "手機長按牌背選牌，往下滑可取消選取");
   var revealBtn = document.getElementById("btn-reveal");
   var confirmBtn = document.getElementById("btn-confirm-draw");
   var reshuffleBtn = document.getElementById("btn-reshuffle");
-  if(revealBtn){ revealBtn.disabled = false; revealBtn.style.display = "none"; }
+  if(revealBtn){ revealBtn.disabled = false; revealBtn.style.display = "none"; revealBtn.dataset.action = "reveal"; revealBtn.textContent = "揭曉"; revealBtn.classList.add("btn-gold"); revealBtn.classList.remove("btn-primary"); }
   if(confirmBtn){ confirmBtn.disabled = false; confirmBtn.style.display = "none"; }
   if(reshuffleBtn) reshuffleBtn.disabled = false;
 
   // 建立牌堆槽位（tray），依牌位數量自動分成多排橫列
   var tray = document.getElementById("draw-tray");
   tray.setAttribute("data-spread", spreadSelect.value);
+  tray.classList.remove("final-complete-glow");
   tray.innerHTML = buildTrayRowsHTML(spread.positions);
 
-  document.getElementById("draw-overlay").classList.add("active");
+  var overlay = document.getElementById("draw-overlay");
+  overlay.classList.remove("draw-selection-complete", "draw-revealed", "cancel-aiming");
+  overlay.classList.add("active");
   // overlay 顯示後再計算寬度，避免不同瀏覽器拿到 0 或錯誤寬度造成整排偏左。
   requestAnimationFrame(function(){
     buildFan();
@@ -2872,7 +3601,9 @@ function openDrawOverlay(spread){
 }
 
 function buildFan(opts){
+  clearMobileFanSelection();
   opts = opts || {};
+  clearMobileFanSelection();
   var stage = document.getElementById("fan-stage");
   var wrap = document.getElementById("fan-wrap");
   // 扇形牌堆加寬：每張牌都有自己的水平落點，避免 78 張牌全部擠在中心，手機版可左右滑動選牌。
@@ -2888,13 +3619,15 @@ function buildFan(opts){
   for(var i=0;i<visualCount;i++){
     var angle = startAngle + step * i;
     var t = visualCount > 1 ? (i / (visualCount - 1)) : .5;
-    var x = visualCount > 1 ? (4 + (92 * t)) : 50;
+    var x = visualCount > 1 ? ((isSmall ? 8 : 4) + ((isSmall ? 84 : 92) * t)) : 50;
     var z = Math.round(1000 - Math.abs(i - centerIndex));
     var arc = Math.sin(Math.PI * t);
     var arcLift = Math.round((isSmall ? 18 : 34) * arc);
     var lift = isSmall ? -12 : -18;
+    var selectLift = isSmall ? -76 : -28;
     var base = "translateX(-50%) translateY(-"+arcLift+"px) rotate("+angle.toFixed(3)+"deg)";
     var hover = "translateX(-50%) translateY("+(-arcLift + lift)+"px) rotate("+angle.toFixed(3)+"deg)";
+    var selectTransform = "translateX(-50%) translateY("+(-arcLift + selectLift)+"px) rotate("+angle.toFixed(3)+"deg)";
     var cls = "fan-card" + (i === centerIndex ? " center-card" : "");
     if(opts.unpack){
       // 展開動畫：卡片先以「疊成一副」的收攏狀態出現在正中央（極小旋轉、微縮小、透明），
@@ -2902,17 +3635,26 @@ function buildFan(opts){
       var jitter = (Math.random() * 6 - 3).toFixed(2);
       html += '<div class="'+cls+' unpacking" data-fan-idx="'+i+'" '+
         'data-target-left="'+x.toFixed(3)+'%" data-target-transform="'+base+'" '+
-        'style="left:50%;z-index:'+z+';opacity:0;transform:translateX(-50%) translateY(0px) rotate('+jitter+'deg) scale(0.9);--fan-transform-hover:'+hover+';"></div>';
+        'style="left:50%;z-index:'+z+';opacity:0;transform:translateX(-50%) translateY(0px) rotate('+jitter+'deg) scale(0.9);--fan-transform-base:'+base+';--fan-transform-hover:'+hover+';--fan-transform-select:'+selectTransform+';"></div>';
     } else {
-      html += '<div class="'+cls+'" data-fan-idx="'+i+'" style="left:'+x.toFixed(3)+'%;z-index:'+z+';transform:'+base+';--fan-transform-hover:'+hover+';"></div>';
+      html += '<div class="'+cls+'" data-fan-idx="'+i+'" style="left:'+x.toFixed(3)+'%;z-index:'+z+';transform:'+base+';--fan-transform-base:'+base+';--fan-transform-hover:'+hover+';--fan-transform-select:'+selectTransform+';"></div>';
     }
   }
   stage.innerHTML = html;
   hardenTarotImageInteractions(stage);
   stage.querySelectorAll(".fan-card").forEach(function(card){
+    card.addEventListener("touchstart", function(e){ startFanTouchAim(e, card); }, {passive:false});
+    card.addEventListener("touchmove", moveFanTouchAim, {passive:false});
+    card.addEventListener("touchend", endFanTouchAim, {passive:false});
+    card.addEventListener("touchcancel", endFanTouchAim, {passive:false});
+    card.addEventListener("pointerdown", function(e){ if(e.pointerType !== "touch") onFanPointerAimStart(e, card); }, {passive:false});
+    card.addEventListener("pointermove", function(e){ if(e.pointerType !== "touch") onFanPointerAimMove(e); }, {passive:false});
+    card.addEventListener("pointerup", function(e){ if(e.pointerType !== "touch") onFanPointerAimEnd(e); }, {passive:false});
+    card.addEventListener("pointercancel", function(e){ if(e.pointerType !== "touch") onFanPointerAimCancel(e); }, {passive:true});
     card.addEventListener("click", function(e){
       e.preventDefault();
       e.stopPropagation();
+      if(Date.now() < suppressFanClickUntil) return;
       onFanCardClick(card);
     });
   });
@@ -2985,14 +3727,34 @@ window.addEventListener("resize", function(){
 
 function onFanCardClick(cardEl){
   if(!drawSession) return;
+  if(fanPickLocked) return;
   var idx = drawSession.filled.length;
   if(idx >= drawSession.spread.positions.length) return; // 已抽滿
   if(cardEl.classList.contains("used")) return;
 
+  // 手機版由 pointerdown → 長按 → pointerup 直接抽牌。
+  // 合成 click 只會造成誤觸或重複抽牌，所以直接忽略。
+  if(isMobileDrawConfirmMode()){
+    return;
+  }
+
+  fanPickLocked = true;
+  cardEl.classList.add("pick-confirmed");
+  setTimeout(function(){
+    cardEl.classList.remove("pick-confirmed");
+    commitFanCardPick(cardEl);
+  }, 170);
+}
+
+function commitFanCardPick(cardEl){
+  if(!drawSession){ fanPickLocked = false; return; }
+  var idx = drawSession.filled.length;
+  if(idx >= drawSession.spread.positions.length){ fanPickLocked = false; return; }
+  if(cardEl.classList.contains("used")){ fanPickLocked = false; return; }
   var pos = drawSession.spread.positions[idx];
   var restriction = drawSession.spread.restriction[pos];
   var drawn = drawCardForPosition(restriction);
-  if(!drawn){ showToast("牌堆已無可用的牌"); return; }
+  if(!drawn){ showToast("牌堆已無可用的牌"); fanPickLocked = false; return; }
 
   var orientation = Math.random() < 0.5 ? "upright" : "reversed";
   drawSession.filled.push({position:pos, cardName:drawn.name, suit:drawn.suit, orientation:orientation, cardImage:getRwsCardImage(drawn.name), cardImageSource:"rws"});
@@ -3020,17 +3782,94 @@ function onFanCardClick(cardEl){
       '<div class="face front-face">'+cardImageHtml(drawn.name, 'rws-tray-img', drawn.name)+'</div>'+
     '</div>';
   hardenTarotImageInteractions(slot);
+  slot.classList.add("just-filled");
+  var justCard = slot.querySelector(".tray-card");
+  if(justCard) justCard.classList.add("just-filled-card");
+  setTimeout(function(){
+    slot.classList.remove("just-filled");
+    if(justCard) justCard.classList.remove("just-filled-card");
+  }, 980);
 
   var remaining = drawSession.spread.positions.length - drawSession.filled.length;
   if(remaining > 0){
-    updateDrawProgress(state.drawMode === "independent" ? "下一個牌位已重新洗入完整牌池，請再選一張" : "請選擇下一張牌");
+    updateDrawProgress(state.drawMode === "independent" ? (isMobileDrawConfirmMode() ? "已重洗，按住放開抽" : "下一個牌位已重新洗入完整牌池，請再選一張") : (isMobileDrawConfirmMode() ? "空白處滑動平移畫面" : "請選擇下一張牌"));
   }
   if(drawSession.filled.length >= drawSession.spread.positions.length){
-    var title = document.getElementById("draw-title");
-    if(title) title.textContent = "已抽滿 " + drawSession.spread.positions.length + " / " + drawSession.spread.positions.length + " 張 · " + getDrawModeShortLabel();
-    document.getElementById("draw-hint").textContent = "已抽滿所有牌，按下揭曉查看結果";
-    document.getElementById("btn-reveal").style.display = "inline-flex";
+    markDrawSelectionComplete();
   }
+  setTimeout(function(){ fanPickLocked = false; }, 220);
+}
+
+
+function getDrawCardsForSave(){
+  if(!drawSession || !drawSession.filled) return [];
+  return drawSession.filled.map(function(c){
+    return {position:c.position, cardName:c.cardName, orientation:c.orientation, cardImage:c.cardImage || getRwsCardImage(c.cardName), cardImageSource:c.cardImageSource || "rws"};
+  });
+}
+
+function setDrawPrimaryAction(action){
+  var revealBtn = document.getElementById("btn-reveal");
+  var confirmBtn = document.getElementById("btn-confirm-draw");
+  if(confirmBtn){
+    confirmBtn.style.display = "none";
+    confirmBtn.disabled = false;
+  }
+  if(!revealBtn) return;
+  revealBtn.disabled = false;
+  revealBtn.style.display = "inline-flex";
+  revealBtn.dataset.action = action === "confirm" ? "confirm" : "reveal";
+  revealBtn.textContent = action === "confirm" ? "確認並帶回" : "揭曉";
+  revealBtn.classList.toggle("btn-primary", action === "confirm");
+  revealBtn.classList.toggle("btn-gold", action !== "confirm");
+}
+
+function confirmDrawAndSave(){
+  if(!drawSession || !drawSession.filled || drawSession.filled.length === 0) return;
+  if(drawSession.spread && drawSession.filled.length < drawSession.spread.positions.length){
+    showToast("還沒抽滿所有牌");
+    return;
+  }
+  var actionBtn = document.getElementById("btn-reveal");
+  var confirmBtn = document.getElementById("btn-confirm-draw");
+  if(actionBtn) actionBtn.disabled = true;
+  if(confirmBtn) confirmBtn.disabled = true;
+  state.currentMode = "online";
+  state.pendingCards = getDrawCardsForSave();
+  setOnlineDrawLocked(true);
+  var reshuffle = document.getElementById("btn-reshuffle");
+  if(reshuffle) reshuffle.disabled = true;
+  if(actionBtn) actionBtn.style.display = "none";
+  if(confirmBtn) confirmBtn.style.display = "none";
+  var hint = document.getElementById("draw-hint");
+  if(hint) hint.textContent = "正在儲存紀錄……";
+  renderOnlineResultSummary();
+  document.getElementById("draw-overlay").classList.remove("active");
+  saveCurrentAddRecord({fromDraw:true}).then(function(ok){
+    if(!ok){
+      if(actionBtn){
+        actionBtn.disabled = false;
+        setDrawPrimaryAction("confirm");
+      }
+      if(confirmBtn) confirmBtn.disabled = false;
+      if(reshuffle) reshuffle.disabled = false;
+      setOnlineDrawLocked(false);
+    }
+  });
+}
+
+
+function markDrawSelectionComplete(){
+  if(!drawSession || !drawSession.spread || drawSession.filled.length < drawSession.spread.positions.length) return;
+  var title = document.getElementById("draw-title");
+  var hint = document.getElementById("draw-hint");
+  var revealBtn = document.getElementById("btn-reveal");
+  var confirmBtn = document.getElementById("btn-confirm-draw");
+  if(title) title.textContent = "已抽滿 " + drawSession.spread.positions.length + " / " + drawSession.spread.positions.length + " 張 · " + getDrawModeShortLabel();
+  if(hint) hint.textContent = "已抽滿所有牌，請先揭曉，再確認帶回";
+  var overlay = document.getElementById("draw-overlay");
+  if(overlay) overlay.classList.add("draw-selection-complete");
+  setDrawPrimaryAction("reveal");
 }
 
 function drawCardForPosition(restriction){
@@ -3053,13 +3892,24 @@ function drawCardForPosition(restriction){
 }
 
 document.getElementById("btn-reveal").addEventListener("click", function(){
+  if(this.dataset.action === "confirm"){
+    confirmDrawAndSave();
+    return;
+  }
+  if(!drawSession || !drawSession.filled || !drawSession.spread || drawSession.filled.length < drawSession.spread.positions.length){
+    showToast("還沒抽滿所有牌");
+    return;
+  }
   drawSession.filled.forEach(function(c, idx){
     var el = document.getElementById("tray-card-"+idx);
+    if(!el) return;
     el.classList.add("revealed");
     if(c.orientation === "reversed") el.classList.add("reversed");
     el.setAttribute("role", "button");
     el.setAttribute("tabindex", "0");
     el.setAttribute("title", "點擊查看放大牌面與簡易牌義");
+    if(el.dataset.meaningBound === "1") return;
+    el.dataset.meaningBound = "1";
     function openTrayCard(e){
       e.preventDefault();
       e.stopPropagation();
@@ -3069,33 +3919,13 @@ document.getElementById("btn-reveal").addEventListener("click", function(){
     el.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " ") openTrayCard(e); });
   });
   document.getElementById("draw-title").textContent = "揭曉完成";
-  document.getElementById("draw-hint").textContent = "確認後即可帶回紀錄";
-  document.getElementById("btn-reveal").style.display = "none";
-  document.getElementById("btn-confirm-draw").style.display = "inline-flex";
+  var overlay = document.getElementById("draw-overlay");
+  if(overlay) overlay.classList.add("draw-revealed");
+  document.getElementById("draw-hint").textContent = "確認後即可帶回並儲存紀錄";
+  setDrawPrimaryAction("confirm");
 });
 
-document.getElementById("btn-confirm-draw").addEventListener("click", function(){
-  if(!drawSession || !drawSession.filled || drawSession.filled.length === 0) return;
-  var confirmBtn = this;
-  confirmBtn.disabled = true;
-  state.currentMode = "online";
-  state.pendingCards = drawSession.filled.map(function(c){
-    return {position:c.position, cardName:c.cardName, orientation:c.orientation, cardImage:c.cardImage || getRwsCardImage(c.cardName), cardImageSource:c.cardImageSource || "rws"};
-  });
-  setOnlineDrawLocked(true);
-  document.getElementById("btn-reshuffle").disabled = true;
-  document.getElementById("btn-reveal").style.display = "none";
-  document.getElementById("draw-hint").textContent = "正在儲存紀錄……";
-  renderOnlineResultSummary();
-  document.getElementById("draw-overlay").classList.remove("active");
-  saveCurrentAddRecord({fromDraw:true}).then(function(ok){
-    if(!ok){
-      confirmBtn.disabled = false;
-      document.getElementById("btn-reshuffle").disabled = false;
-      setOnlineDrawLocked(false);
-    }
-  });
-});
+document.getElementById("btn-confirm-draw").addEventListener("click", confirmDrawAndSave);
 
 document.getElementById("draw-close").addEventListener("click", function(){
   document.getElementById("draw-overlay").classList.remove("active");
@@ -3147,6 +3977,14 @@ function saveCurrentAddRecord(options){
   options = options || {};
   var date = document.getElementById("add-date").value || todayStr();
   var question = document.getElementById("add-question").value.trim();
+  if(!question){
+    showToast("請先填寫想探索的問題");
+    var q = document.getElementById("add-question");
+    var qErr = document.getElementById("add-question-error");
+    if(q) q.classList.add("field-error");
+    if(qErr) qErr.style.display = "block";
+    return Promise.resolve(false);
+  }
   var spreadType = spreadSelect.value;
   var mode = state.currentMode;
 
