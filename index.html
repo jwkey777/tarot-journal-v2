@@ -377,6 +377,12 @@
     font-family:var(--font-display);color:var(--gold-bright);font-size:22px;font-weight:700;letter-spacing:1.5px;
     text-align:center;text-shadow:0 0 18px rgba(232,200,116,0.18);
   }
+  .draw-heading{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0;padding:0 52px;}
+  .draw-position-now{
+    max-width:min(560px,72vw);font-size:13px;line-height:1.4;color:var(--text-muted);text-align:center;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.04em;
+  }
+  .draw-position-now strong{color:var(--gold-bright);font-weight:600;}
   #draw-title::before,#draw-title::after{content:"◆";font-size:17px;margin:0 18px;color:var(--gold);}
   #draw-close{
     position:absolute;right:0;top:26px;width:42px;height:42px;border-radius:50%;
@@ -797,6 +803,21 @@
   .crop-bottom{padding:14px 18px 20px;background:linear-gradient(180deg, transparent, var(--bg));}
   .crop-guide{font-size:12px;color:var(--text-dim);line-height:1.6;text-align:center;margin-bottom:10px;}
   .spread-layout{position:relative;min-height:600px;margin-bottom:22px;background:radial-gradient(circle at 50% 50%, rgba(150,120,207,.07), transparent 65%);border:1px solid var(--border-soft);border-radius:var(--radius);overflow:visible;padding:18px 0;touch-action:pan-y;}
+  /* 紀錄頁固定使用自適應卡片網格，完整保留牌位、牌面、牌名，不再以絕對座標互相覆蓋。 */
+  .spread-layout.detail-card-grid{
+    position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(126px,1fr));
+    gap:14px;min-height:0!important;height:auto;padding:14px;margin-bottom:22px;align-items:stretch;
+  }
+  .spread-layout.detail-card-grid .card-tile{
+    position:relative!important;left:auto!important;top:auto!important;transform:none!important;
+    width:100%!important;min-width:0;min-height:190px;padding:10px 7px;justify-content:flex-start;
+  }
+  .spread-layout.detail-card-grid .card-tile .pos{
+    width:100%;min-height:2.7em;display:flex;align-items:center;justify-content:center;
+    font-size:11px;line-height:1.35;color:var(--text-muted);white-space:normal;word-break:break-word;
+  }
+  .spread-layout.detail-card-grid .card-tile .rws-tile-img{width:min(76px,70%);margin:4px 0 5px;}
+  .spread-layout.detail-card-grid .card-tile .name{font-size:12px;line-height:1.35;word-break:break-word;}
   .spread-layout .card-tile{position:absolute;width:112px;min-height:152px;transform:translate(-50%,-50%);cursor:pointer;}
   .spread-layout .card-tile .thumb{width:70px;aspect-ratio:2/3;object-fit:cover;border-radius:6px;border:1px solid var(--border-soft);margin:2px 0;}
   .spread-layout[data-spread="single"]{min-height:260px;}
@@ -841,6 +862,9 @@
   }
   @media (max-width:520px){
     .spread-layout{min-height:540px;}
+    .spread-layout.detail-card-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:10px;}
+    .spread-layout.detail-card-grid .card-tile{min-height:176px;padding:9px 5px;}
+    .spread-layout.detail-card-grid .card-tile .rws-tile-img{width:min(66px,72%);}
     .spread-layout .card-tile{width:92px;min-height:132px;padding:9px 5px;}
     .spread-layout .card-tile .name{font-size:12px;}
     .spread-layout .card-tile .thumb{width:56px;}
@@ -851,6 +875,8 @@
   }
 
   @media (max-width:360px){
+    .spread-layout.detail-card-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:8px;}
+    .spread-layout.detail-card-grid .card-tile{min-height:166px;}
     .fan-stage{height:138px;}
     .fan-card{width:32px;}
     /* 牌位卡寬改由 clamp() 依視窗寬度自動縮放（見 720px 斷點），此處不再用固定 38px 覆寫，
@@ -1402,6 +1428,724 @@
   box-shadow:0 0 22px rgba(193,89,76,.55);
 }
 
+
+/* === 2026-07-10 手機長按選牌：停留左右邊緣時自動捲動牌堆 === */
+.fan-edge-scroll-indicator{
+  position:fixed;top:50%;z-index:115;display:none;align-items:center;justify-content:center;
+  width:46px;height:86px;transform:translateY(-50%);border-radius:24px;
+  color:var(--gold-bright);font-size:28px;line-height:1;pointer-events:none;
+  background:linear-gradient(90deg, rgba(12,10,20,.92), rgba(36,28,58,.62));
+  border:1px solid rgba(232,200,116,.48);box-shadow:0 0 26px rgba(201,162,75,.22);
+  opacity:0;transition:opacity .16s ease, transform .16s ease;
+}
+.fan-edge-scroll-indicator.left{left:8px;}
+.fan-edge-scroll-indicator.right{right:8px;background:linear-gradient(270deg, rgba(12,10,20,.92), rgba(36,28,58,.62));}
+.draw-overlay.precision-aiming .fan-edge-scroll-indicator.visible{display:flex;opacity:.82;}
+.draw-overlay.precision-aiming .fan-edge-scroll-indicator.active{opacity:1;transform:translateY(-50%) scale(1.08);}
+
+
+
+/* === 2026-07-10 修正：抽牌槽直接顯示牌位名稱，紀錄頁保留實體牌陣形狀 === */
+.draw-position-now{display:none!important;}
+.draw-tray{gap:38px;padding-bottom:18px;}
+.tray-row{gap:22px;}
+.tray-slot .slot-label{
+  display:block!important;position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  margin-top:7px;width:78px;max-width:78px;min-height:2.5em;
+  color:var(--text);font-size:10.5px;line-height:1.25;text-align:center;
+  white-space:normal;word-break:break-word;overflow-wrap:anywhere;pointer-events:none;
+}
+.tray-slot.filled .slot-label{color:var(--gold-bright);}
+
+.spread-layout.detail-spread-shaped{position:relative;display:block;overflow:visible;padding:20px 8px;}
+.spread-layout.detail-spread-shaped .card-tile{
+  position:absolute;width:82px;min-height:124px;padding:7px 5px;gap:2px;
+  transform:translate(-50%,-50%);justify-content:flex-start;
+  box-shadow:0 7px 18px rgba(0,0,0,.26);
+}
+.spread-layout.detail-spread-shaped .card-tile .pos{
+  width:100%;min-height:2.4em;display:flex;align-items:center;justify-content:center;
+  font-size:9px;line-height:1.2;color:var(--text-muted);text-align:center;word-break:break-word;
+}
+.spread-layout.detail-spread-shaped .card-tile .rws-tile-img{width:48px;height:auto;aspect-ratio:2/3;margin:1px 0;}
+.spread-layout.detail-spread-shaped .card-tile .name{font-size:10.5px;line-height:1.2;}
+.spread-layout.detail-spread-shaped .card-tile .orient{font-size:8px;}
+.spread-layout.detail-spread-shaped[data-spread="single"]{min-height:260px;}
+.spread-layout.detail-spread-shaped[data-spread="timeflow"]{min-height:360px;}
+.spread-layout.detail-spread-shaped[data-spread="relationship"]{min-height:620px;}
+.spread-layout.detail-spread-shaped[data-spread="twochoice"]{min-height:600px;}
+.spread-layout.detail-spread-shaped[data-spread="cup"]{min-height:680px;}
+.spread-layout.detail-spread-shaped[data-spread="star"]{min-height:720px;}
+.spread-layout.detail-spread-shaped[data-spread="heartvoice"]{min-height:820px;}
+.spread-layout.detail-spread-shaped[data-spread="smallcross"]{min-height:620px;}
+.spread-layout.detail-spread-shaped[data-spread="fourElementsFixed"],
+.spread-layout.detail-spread-shaped[data-spread="fourElementsFree"]{min-height:650px;}
+
+@media (max-width:720px){
+  .draw-tray{gap:34px;padding-bottom:16px;}
+  .tray-row{gap:14px;}
+  .tray-slot .slot-label{width:66px;max-width:66px;font-size:9.5px;line-height:1.2;margin-top:6px;}
+  .spread-layout.detail-spread-shaped{padding-left:2px;padding-right:2px;}
+  .spread-layout.detail-spread-shaped .card-tile{width:68px;min-height:112px;padding:5px 3px;}
+  .spread-layout.detail-spread-shaped .card-tile .pos{font-size:8px;min-height:2.5em;}
+  .spread-layout.detail-spread-shaped .card-tile .rws-tile-img{width:42px;}
+  .spread-layout.detail-spread-shaped .card-tile .name{font-size:9.5px;}
+  .spread-layout.detail-spread-shaped[data-spread="timeflow"]{min-height:330px;}
+  .spread-layout.detail-spread-shaped[data-spread="relationship"]{min-height:600px;}
+  .spread-layout.detail-spread-shaped[data-spread="twochoice"]{min-height:580px;}
+  .spread-layout.detail-spread-shaped[data-spread="cup"]{min-height:650px;}
+  .spread-layout.detail-spread-shaped[data-spread="star"]{min-height:700px;}
+  .spread-layout.detail-spread-shaped[data-spread="heartvoice"]{min-height:800px;}
+  .spread-layout.detail-spread-shaped[data-spread="smallcross"]{min-height:600px;}
+}
+@media (max-width:380px){
+  .tray-row{gap:10px;}
+  .tray-slot .slot-label{width:58px;max-width:58px;font-size:9px;}
+  .spread-layout.detail-spread-shaped .card-tile{width:62px;min-height:106px;}
+  .spread-layout.detail-spread-shaped .card-tile .rws-tile-img{width:38px;}
+}
+
+
+
+/* === 2026-07-12 凱爾特十字：牌陣版預覽、牌位文字外置、中線精準對齊 === */
+.spread-preview-board[data-spread="celtic"]{
+  min-height:560px;
+  padding:18px 4px;
+  overflow:visible;
+}
+.spread-preview-board[data-spread="celtic"] .spread-preview-card{
+  width:72px;
+  min-height:116px;
+  z-index:2;
+}
+.spread-preview-board[data-spread="celtic"] .spread-preview-card .label{
+  display:block;
+  position:absolute;
+  left:50%;
+  top:100%;
+  transform:translateX(-50%);
+  width:88px;
+  max-width:88px;
+  margin-top:6px;
+  padding:3px 4px;
+  border-radius:6px;
+  background:rgba(12,10,20,.86);
+  border:1px solid rgba(201,162,75,.24);
+  color:var(--text);
+  font-size:10px;
+  line-height:1.25;
+  white-space:nowrap;
+  text-align:center;
+  text-shadow:none;
+  z-index:5;
+}
+.spread-preview-board[data-spread="celtic"] .spread-preview-card.crossed{
+  z-index:4;
+}
+.spread-preview-board[data-spread="celtic"] .spread-preview-card.crossed .preview-back{
+  transform:rotate(90deg);
+}
+.spread-preview-board[data-spread="celtic"] .spread-preview-card.crossed .num{
+  transform:translate(-50%,-50%) rotate(-90deg);
+}
+.spread-preview-board[data-spread="celtic"] .spread-preview-card.crossed .label{
+  display:block;
+  top:50%;
+  left:calc(100% + 28px);
+  transform:translateY(-50%);
+  margin:0;
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-5 .label,
+.spread-preview-board[data-spread="celtic"] .celtic-pos-10 .label{
+  top:auto;
+  bottom:100%;
+  margin-top:0;
+  margin-bottom:6px;
+}
+
+.spread-layout.detail-celtic-shaped{
+  min-height:760px!important;
+  padding:24px 4px;
+  overflow:visible;
+}
+.spread-layout.detail-celtic-shaped .card-tile{
+  width:72px;
+  min-height:150px;
+  padding:6px 4px;
+  overflow:visible;
+  z-index:2;
+}
+.spread-layout.detail-celtic-shaped .card-tile .pos{
+  position:absolute;
+  left:50%;
+  top:100%;
+  transform:translateX(-50%);
+  width:92px;
+  min-height:0;
+  margin-top:6px;
+  padding:4px 5px;
+  border-radius:6px;
+  border:1px solid rgba(201,162,75,.28);
+  background:rgba(12,10,20,.92);
+  color:var(--text);
+  font-size:10px;
+  line-height:1.25;
+  white-space:nowrap;
+  z-index:8;
+}
+.spread-layout.detail-celtic-shaped .card-tile .rws-tile-img{
+  width:54px;
+  margin:2px auto 4px;
+}
+.spread-layout.detail-celtic-shaped .card-tile.crossed{
+  z-index:5;
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
+  pointer-events:auto;
+}
+.spread-layout.detail-celtic-shaped .card-tile.crossed .rws-tile-img{
+  transform:rotate(90deg);
+  box-shadow:0 7px 18px rgba(0,0,0,.34);
+}
+.spread-layout.detail-celtic-shaped .card-tile.crossed.reversed .rws-tile-img{
+  transform:rotate(270deg);
+}
+.spread-layout.detail-celtic-shaped .card-tile.crossed .pos{
+  top:50%;
+  left:calc(100% + 34px);
+  transform:translateY(-50%);
+  margin:0;
+}
+.spread-layout.detail-celtic-shaped .card-tile.crossed .name,
+.spread-layout.detail-celtic-shaped .card-tile.crossed .orient{
+  position:relative;
+  top:62px;
+  background:rgba(12,10,20,.82);
+  border-radius:4px;
+  padding:1px 3px;
+}
+.spread-layout.detail-celtic-shaped .celtic-pos-5 .pos,
+.spread-layout.detail-celtic-shaped .celtic-pos-10 .pos{
+  top:auto;
+  bottom:100%;
+  margin-top:0;
+  margin-bottom:6px;
+}
+
+@media (max-width:520px){
+  .spread-preview-board[data-spread="celtic"]{min-height:520px;}
+  .spread-preview-board[data-spread="celtic"] .spread-preview-card{width:60px;min-height:104px;}
+  .spread-preview-board[data-spread="celtic"] .spread-preview-card .preview-back{width:48px;}
+  .spread-preview-board[data-spread="celtic"] .spread-preview-card .label{width:74px;max-width:74px;font-size:9px;}
+  .spread-preview-board[data-spread="celtic"] .spread-preview-card.crossed .label{left:calc(100% + 22px);}
+
+  .spread-layout.detail-celtic-shaped{min-height:700px!important;padding-left:0;padding-right:0;}
+  .spread-layout.detail-celtic-shaped .card-tile{width:62px;min-height:132px;padding:5px 3px;}
+  .spread-layout.detail-celtic-shaped .card-tile .rws-tile-img{width:44px;}
+  .spread-layout.detail-celtic-shaped .card-tile .pos{width:76px;font-size:9px;padding:3px;}
+  .spread-layout.detail-celtic-shaped .card-tile.crossed .pos{left:calc(100% + 24px);}
+  .spread-layout.detail-celtic-shaped .card-tile.crossed .name,
+  .spread-layout.detail-celtic-shaped .card-tile.crossed .orient{top:54px;}
+}
+
+
+/* === 2026-07-12 凱爾特中央交叉專用格式：第一張永遠可辨識，第二張資訊集中不散落 === */
+.spread-preview-board[data-spread="celtic"] .celtic-pos-1{
+  z-index:3;
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-1 .preview-back{
+  width:60px;
+  box-shadow:0 0 0 2px rgba(232,200,116,.42),0 10px 24px rgba(0,0,0,.42);
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-1 .label{
+  top:calc(100% + 3px);
+  left:22%;
+  transform:translateX(-50%);
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-2{
+  width:54px;
+  min-height:80px;
+  z-index:6;
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-2 .preview-back{
+  width:46px;
+  box-shadow:0 8px 18px rgba(0,0,0,.46),0 0 0 2px rgba(150,120,207,.42);
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-2 .label{
+  left:calc(100% + 24px);
+  width:64px;
+  max-width:64px;
+}
+
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card{
+  width:112px;
+  min-height:92px;
+  padding:0;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  overflow:visible;
+  z-index:9;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-visual{
+  position:absolute;
+  left:50%;top:50%;
+  width:50px;
+  transform:translate(-50%,-50%) rotate(90deg);
+  border-radius:7px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,.50),0 0 0 2px rgba(150,120,207,.48);
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card.reversed .celtic-cross-visual{
+  transform:translate(-50%,-50%) rotate(270deg);
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-visual .rws-tile-img{
+  width:50px;
+  margin:0;
+  transform:none!important;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta{
+  position:absolute;
+  left:calc(100% + 8px);
+  top:50%;
+  transform:translateY(-50%);
+  width:94px;
+  padding:6px 7px;
+  border-radius:8px;
+  border:1px solid rgba(150,120,207,.46);
+  background:rgba(12,10,20,.94);
+  box-shadow:0 8px 20px rgba(0,0,0,.34);
+  text-align:left;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .pos{
+  position:static;
+  width:auto;
+  transform:none;
+  margin:0 0 3px;
+  padding:0;
+  border:0;
+  background:none;
+  color:var(--gold-bright);
+  font-size:10px;
+  white-space:normal;
+  text-align:left;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .name{
+  position:static;
+  padding:0;
+  background:none;
+  font-size:10.5px;
+  line-height:1.25;
+  color:var(--text);
+  text-align:left;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .orient{
+  position:static;
+  padding:0;
+  background:none;
+  margin-top:2px;
+  font-size:8.5px;
+  color:var(--text-dim);
+  text-align:left;
+}
+.spread-layout.detail-celtic-shaped .celtic-pos-1{
+  z-index:4;
+}
+.spread-layout.detail-celtic-shaped .celtic-pos-1 .rws-tile-img{
+  box-shadow:0 0 0 2px rgba(232,200,116,.36),0 8px 20px rgba(0,0,0,.35);
+}
+
+@media (max-width:520px){
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-1 .preview-back{width:52px;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-2 .preview-back{width:40px;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-2 .label{left:calc(100% + 18px);width:56px;max-width:56px;}
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card{width:90px;}
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-visual,
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-visual .rws-tile-img{width:42px;}
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta{
+    left:calc(100% + 3px);
+    width:78px;
+    padding:5px 6px;
+  }
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .pos{font-size:9px;}
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .name{font-size:9.5px;}
+}
+
+
+
+/* === 2026-07-12 凱爾特手機易讀最終版：第2張位於第1張正下方 === */
+.spread-preview-board[data-spread="celtic"]{
+  min-height:610px;
+  overflow:visible;
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-1 .label{
+  left:50%;
+  top:100%;
+  transform:translateX(-50%);
+  margin-top:6px;
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-2{
+  width:96px;
+  min-height:82px;
+  z-index:4;
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-2 .preview-back{
+  width:48px;
+  transform:rotate(90deg);
+  transform-origin:center;
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-2 .num{
+  transform:translate(-50%,-50%) rotate(-90deg);
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-2 .label{
+  left:50%;
+  top:100%;
+  transform:translateX(-50%);
+  width:76px;
+  max-width:76px;
+  margin-top:5px;
+}
+/* 最終結果的牌位名稱放牌下方 */
+.spread-preview-board[data-spread="celtic"] .celtic-pos-10 .label{
+  top:100%;
+  bottom:auto;
+  margin-top:6px;
+  margin-bottom:0;
+}
+
+.spread-layout.detail-celtic-shaped{
+  min-height:820px!important;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card{
+  width:112px;
+  min-height:124px;
+  z-index:5;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-visual{
+  left:50%;
+  top:36px;
+  width:50px;
+  transform:translate(-50%,-50%) rotate(90deg);
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card.reversed .celtic-cross-visual{
+  transform:translate(-50%,-50%) rotate(270deg);
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta{
+  left:50%;
+  top:78px;
+  transform:translateX(-50%);
+  width:96px;
+  padding:5px 6px;
+  text-align:center;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .pos,
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .name,
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .orient{
+  text-align:center;
+}
+.spread-layout.detail-celtic-shaped .celtic-pos-10 .pos{
+  top:100%;
+  bottom:auto;
+  margin-top:6px;
+  margin-bottom:0;
+}
+
+@media (max-width:520px){
+  .spread-preview-board[data-spread="celtic"]{min-height:580px;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-2{width:82px;min-height:74px;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-2 .preview-back{width:42px;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-2 .label{
+    left:50%;width:66px;max-width:66px;
+  }
+  .spread-layout.detail-celtic-shaped{min-height:760px!important;}
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card{width:90px;min-height:112px;}
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-visual,
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-visual .rws-tile-img{width:42px;}
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-visual{top:32px;}
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta{
+    left:50%;top:69px;width:78px;padding:4px 5px;
+  }
+}
+
+
+
+/* === 2026-07-12 牌位名稱整合至卡片內，取消懸浮標籤；修復預覽文字 === */
+.spread-preview-board[data-spread="celtic"] .spread-preview-card{
+  overflow:visible!important;
+}
+.spread-preview-board[data-spread="celtic"] .spread-preview-card .label{
+  display:block!important;
+  position:absolute!important;
+  left:50%!important;
+  top:100%!important;
+  bottom:auto!important;
+  transform:translateX(-50%)!important;
+  margin:6px 0 0!important;
+  width:88px!important;
+  max-width:88px!important;
+  padding:3px 5px!important;
+  background:rgba(12,10,20,.92)!important;
+  border:1px solid rgba(201,162,75,.30)!important;
+  border-radius:6px!important;
+  color:var(--text)!important;
+  font-size:10px!important;
+  line-height:1.25!important;
+  white-space:nowrap!important;
+  opacity:1!important;
+  visibility:visible!important;
+  z-index:20!important;
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-2 .label{
+  margin-top:8px!important;
+}
+
+/* 紀錄頁：牌位名稱收進長卡片底部，不再懸浮於牌外 */
+.spread-layout.detail-celtic-shaped .card-tile{
+  overflow:hidden!important;
+  padding-bottom:8px!important;
+}
+.spread-layout.detail-celtic-shaped .card-tile .pos{
+  position:static!important;
+  left:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  transform:none!important;
+  width:calc(100% - 8px)!important;
+  min-height:0!important;
+  margin:5px auto 0!important;
+  padding:5px 2px 0!important;
+  border:0!important;
+  border-top:1px solid rgba(201,162,75,.22)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--text-muted)!important;
+  font-size:9px!important;
+  line-height:1.3!important;
+  white-space:normal!important;
+  text-align:center!important;
+  z-index:auto!important;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card{
+  overflow:hidden!important;
+  background:linear-gradient(160deg, var(--surface-2), var(--bg-elevated))!important;
+  border:1px solid var(--border)!important;
+  box-shadow:0 7px 18px rgba(0,0,0,.26)!important;
+  min-height:132px!important;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta{
+  position:absolute!important;
+  left:4px!important;
+  right:4px!important;
+  top:76px!important;
+  width:auto!important;
+  transform:none!important;
+  padding:0 3px 5px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  text-align:center!important;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .name,
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .orient{
+  position:static!important;
+  top:auto!important;
+  padding:0!important;
+  background:transparent!important;
+  text-align:center!important;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .pos{
+  margin-top:4px!important;
+  width:100%!important;
+}
+@media (max-width:520px){
+  .spread-preview-board[data-spread="celtic"] .spread-preview-card .label{
+    width:74px!important;
+    max-width:74px!important;
+    font-size:9px!important;
+  }
+  .spread-layout.detail-celtic-shaped .card-tile .pos{font-size:8px!important;}
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card{min-height:118px!important;}
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta{top:67px!important;}
+}
+
+
+/* === 2026-07-12 凱爾特預覽／紀錄同版型：牌位置頂、一般卡加寬 === */
+/* 預覽與紀錄皆採：牌位名稱 → 牌面 → 牌名 → 正逆位。預覽無牌名資料，保留相同卡框比例。 */
+.spread-preview-board[data-spread="celtic"] .spread-preview-card{
+  width:92px!important;
+  min-height:144px!important;
+  padding:7px 6px 9px!important;
+  overflow:hidden!important;
+  border:1px solid var(--border)!important;
+  border-radius:var(--radius-sm)!important;
+  background:linear-gradient(160deg,var(--surface-2),var(--bg-elevated))!important;
+  box-shadow:0 7px 18px rgba(0,0,0,.26)!important;
+  justify-content:flex-start!important;
+  gap:5px!important;
+}
+.spread-preview-board[data-spread="celtic"] .spread-preview-card .label{
+  position:static!important;
+  order:0!important;
+  transform:none!important;
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0 2px 5px!important;
+  border:0!important;
+  border-bottom:1px solid rgba(201,162,75,.22)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--text)!important;
+  font-size:10px!important;
+  line-height:1.25!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+}
+.spread-preview-board[data-spread="celtic"] .spread-preview-card .preview-back{
+  order:1!important;
+  width:58px!important;
+  margin:auto!important;
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-2{
+  width:112px!important;
+  min-height:124px!important;
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-2 .preview-back{
+  width:54px!important;
+  transform:rotate(90deg)!important;
+  margin:10px auto 8px!important;
+}
+.spread-preview-board[data-spread="celtic"] .celtic-pos-2 .num{
+  transform:translate(-50%,-50%) rotate(-90deg)!important;
+}
+
+.spread-layout.detail-celtic-shaped .card-tile{
+  width:92px!important;
+  min-height:162px!important;
+  padding:7px 6px 9px!important;
+  justify-content:flex-start!important;
+  gap:3px!important;
+  overflow:hidden!important;
+}
+.spread-layout.detail-celtic-shaped .card-tile .pos{
+  order:0!important;
+  position:static!important;
+  width:100%!important;
+  margin:0 0 5px!important;
+  padding:0 2px 5px!important;
+  border:0!important;
+  border-bottom:1px solid rgba(201,162,75,.22)!important;
+  background:transparent!important;
+  color:var(--text)!important;
+  font-size:10px!important;
+  line-height:1.25!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+}
+.spread-layout.detail-celtic-shaped .card-tile .rws-tile-img{order:1!important;width:58px!important;margin:0 auto 3px!important;}
+.spread-layout.detail-celtic-shaped .card-tile .name{order:2!important;font-size:11px!important;line-height:1.2!important;white-space:nowrap!important;}
+.spread-layout.detail-celtic-shaped .card-tile .orient{order:3!important;font-size:9px!important;}
+
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card{
+  width:112px!important;
+  min-height:138px!important;
+  padding:7px 6px 8px!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta{
+  position:static!important;
+  order:0!important;
+  width:100%!important;
+  transform:none!important;
+  padding:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .pos{order:0!important;}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-visual{
+  position:relative!important;
+  order:1!important;
+  left:auto!important;top:auto!important;
+  width:54px!important;
+  margin:6px auto 7px!important;
+  transform:rotate(90deg)!important;
+}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card.reversed .celtic-cross-visual{transform:rotate(270deg)!important;}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-visual .rws-tile-img{width:54px!important;}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .name{order:2!important;white-space:nowrap!important;}
+.spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-meta .orient{order:3!important;}
+
+@media (max-width:520px){
+  .spread-preview-board[data-spread="celtic"] .spread-preview-card{width:78px!important;min-height:132px!important;padding:6px 4px 8px!important;}
+  .spread-preview-board[data-spread="celtic"] .spread-preview-card .label{font-size:9px!important;}
+  .spread-preview-board[data-spread="celtic"] .spread-preview-card .preview-back{width:50px!important;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-2{width:98px!important;min-height:114px!important;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-2 .preview-back{width:46px!important;}
+  .spread-layout.detail-celtic-shaped .card-tile{width:78px!important;min-height:148px!important;padding:6px 4px 8px!important;}
+  .spread-layout.detail-celtic-shaped .card-tile .pos{font-size:9px!important;}
+  .spread-layout.detail-celtic-shaped .card-tile .rws-tile-img{width:50px!important;}
+  .spread-layout.detail-celtic-shaped .card-tile .name{font-size:10px!important;}
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card{width:98px!important;min-height:128px!important;}
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-visual,
+  .spread-layout.detail-celtic-shaped .card-tile.celtic-cross-card .celtic-cross-visual .rws-tile-img{width:46px!important;}
+}
+
+
+/* === 2026-07-12 桌機版凱爾特預覽加高與間距調整；手機版維持原樣 === */
+@media (min-width:641px){
+  .spread-preview-board[data-spread="celtic"]{
+    min-height:820px!important;
+  }
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-1{left:38%!important;top:39%!important;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-2{left:38%!important;top:58%!important;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-3{left:38%!important;top:84%!important;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-4{left:13%!important;top:39%!important;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-5{left:38%!important;top:13%!important;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-6{left:63%!important;top:39%!important;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-7{left:84%!important;top:84%!important;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-8{left:84%!important;top:60%!important;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-9{left:84%!important;top:36%!important;}
+  .spread-preview-board[data-spread="celtic"] .celtic-pos-10{left:84%!important;top:13%!important;}
+}
+
+
+
+/* === 2026-07-12 桌機抽牌舞台微調：左側安全區、抽牌區微上移、提示下移、拉霸避讓 === */
+@media (min-width:721px){
+  /* 舞台左右加真正可捲動的緩衝，最左／最右牌不再貼著容器邊緣。 */
+  .fan-wrap{
+    margin-top:-72px;
+    padding-left:max(120px, var(--draw-safe-edge));
+    padding-right:max(120px, var(--draw-safe-edge));
+    padding-top:0;
+    padding-bottom:74px;
+    scroll-padding-left:120px;
+    scroll-padding-right:120px;
+    scrollbar-gutter:stable;
+    align-items:flex-start;
+  }
+  .fan-stage{
+    margin-left:88px;
+    margin-right:88px;
+    height:clamp(370px,49vw,480px);
+  }
+  /* 牌底離水平拉霸保留明顯安全距離，拉霸不會吃到扇形下緣。 */
+  .fan-card{
+    bottom:48px;
+  }
+  /* 提示列獨立往下，讓扇形牌下緣先留一段呼吸空間。 */
+  .fan-swipe-hint{
+    margin-top:26px;
+    margin-bottom:14px;
+  }
+  .draw-bottom{
+    padding-top:8px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1544,7 +2288,7 @@
     </div>
     <img id="detail-photo" class="spread-photo" style="display:none;">
     <div class="section-label">牌陣</div>
-    <div id="celtic-mobile-hint" class="mobile-celtic-hint" style="display:none;"><strong>提示：</strong>凱爾特十字牌陣資訊較多，手機可旋轉為橫向畫面，牌位會比較完整好讀。</div>
+    <div id="celtic-mobile-hint" class="mobile-celtic-hint" style="display:none;"><strong>提示：</strong>牌位依抽牌順序排列，右側由下往上為 7、8、9、10。</div>
     <div class="spread-grid" id="detail-cards"></div>
 
     <div class="section-label">基本分析</div>
@@ -1647,11 +2391,16 @@
 <!-- 抽牌覆蓋層 -->
 <div class="draw-overlay" id="draw-overlay">
   <div class="draw-top">
-    <div class="title" id="draw-title">請依序點選牌卡</div>
+    <div class="draw-heading">
+      <div class="title" id="draw-title">請依序點選牌卡</div>
+    </div>
     <div class="icon-btn" id="draw-close"><svg class="ph" aria-hidden="true" viewBox="0 0 256 256"><path d="M70 52l58 58 58-58 18 18-58 58 58 58-18 18-58-58-58 58-18-18 58-58-58-58z"/></svg></div>
   </div>
   <div class="draw-tray" id="draw-tray"></div>
   <div class="fan-aim-preview" id="fan-aim-preview" aria-hidden="true"><div class="fan-aim-card"></div><div class="fan-aim-text" id="fan-aim-text">目前指向這張牌<small>放開後會先推出，再點一次確認抽牌</small></div></div>
+
+  <div class="fan-edge-scroll-indicator left" id="fan-edge-left" aria-hidden="true">‹</div>
+  <div class="fan-edge-scroll-indicator right" id="fan-edge-right" aria-hidden="true">›</div>
   <div class="fan-wrap" id="fan-wrap">
     <div class="fan-stage" id="fan-stage"></div>
   </div>
@@ -1834,6 +2583,8 @@ function hardenTarotImageInteractions(root){
 });
 
 window.addEventListener("load", function(){ hardenTarotImageInteractions(document); });
+window.addEventListener("resize", scheduleFanCurveForScroll, {passive:true});
+
 
 var CARD_MEANINGS = {
 "愚者": {
@@ -2241,10 +2992,10 @@ var SPREADS = {
   },
   celtic:{
     name:"凱爾特十字",
-    positions:["你或你的問題","橫在你眼前的事","問題概況、隱藏因素或過去累積","過去","懸在你頭頂上的事：可能發生的事，也可能是你預想的狀況","不久的將來","你內心真正害怕或負面想法（真實心態）","周圍的人對此事的感受（環境能量）","你的期待與願望","最終結果"],
-    restriction:{"你或你的問題":"any","橫在你眼前的事":"any","問題概況、隱藏因素或過去累積":"any","過去":"any","懸在你頭頂上的事：可能發生的事，也可能是你預想的狀況":"any","不久的將來":"any","你內心真正害怕或負面想法（真實心態）":"any","周圍的人對此事的感受（環境能量）":"any","你的期待與願望":"any","最終結果":"any"},
+    positions:["現況","問題","潛在","過去","懸著的事","不久將來","真實心態","外在環境","希望恐懼","最終結果"],
+    restriction:{"現況":"any","問題":"any","潛在":"any","過去":"any","懸著的事":"any","不久將來":"any","真實心態":"any","外在環境":"any","希望恐懼":"any","最終結果":"any"},
     help:"適合重大問題與長線分析。資訊量很大，像把事件拆成一座小型迷宮，適合有時間好好寫覺察時使用。",
-    layout:{"你或你的問題":[38,50],"橫在你眼前的事":[38,50],"問題概況、隱藏因素或過去累積":[38,76],"過去":[13,50],"懸在你頭頂上的事：可能發生的事，也可能是你預想的狀況":[38,24],"可能發生的事":[38,24],"不久的將來":[63,50],"你內心真正害怕或負面想法（真實心態）":[84,82],"周圍的人對此事的感受（環境能量）":[84,60],"你的期待與願望":[84,38],"最終結果":[84,16]}
+    layout:{"現況":[38,42],"問題":[38,61],"潛在":[38,82],"過去":[13,42],"懸著的事":[38,14],"不久將來":[63,42],"真實心態":[84,82],"外在環境":[84,60],"希望恐懼":[84,38],"最終結果":[84,16]}
   },
   fourElementsFixed:{
     name:"四元素牌陣（限定花色）", positions:["主牌","火","水","風","土"],
@@ -2789,16 +3540,55 @@ function renderEnergyTrendChart(data){
     '</svg></div>';
 }
 
+var MONTHLY_REVIEW_INSTRUCTIONS = "# 證據優先原則（Evidence First）\n\n本次分析必須以使用者提供的紀錄為主要依據，而非自行延伸推論。\n\n請遵守以下規則：\n\n1. 每一項重要觀察，應盡可能引用一至三筆相關紀錄作為依據，例如：\n\n   * 日期\n   * 問題\n   * 牌陣位置\n   * 抽到的牌\n   * 使用者的筆記\n\n2. 若同一結論只有一筆紀錄支持，請避免下定論，改用以下較保留的描述：\n\n   * 「可能」\n   * 「目前看來」\n   * 「值得持續觀察」\n   * 「目前資料不足以確認」\n\n3. 只有當兩筆以上紀錄呈現一致趨勢時，才可將其描述為：\n\n   * 「重複出現的模式」\n   * 「目前可觀察到的傾向」\n\n4. 若不同紀錄彼此矛盾，請直接指出存在不同訊號，不要強行整合成單一結論。\n\n5. 若資料不足，請誠實說明：\n\n   > 目前沒有足夠證據支持此推論。\n\n   不要為了完整性而自行補足原因或故事。\n\n6. 不要因為牌義相似，就假設不同事件具有相同原因。請優先比較問題內容、事件背景與使用者的紀錄，再判斷是否存在關聯。\n\n7. 請避免使用過度肯定或命定式的語句，例如：\n\n   * 「這代表……」\n   * 「可以確定……」\n   * 「你的課題就是……」\n   * 「宇宙正在告訴你……」\n\n   請改用較符合證據的描述，例如：\n\n   * 「目前紀錄顯示……」\n   * 「從本月資料來看……」\n   * 「這可能反映……」\n   * 「值得持續觀察……」\n   * 「目前尚無足夠資料支持此推論。」\n\n8. 若使用者後續驗證的內容與當初的抽牌解讀不同，請不要視為「占卜錯誤」，而是將兩者一起分析，探討使用者的理解、事件發展或提問方式是否因此產生新的資訊。\n\n分析的目標不是給出正確答案，而是協助使用者從自己的紀錄中發現有證據支持的模式，並區分哪些已經形成趨勢，哪些仍只是值得驗證的假設。\n\n---\n\n# 每月塔羅回顧 AI 提示詞\n\n你是一位協助整理與分析紀錄的 AI。\n\n你的任務不是預測未來，也不是過度解讀牌義，而是根據使用者一整個月的塔羅紀錄，找出值得注意的模式、變化與仍待驗證的假設。\n\n請將塔羅牌視為「思考與覺察的符號」，而不是命運的答案。\n\n回答時請遵守以下原則。\n\n## 分析原則\n\n1. 優先依據使用者的紀錄內容分析，而不是單獨解釋牌義。\n\n2. 每個重要觀察都應盡量引用對應的紀錄作為依據。\n\n3. 不要刻意正向鼓勵，也不要製造焦慮。\n\n4. 不要為了完整而分析所有內容，請聚焦真正重要的模式。\n\n5. 若資料不足，請直接說明目前無法判斷，不要自行推論。\n\n6. 對於同一件事情的多次占卜，請觀察它是否有新的資訊或進展，而不是只比較牌義。\n\n---\n\n# 請依照以下結構分析\n\n## 一、本月概況（簡短）\n\n簡單統計本月資料，例如：\n\n* 占卜總次數\n* 使用牌陣\n* 正位／逆位比例\n* 大阿爾克那出現次數\n* 日常小決策占多少比例，例如是否運動、是否出遊、是否放假等\n\n如果本月有不少日常小問題，可以簡單說明：\n\n> 本月也持續透過塔羅記錄生活中的小決策，這些紀錄有助於觀察日常習慣，但以下回顧將聚焦於較重要且重複出現的主題。\n\n不用深入分析這些小問題。\n\n---\n\n## 二、本月最值得關注的 3 個主題\n\n請找出真正重要且重複出現的議題。\n\n例如：\n\n* 工作\n* 感情\n* 創作\n* 健康\n* 自我成長\n* 家庭\n\n每個主題請說明：\n\n* 出現了幾次\n* 問題如何演變\n* 是否有新的資訊加入\n* 是否已有進展\n* 或仍停留在同一個問題\n\n請引用相關紀錄作為依據。\n\n---\n\n## 三、重複出現的大阿爾克那\n\n請找出本月重複出現的大阿爾克那。\n\n不要直接解牌。\n\n請回答：\n\n* 這張牌主要出現在什麼類型的問題？\n* 出現在哪些牌陣位置？\n* 是否跨越不同事件仍持續出現？\n* 是否代表同一個核心議題正在持續被探索？\n\n如果只是巧合，也請直接說明沒有足夠證據。\n\n---\n\n## 四、重複出現的模式\n\n請找出值得注意的模式，例如：\n\n* 相同問題反覆出現\n* 相同情緒反覆出現\n* 相同牌位反覆出現\n* 相同元素比例明顯偏高\n* 相同人物牌反覆出現\n\n請區分以下兩類：\n\n### 已有足夠證據支持的模式\n\n以及\n\n### 目前只是值得持續觀察的假設\n\n不要混為一談。\n\n---\n\n## 五、重複提問分析\n\n如果使用者多次詢問相近問題，請判斷比較接近哪一種。\n\n### A. 持續探索\n\n每次問題都有新的事件、新的背景或新的資訊。\n\n代表正在推進同一個議題。\n\n### B. 重複確認\n\n問題內容幾乎沒有改變。\n\n新的資訊很少。\n\n比較像希望再次確認相同答案。\n\n如果沒有重複提問，也請直接說明。\n\n---\n\n## 六、有哪些事情已經產生變化？\n\n請比較月初與月底。\n\n例如：\n\n* 問題是否改變？\n* 思考方式是否改變？\n* 抽牌結果是否開始出現不同方向？\n* 第一直覺與後續驗證是否出現新的理解？\n\n如果沒有足夠資料，也請誠實說明。\n\n---\n\n## 七、目前仍卡住的地方\n\n請指出目前仍反覆出現、尚未看到明顯進展的議題。\n\n請聚焦一到三個重點即可。\n\n不要一次列出很多問題。\n\n如果使用者情緒較低落，也請聚焦真正反覆出現的核心，而不是逐條分析所有負面內容。\n\n---\n\n## 八、下個月值得持續觀察的重點\n\n請不要給建議。\n\n請改成提出值得驗證的觀察，例如：\n\n* 哪個議題值得繼續追蹤？\n* 哪張牌是否仍會再次出現？\n* 哪種情境容易引發相同思考模式？\n* 哪個假設下個月可以持續驗證？\n\n請避免直接告訴使用者應該怎麼做。\n\n---\n\n## 九、一句總結\n\n最後請用一句客觀的描述，總結這個月。\n\n避免雞湯式鼓勵。\n\n請像研究者整理報告一樣，例如：\n\n* 本月的焦點逐漸由「是否開始」轉向「如何優化」。\n* 同一議題持續出現，但目前尚未看到明顯轉折。\n* 工作相關問題開始形成固定的決策模式，值得持續追蹤。\n* 本月資料顯示創作與工作已逐漸交織成同一個核心議題。\n\n重點是忠於紀錄，而不是刻意給出勵志結論。";
+
 function buildMonthlyAiPrompt(y, m, recs, totalCards, reversedRate, topCards, topWords, topSuit, trend){
   var lines = [];
-  lines.push("請幫我做塔羅月末覆盤。請不要替我算命，而是協助我整理覺察、問題模式與下個月行動提醒。");
+  lines.push(MONTHLY_REVIEW_INSTRUCTIONS);
+  lines.push("");
+  lines.push("---");
+  lines.push("");
+  lines.push("# 本月資料");
+  lines.push("");
   lines.push("月份："+y+" 年 "+(m+1)+" 月");
-  lines.push("占卜次數："+recs.length+"；累積牌數："+totalCards+"；逆位比例："+reversedRate+"%");
-  lines.push("常出現的牌："+(topCards.length ? topCards.map(function(x){return x.name+"×"+x.count;}).join("、") : "暫無"));
-  lines.push("提問關鍵字："+(topWords.length ? topWords.map(function(x){return x.name+"×"+x.count;}).join("、") : "暫無"));
+  lines.push("占卜總次數："+recs.length);
+  lines.push("累積牌數："+totalCards);
+  lines.push("逆位比例："+reversedRate+"%");
+  lines.push("常出現的牌："+(topCards.length ? topCards.map(function(x){return x.name+" × "+x.count;}).join("、") : "暫無"));
+  lines.push("提問關鍵字："+(topWords.length ? topWords.map(function(x){return x.name+" × "+x.count;}).join("、") : "暫無"));
   lines.push("能量主軸："+(topSuit ? suitDisplayName(topSuit.name)+"，"+suitHint(topSuit.name) : "暫無"));
-  lines.push("能量趨勢："+(trend.length ? trend.map(function(x){return x.label+"="+x.value;}).join("、") : "暫無"));
-  lines.push("請用以下結構回覆：1. 本月主線任務 2. 反覆卡關點 3. 我可能正在逃避或誤判的地方 4. 下個月可以實驗的三個小行動 5. 一句適合貼回占卜日誌的總結。");
+  lines.push("能量趨勢："+(trend.length ? trend.map(function(x){return x.label+" = "+x.value;}).join("、") : "暫無"));
+  lines.push("");
+  lines.push("# 本月完整紀錄");
+  lines.push("");
+
+  var sorted = recs.slice().sort(function(a,b){
+    if(a.date !== b.date) return a.date < b.date ? -1 : 1;
+    return (a.createdAt||0) - (b.createdAt||0);
+  });
+
+  sorted.forEach(function(r, idx){
+    var spreadName = SPREADS[r.spreadType] ? SPREADS[r.spreadType].name : (r.spreadType || "未標示");
+    lines.push("## 紀錄 "+(idx+1));
+    lines.push("占卜日期："+(r.date || "未填寫"));
+    lines.push("探索問題："+(r.question || "未填寫"));
+    lines.push("使用牌陣："+spreadName);
+    lines.push("抽到的牌：");
+    if(r.cards && r.cards.length){
+      r.cards.forEach(function(c, cardIdx){
+        var pos = c.position || ("第 "+(cardIdx+1)+" 張");
+        var orient = c.orientation === "reversed" ? "逆位" : "正位";
+        lines.push("- "+pos+"："+(c.cardName || "未標示")+"（"+orient+"）");
+      });
+    }else{
+      lines.push("- 無牌卡資料");
+    }
+    lines.push("第一直覺與覺察筆記："+(r.thoughts || "未填寫"));
+    lines.push("AI 解讀："+(r.aiReading || "未填寫"));
+    lines.push("後續驗證："+(r.followUp || "未填寫"));
+    lines.push("");
+  });
+
   return lines.join("\n");
 }
 
@@ -3054,15 +3844,16 @@ function renderSpreadPreview(){
   if(!el || !spread) return;
   var cards = spread.positions.map(function(pos, idx){
     var point = spread.layout && spread.layout[pos] ? spread.layout[pos] : [50,50];
-    var crossed = spreadSelect.value === "celtic" && pos === "橫在你眼前的事";
-    return '<div class="spread-preview-card '+(crossed ? 'crossed' : '')+'" title="'+escapeHtml(pos)+'" style="left:'+point[0]+'%;top:'+point[1]+'%;">'+
+    var crossed = false; // 第2張改為獨立橫牌，不再覆蓋第1張
+    var celticClass = spreadSelect.value === "celtic" ? ' celtic-pos-'+(idx+1) : '';
+    return '<div class="spread-preview-card '+(crossed ? 'crossed' : '')+celticClass+'" title="'+escapeHtml(pos)+'" style="left:'+point[0]+'%;top:'+point[1]+'%;">'+
+      '<div class="label">'+(idx+1)+' · '+escapeHtml(pos)+'</div>'+
       '<div class="preview-back"><div class="num">'+(idx+1)+'</div></div>'+
-      '<div class="label">'+escapeHtml(pos)+'</div>'+
     '</div>';
   }).join("");
   // 5張以上視為「大牌陣」，加上 data-dense 供手機版切換為 RWD grid 顯示，避免絕對定位造成重疊或壓縮。
   // 但杯型與星型本身需要保留牌陣形狀，所以手機版也維持絕對定位。
-  var shapedPreview = spreadSelect.value === "cup" || spreadSelect.value === "star";
+  var shapedPreview = spreadSelect.value === "cup" || spreadSelect.value === "star" || spreadSelect.value === "celtic";
   var denseAttr = spread.positions.length >= 5 && !shapedPreview ? ' data-dense="true"' : '';
   el.innerHTML = '<div class="spread-preview-title"><span>'+'牌陣預覽</span><span>'+spread.positions.length+' 張</span></div>'+
     '<div class="spread-preview-board" data-spread="'+escapeHtml(spreadSelect.value)+'"'+denseAttr+'>'+cards+'</div>';
@@ -3176,9 +3967,113 @@ var fanAimingCard = null;
 var fanPointerAim = null;
 var suppressFanClickUntil = 0;
 var fanTouchAim = null;
+var fanEdgeScrollRaf = 0;
+var fanEdgeScrollLastTime = 0;
+
+// 手機版平移時，不改變 78 張牌原本的扇形鋪排。
+// 只把整個扇形牌堆視為一個區塊：以初始置中的位置為 (0,0)，
+// 往左或往右捲得越遠，整體 Y 軸就越往上，形成沿著扇形上緣移動的體感。
+// 這裡只更新 fan-stage 的單一 transform，不逐張重算，避免捲動延遲。
+function updateFanCurveForScroll(){
+  var wrap = document.getElementById("fan-wrap");
+  var stage = document.getElementById("fan-stage");
+  if(!wrap || !stage) return;
+
+  if(!isMobileDrawConfirmMode()){
+    stage.style.transform = "translate3d(0,0,0)";
+    return;
+  }
+
+  var maxScroll = Math.max(0, wrap.scrollWidth - wrap.clientWidth);
+  var defaultOrigin = maxScroll / 2;
+  var origin = Number(stage.dataset.fanScrollOrigin);
+  if(!Number.isFinite(origin)){
+    origin = defaultOrigin;
+    stage.dataset.fanScrollOrigin = String(origin);
+  }
+
+  var halfRange = Math.max(1, Math.max(origin, maxScroll - origin));
+  var distance = Math.abs(wrap.scrollLeft - origin);
+  var t = Math.max(0, Math.min(1, distance / halfRange));
+
+  // 中央附近保持穩定，越靠兩側上升越明顯。
+  // 二次曲線比線性位移自然，也不會像全圓輪盤。
+  var maxDrop = Math.max(34, Math.min(74, wrap.clientWidth * 0.13));
+  var liftY = maxDrop * t * t;
+  stage.style.transform = "translate3d(0,-" + liftY.toFixed(2) + "px,0)";
+}
+function scheduleFanCurveForScroll(){
+  // 只有一個容器 transform，計算量很小，直接跟手更新，避免 rAF 帶來一拍延遲。
+  updateFanCurveForScroll();
+}
 
 function isMobileDrawConfirmMode(){
   return window.innerWidth <= 720 || (window.matchMedia && window.matchMedia("(hover:none)").matches);
+}
+function updateFanEdgeIndicators(direction, active){
+  var left = document.getElementById("fan-edge-left");
+  var right = document.getElementById("fan-edge-right");
+  [left,right].forEach(function(el){ if(el) el.classList.remove("visible","active"); });
+  var el = direction < 0 ? left : direction > 0 ? right : null;
+  if(el){ el.classList.add("visible"); if(active) el.classList.add("active"); }
+}
+function stopFanEdgeScroll(){
+  if(fanEdgeScrollRaf) cancelAnimationFrame(fanEdgeScrollRaf);
+  fanEdgeScrollRaf = 0;
+  fanEdgeScrollLastTime = 0;
+  updateFanEdgeIndicators(0, false);
+}
+function getActiveFanAimState(){ return fanTouchAim || fanPointerAim; }
+function updateFanSelectionUnderFinger(state){
+  if(!state || state.cancelled) return;
+  var card = getFanCardFromPoint(state.x, state.y);
+  if(card && !card.classList.contains("used")){
+    state.card = card;
+    var cards = getLiveFanCards();
+    state.currentIndex = Math.max(0, cards.indexOf(card));
+    setFanAimingCard(card);
+  }
+}
+function rebaseFanDragAnchor(state){
+  if(!state) return;
+  // 邊緣自動捲動時，是牌堆在手指下方移動，不是手指累積了巨大位移。
+  // 每幀把「左右微調」的基準重設到目前手指與目前牌，避免離開邊緣反向拖曳時
+  // 又拿最初長按座標計算，造成選牌瞬間跳到螢幕另一側。
+  var cards = getLiveFanCards();
+  var index = state.card ? cards.indexOf(state.card) : state.currentIndex;
+  if(index == null || index < 0) index = Math.max(0, state.currentIndex || 0);
+  state.dragAnchorX = state.x;
+  state.dragAnchorIndex = index;
+  state.currentIndex = index;
+  state.smoothX = state.x;
+  state.lastSwitchAt = Date.now();
+}
+function runFanEdgeScroll(now){
+  var state = getActiveFanAimState();
+  var wrap = document.getElementById("fan-wrap");
+  if(!state || !wrap || state.cancelled){ stopFanEdgeScroll(); return; }
+  var rect = wrap.getBoundingClientRect();
+  var edge = Math.max(54, Math.min(92, rect.width * .18));
+  var leftDepth = Math.max(0, edge - (state.x - rect.left));
+  var rightDepth = Math.max(0, edge - (rect.right - state.x));
+  var direction = leftDepth > 0 ? -1 : rightDepth > 0 ? 1 : 0;
+  var depth = direction < 0 ? leftDepth : rightDepth;
+  var canScroll = direction < 0 ? wrap.scrollLeft > 1 : direction > 0 ? wrap.scrollLeft < wrap.scrollWidth - wrap.clientWidth - 1 : false;
+  updateFanEdgeIndicators(direction, direction !== 0 && canScroll);
+  if(direction && canScroll){
+    var dt = fanEdgeScrollLastTime ? Math.min(34, now - fanEdgeScrollLastTime) : 16;
+    var strength = Math.max(0, Math.min(1, depth / edge));
+    var speed = 70 + 360 * strength * strength;
+    wrap.scrollLeft += direction * speed * dt / 1000;
+    updateFanCurveForScroll();
+    updateFanSelectionUnderFinger(state);
+    rebaseFanDragAnchor(state);
+  }
+  fanEdgeScrollLastTime = now;
+  fanEdgeScrollRaf = requestAnimationFrame(runFanEdgeScroll);
+}
+function ensureFanEdgeScroll(){
+  if(!fanEdgeScrollRaf) fanEdgeScrollRaf = requestAnimationFrame(runFanEdgeScroll);
 }
 function clearMobileFanSelection(){
   if(mobileSelectedFanCard && mobileSelectedFanCard.classList){
@@ -3197,6 +4092,7 @@ function updateFanAimPreview(cardEl, mode){
   // 目前指向的牌直接以金框、亮度與上推位移標示。
 }
 function hideFanAimPreview(){
+  stopFanEdgeScroll();
   clearFanAimingCard();
   var overlay = document.getElementById("draw-overlay");
   if(overlay) overlay.classList.remove("precision-aiming", "cancel-aiming");
@@ -3244,16 +4140,59 @@ function getFanCardFromPoint(x, y){
   });
   return best;
 }
+function getFanCardFromPointStable(pointerState, x, y){
+  var cards = getLiveFanCards();
+  if(!cards.length) return null;
+
+  // 依手指在畫面上的實際 X 位置選牌。這與邊緣自動捲動使用同一套座標邏輯，
+  // 避免螢幕中段用「起點位移換算索引」時，因牌卡重疊而讓金框逐漸離開手指。
+  var centers = cards.map(function(card){
+    var r = card.getBoundingClientRect();
+    return { card:card, x:r.left + r.width / 2, y:r.top + r.height / 2 };
+  });
+  var nearestIndex = 0;
+  var nearestScore = Infinity;
+  centers.forEach(function(p, i){
+    var score = Math.abs(p.x - x) + Math.abs(p.y - y) * 0.05;
+    if(score < nearestScore){ nearestScore = score; nearestIndex = i; }
+  });
+
+  var currentIndex = (pointerState && typeof pointerState.currentIndex === "number")
+    ? Math.max(0, Math.min(cards.length - 1, pointerState.currentIndex))
+    : nearestIndex;
+  if(nearestIndex === currentIndex) return cards[currentIndex];
+
+  // 不降低更新頻率，只在相鄰牌中心的分界線加極小緩衝，防止手指剛好壓在
+  // 兩張重疊牌的交界時，金框一幀左、一幀右。跨過分界後仍會立即更新。
+  var direction = nearestIndex > currentIndex ? 1 : -1;
+  var nextIndex = currentIndex + direction;
+  var currentCenter = centers[currentIndex].x;
+  var nextCenter = centers[nextIndex].x;
+  var boundary = (currentCenter + nextCenter) / 2;
+  var hysteresis = 2;
+  var crossed = direction > 0 ? x >= boundary + hysteresis : x <= boundary - hysteresis;
+
+  if(crossed){
+    // 手指若一次跨過多張，直接採用目前視覺上最近的牌，不必逐張追趕。
+    pointerState.currentIndex = nearestIndex;
+    pointerState.lastSwitchAt = Date.now();
+    return cards[nearestIndex];
+  }
+  return cards[currentIndex];
+}
+
 function getFanCardByDragDelta(pointerState, x){
   if(!pointerState) return null;
   var cards = getLiveFanCards();
   if(!cards.length) return null;
-  var startIndex = Math.max(0, Math.min(cards.length - 1, pointerState.startIndex || 0));
+  var anchorIndex = (typeof pointerState.dragAnchorIndex === "number") ? pointerState.dragAnchorIndex : pointerState.startIndex;
+  var anchorX = (typeof pointerState.dragAnchorX === "number") ? pointerState.dragAnchorX : pointerState.startX;
+  var startIndex = Math.max(0, Math.min(cards.length - 1, anchorIndex || 0));
   var startWidth = pointerState.startCardWidth || 60;
   // 手機精準微調：不必真的滑到下一張中心，只要左右移動約半張牌寬，就切到隔壁牌。
   // 這樣手指不用離開原本區域，也能在附近牌之間清楚挑選。
   var step = Math.max(18, Math.min(34, startWidth * 0.42));
-  var offset = Math.round((x - pointerState.startX) / step);
+  var offset = Math.round((x - anchorX) / step);
   var targetIndex = Math.max(0, Math.min(cards.length - 1, startIndex + offset));
   return cards[targetIndex] || cards[startIndex] || null;
 }
@@ -3261,15 +4200,17 @@ function getFanCardBySmoothDragDelta(pointerState, x){
   if(!pointerState) return null;
   var cards = getLiveFanCards();
   if(!cards.length) return null;
-  var startIndex = Math.max(0, Math.min(cards.length - 1, pointerState.startIndex || 0));
+  var anchorIndex = (typeof pointerState.dragAnchorIndex === "number") ? pointerState.dragAnchorIndex : pointerState.startIndex;
+  var anchorX = (typeof pointerState.dragAnchorX === "number") ? pointerState.dragAnchorX : pointerState.startX;
+  var startIndex = Math.max(0, Math.min(cards.length - 1, anchorIndex || 0));
   var startWidth = pointerState.startCardWidth || 60;
-  // 手機防抖：用「起點 + 位移」推算目標牌，不用即時 hit-test。
+  // 手機防抖：用「目前基準 + 位移」推算目標牌，不用即時 hit-test。
   // hit-test 會因為選中牌上推、亮框、手指遮擋而在相鄰牌之間鬼打牆。
   var step = Math.max(26, Math.min(52, startWidth * 0.68));
   var now = Date.now();
-  var lastX = (typeof pointerState.smoothX === 'number') ? pointerState.smoothX : pointerState.startX;
+  var lastX = (typeof pointerState.smoothX === 'number') ? pointerState.smoothX : anchorX;
   pointerState.smoothX = lastX * 0.62 + x * 0.38;
-  var dx = pointerState.smoothX - pointerState.startX;
+  var dx = pointerState.smoothX - anchorX;
   if(Math.abs(dx) < Math.max(10, startWidth * 0.16)){
     return cards[pointerState.currentIndex ?? startIndex] || cards[startIndex] || null;
   }
@@ -3292,12 +4233,15 @@ function activateFanDragAim(e, cardEl){
   var cards = getLiveFanCards();
   var card = getFanCardFromPoint(fanPointerAim.x, fanPointerAim.y) || cardEl;
   fanPointerAim.startIndex = Math.max(0, cards.indexOf(card));
+  fanPointerAim.dragAnchorIndex = fanPointerAim.startIndex;
+  fanPointerAim.dragAnchorX = fanPointerAim.x;
   var startRect = card.getBoundingClientRect ? card.getBoundingClientRect() : null;
   fanPointerAim.startCardWidth = startRect ? startRect.width : 60;
   fanPointerAim.active = true;
   fanPointerAim.card = card;
   setFanAimingCard(card);
   setFanAimCancelState(false);
+  ensureFanEdgeScroll();
 }
 function cancelFanAimTimer(){
   if(fanPointerAim && fanPointerAim.timer){
@@ -3323,6 +4267,8 @@ function onFanPointerAimStart(e, cardEl){
     startX:e.clientX,
     startY:e.clientY,
     startIndex:0,
+    dragAnchorIndex:0,
+    dragAnchorX:e.clientX,
     startCardWidth:60,
     active:true,
     timer:null
@@ -3338,7 +4284,12 @@ function onFanPointerAimMove(e){
   fanPointerAim.cancelled = isFanAimCancelled(fanPointerAim, e.clientY);
   setFanAimCancelState(fanPointerAim.cancelled);
   if(fanPointerAim.cancelled) return;
-  var card = getFanCardByDragDelta(fanPointerAim, e.clientX) || getFanCardFromPoint(e.clientX, e.clientY);
+  ensureFanEdgeScroll();
+  var wrap = document.getElementById("fan-wrap");
+  var wr = wrap ? wrap.getBoundingClientRect() : null;
+  var edge = wr ? Math.max(54, Math.min(92, wr.width * .18)) : 70;
+  var inEdge = wr && (e.clientX < wr.left + edge || e.clientX > wr.right - edge);
+  var card = getFanCardFromPointStable(fanPointerAim, e.clientX, e.clientY) || getFanCardFromPoint(e.clientX, e.clientY);
   if(card && !card.classList.contains("used")){
     fanPointerAim.card = card;
     setFanAimingCard(card);
@@ -3347,6 +4298,7 @@ function onFanPointerAimMove(e){
 function onFanPointerAimEnd(e){
   if(!fanPointerAim || fanPointerAim.pointerId !== e.pointerId || !isMobileDrawConfirmMode()) return;
   cancelFanAimTimer();
+  stopFanEdgeScroll();
   if(e.cancelable) e.preventDefault();
   // 放開時優先使用目前已鎖定的 aiming card；避免 release 點被手指遮擋或牌重疊時判不到。
   var cancelled = fanPointerAim.cancelled || isFanAimCancelled(fanPointerAim, e.clientY);
@@ -3379,6 +4331,7 @@ function onFanPointerAimEnd(e){
 function onFanPointerAimCancel(e){
   if(fanPointerAim && fanPointerAim.pointerId === e.pointerId){
     cancelFanAimTimer();
+    stopFanEdgeScroll();
     fanPointerAim = null;
     var overlay = document.getElementById("draw-overlay");
     if(overlay) overlay.classList.remove("precision-aiming", "cancel-aiming");
@@ -3419,6 +4372,8 @@ function startFanTouchAim(e, cardEl){
     y:t.clientY,
     smoothX:t.clientX,
     startIndex:Math.max(0, cards.indexOf(cardEl)),
+    dragAnchorIndex:Math.max(0, cards.indexOf(cardEl)),
+    dragAnchorX:t.clientX,
     currentIndex:Math.max(0, cards.indexOf(cardEl)),
     startCardWidth:startRect ? startRect.width : 60,
     lastSwitchAt:Date.now()
@@ -3426,6 +4381,7 @@ function startFanTouchAim(e, cardEl){
   fanPointerAim = null;
   setFanAimingCard(cardEl);
   setFanAimCancelState(false);
+  ensureFanEdgeScroll();
 }
 function moveFanTouchAim(e){
   if(!fanTouchAim || !isMobileDrawConfirmMode()) return;
@@ -3438,7 +4394,12 @@ function moveFanTouchAim(e){
   fanTouchAim.cancelled = isFanAimCancelled(fanTouchAim, t.clientY);
   setFanAimCancelState(fanTouchAim.cancelled);
   if(fanTouchAim.cancelled) return;
-  var card = getFanCardBySmoothDragDelta(fanTouchAim, t.clientX);
+  ensureFanEdgeScroll();
+  var wrap = document.getElementById('fan-wrap');
+  var wr = wrap ? wrap.getBoundingClientRect() : null;
+  var edge = wr ? Math.max(54, Math.min(92, wr.width * .18)) : 70;
+  var inEdge = wr && (t.clientX < wr.left + edge || t.clientX > wr.right - edge);
+  var card = getFanCardFromPointStable(fanTouchAim, t.clientX, t.clientY) || getFanCardFromPoint(t.clientX, t.clientY);
   if(card && !card.classList.contains('used')){
     fanTouchAim.card = card;
     setFanAimingCard(card);
@@ -3447,6 +4408,7 @@ function moveFanTouchAim(e){
 function endFanTouchAim(e){
   if(!fanTouchAim || !isMobileDrawConfirmMode()) return;
   var t = getTouchPoint(e);
+  stopFanEdgeScroll();
   var releaseY = t ? t.clientY : fanTouchAim.y;
   var cancelled = fanTouchAim.cancelled || isFanAimCancelled(fanTouchAim, releaseY);
   var card = fanTouchAim.card || fanAimingCard;
@@ -3518,7 +4480,7 @@ function buildTrayRowsHTML(positions){
     html += '<div class="tray-row">';
     for(var i=0;i<rowSizes[r];i++){
       var pos = positions[idx];
-      html += '<div class="tray-slot" id="tray-slot-'+idx+'" aria-label="第 '+(idx+1)+' 張"><span class="slot-number">'+(idx+1)+'</span></div>';
+      html += '<div class="tray-slot" id="tray-slot-'+idx+'" aria-label="'+escapeHtml(pos)+'"><span class="slot-number">'+(idx+1)+'</span><span class="slot-label">'+escapeHtml(pos)+'</span></div>';
       idx++;
     }
     html += '</div>';
@@ -3536,14 +4498,16 @@ function getDrawModeShortLabel(){
 
 function updateDrawProgress(message){
   if(!drawSession) return;
-  var total = drawSession.spread.positions.length;
-  var current = Math.min(drawSession.filled.length + 1, total);
+  var positions = drawSession.spread.positions || [];
+  var total = positions.length;
+  var filledCount = drawSession.filled.length;
+  var current = Math.min(filledCount + 1, total);
   var title = document.getElementById("draw-title");
   var hint = document.getElementById("draw-hint");
   var focusTip = document.getElementById("draw-focus-tip");
-  if(title) title.textContent = "第 " + current + " / " + total + " 張 · " + getDrawModeShortLabel();
+  if(title) title.textContent = filledCount >= total ? "已完成 " + total + " 張" : "第 " + current + " / " + total + " 張";
   if(hint) hint.textContent = message || (isMobileDrawConfirmMode() ? "空白處滑動平移畫面" : "請選擇一張有感覺的牌");
-  if(focusTip) focusTip.textContent = getDrawModeLabel();
+  if(focusTip) focusTip.textContent = "先想著你的問題，選擇讓你有感覺的牌。";
 }
 function resetDrawSession(){
   if(!drawSession) return;
@@ -3612,6 +4576,10 @@ function buildFan(opts){
   // 半圓感主要靠角度與中間牌略微抬高，不再無限加寬；手機保留左右滑動。
   var totalAngle = isSmall ? 112 : 124;
   var startAngle = -totalAngle / 2;
+  stage.dataset.fanTotalAngle = String(totalAngle);
+  stage.dataset.fanArcLift = String(isSmall ? 18 : 34);
+  stage.dataset.fanPathStart = String(isSmall ? 8 : 4);
+  stage.dataset.fanPathEnd = String(isSmall ? 92 : 96);
   var step = visualCount > 1 ? totalAngle / (visualCount - 1) : 0;
   var centerIndex = Math.floor(visualCount / 2);
 
@@ -3658,8 +4626,16 @@ function buildFan(opts){
       onFanCardClick(card);
     });
   });
+  if(wrap && !wrap.dataset.fanCurveBound){
+    wrap.dataset.fanCurveBound = "1";
+    wrap.addEventListener("scroll", scheduleFanCurveForScroll, {passive:true});
+  }
   requestAnimationFrame(function(){
-    if(wrap){ wrap.scrollLeft = Math.max(0, (wrap.scrollWidth - wrap.clientWidth) / 2); }
+    if(wrap){
+      wrap.scrollLeft = Math.max(0, (wrap.scrollWidth - wrap.clientWidth) / 2);
+      if(stage) stage.dataset.fanScrollOrigin = String(wrap.scrollLeft);
+      updateFanCurveForScroll();
+    }
   });
 
   if(opts.unpack){
@@ -3677,6 +4653,7 @@ function buildFan(opts){
             card.classList.remove("unpacking");
             card.style.transition = "";
           });
+          updateFanCurveForScroll();
         }, 540);
       });
     });
@@ -4080,20 +5057,32 @@ function renderDetail(rec){
   }
 
   var grid = document.getElementById("detail-cards");
-  grid.className = "spread-layout";
+  var useReadableGrid = false;
+  grid.className = "spread-layout detail-spread-shaped" + (rec.spreadType === "celtic" ? " detail-celtic-shaped" : "");
   grid.setAttribute("data-spread", rec.spreadType);
   var celticHint = document.getElementById("celtic-mobile-hint");
   if(celticHint) celticHint.style.display = rec.spreadType === "celtic" ? "block" : "none";
-  var layout = spread.layout || {};
   grid.innerHTML = rec.cards.map(function(c, idx){
     var reversedClass = shouldRotateCardImage(c) ? " reversed" : "";
-    var pt = layout[c.position] || defaultLayoutPoint(idx, rec.cards.length);
-    var extraStyle = '';
-    if(rec.spreadType === "celtic" && (c.position === "橫在你眼前的事" || c.position === "挑戰")) extraStyle = ' rotate(90deg)';
+    var crossedClass = ""; // 第2張使用獨立特殊格式，不再套用傳統交叉覆蓋
+    var celticPosClass = rec.spreadType === "celtic" ? " celtic-pos-"+(idx+1) : "";
+    var displayPosition = rec.spreadType === "celtic" && spread.positions[idx] ? spread.positions[idx] : c.position;
     var imageSrc = c.cardImage || getRwsCardImage(c.cardName);
     var thumb = imageSrc ? bgImageHtml(imageSrc, "rws-tile-img", c.cardName) : '<div class="art">'+PH('sparkle')+'</div>';
-    return '<div class="card-tile'+reversedClass+'" data-card-idx="'+idx+'" style="left:'+pt[0]+'%;top:'+pt[1]+'%;transform:translate(-50%,-50%)'+extraStyle+';">'+
-      '<div class="pos">'+escapeHtml(c.position)+'</div>'+
+    var point = spread.layout && spread.layout[displayPosition] ? spread.layout[displayPosition] : defaultLayoutPoint(idx, rec.cards.length);
+    var placeStyle = ' style="left:'+point[0]+'%;top:'+point[1]+'%;"';
+    if(rec.spreadType === "celtic" && idx === 1){
+      return '<div class="card-tile celtic-cross-card'+reversedClass+celticPosClass+'" data-card-idx="'+idx+'"'+placeStyle+'>'+
+        '<div class="celtic-cross-visual">'+thumb+'</div>'+
+        '<div class="celtic-cross-meta">'+
+          '<div class="pos">'+(idx+1)+' · '+escapeHtml(displayPosition)+'</div>'+
+          '<div class="name">'+escapeHtml(c.cardName)+'</div>'+
+          '<div class="orient">'+(c.orientation==="reversed"?"逆位":"正位")+'</div>'+
+        '</div>'+
+      '</div>';
+    }
+    return '<div class="card-tile'+reversedClass+crossedClass+celticPosClass+'" data-card-idx="'+idx+'"'+placeStyle+'>'+
+      '<div class="pos">'+(rec.spreadType === "celtic" ? ((idx+1)+' · ') : '')+escapeHtml(displayPosition)+'</div>'+
       thumb+
       '<div class="name">'+escapeHtml(c.cardName)+'</div>'+
       '<div class="orient">'+(c.orientation==="reversed"?"逆位":"正位")+'</div>'+
